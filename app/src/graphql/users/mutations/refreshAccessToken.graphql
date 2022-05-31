@@ -1,0 +1,7 @@
+#import '../fragments/AuthenticationTokenFragment.graphql'
+
+mutation refreshAccessToken($input: RefreshAccessTokenInput!) {
+  refreshAccessToken(input: $input) {
+    ...AuthenticationToken
+  }
+}

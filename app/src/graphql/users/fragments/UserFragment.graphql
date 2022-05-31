@@ -1,0 +1,8 @@
+fragment User on User {
+  id
+  email
+  firstName
+  lastName
+  role
+  language
+}

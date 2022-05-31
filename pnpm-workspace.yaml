@@ -1,0 +1,8 @@
+packages:
+  # all packages in subdirs of packages/ and components/
+  - 'app'
+  - 'conf'
+  - 'server'
+  - 'utils'
+  # exclude packages that are inside test directories
+  - '!**/test/**'

@@ -1,0 +1,39 @@
+{
+  "name": "@full-stack-typescript-monorepo-starter-with-authentication/server",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/server.ts",
+    "build": "ts-node src/server.ts",
+    "test": "tsc && eslint . && jest"
+  },
+  "dependencies": {
+    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
+    "@full-stack-typescript-monorepo-starter-with-authentication/utils": "0.0.0",
+    "@graphql-yoga/node": "^2.9.1",
+    "@prisma/client": "^3.15.1",
+    "axios": "^0.27.2",
+    "axios-retry": "^3.2.5",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.5",
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/bcrypt": "^5.0.0",
+    "@types/body-parser": "^1.19.2",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^17.0.41",
+    "@types/nodemailer": "^6.4.4",
+    "babel-jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "prisma": "^3.15.1",
+    "ts-node": "^10.8.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.3"
+  }
+}

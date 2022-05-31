@@ -1,0 +1,17 @@
+{
+  "name": "full-stack-typescript-monorepo-starter-with-authentication",
+  "version": "1.0.0",
+  "description": "A starter monorepo with Node.js backend, GraphQL API, and React frontend. The whole stack is with TypeScript.",
+  "author": "Martin Brandhaug <martin@brandhaug.net>",
+  "license": "ISC",
+  "scripts": {
+    "graphql-codegen": "graphql-codegen --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.5.0",
+    "@graphql-codegen/typescript-operations": "^2.4.1",
+    "@graphql-codegen/typescript-react-query": "^3.5.13",
+    "@graphql-codegen/typescript-resolvers": "2.6.5"
+  }
+}

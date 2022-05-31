@@ -1,0 +1,19 @@
+{
+  "name": "@full-stack-typescript-monorepo-starter-with-authentication/utils",
+  "version": "0.0.0",
+  "main": "src/index.tsx",
+  "module": "src/index.tsx",
+  "scripts": {
+    "test": "tsc && eslint . && jest"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
+    "@types/jest": "^28.1.1",
+    "eslint-plugin-jest": "^26.5.3",
+    "jest": "^28.1.1",
+    "jest-junit": "^13.2.0",
+    "typescript": "^4.7.3"
+  }
+}

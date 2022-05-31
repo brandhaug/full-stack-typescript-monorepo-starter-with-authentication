@@ -1,0 +1,31 @@
+name: Deploy
+on: [push]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.x
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --recursive
+
+      - name: Test
+        run: pnpm run test --recursive
+
+      - name: Build
+        run: pnpm run build --recursive
+
+      - name: Deploy
+        run: echo Deployed!

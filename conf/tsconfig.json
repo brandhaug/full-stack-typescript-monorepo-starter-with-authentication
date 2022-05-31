@@ -1,0 +1,44 @@
+// https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es2019",
+      "esnext",
+    ],
+    "target": "es5",
+    // Allow JSX
+    "jsx": "react",
+    // Allow downlevel iteration so eg. Set's can be ...spread
+    "downlevelIteration": true,
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Enable all strict type-checking options.
+    "strict": true,
+    // Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": true,
+    // Enable strict null checks.
+    "strictNullChecks": true,
+    // Raise error on 'this' expressions with an implied 'any' type.
+    "noImplicitThis": true,
+    // Parse in strict mode and emit "use strict" for each source file.
+    "alwaysStrict": true,
+    // Skip checking the validity of libraries
+    "skipLibCheck": true,
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": false,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    // I think we need this one.
+    "allowSyntheticDefaultImports": true,
+    // noUnusedLocals & noUnusedParameters!
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "sourceMap": true
+  },
+  "exclude": ["node_modules"]
+}
+

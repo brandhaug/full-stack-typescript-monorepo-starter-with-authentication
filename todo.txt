@@ -1,0 +1,9 @@
+- Add register email with validation
+- Add input validation backend
+- Add mixpanel
+- Sentry error logging
+- Replace logo
+- Backend api reload
+- Translations backend
+
+- Fix tests

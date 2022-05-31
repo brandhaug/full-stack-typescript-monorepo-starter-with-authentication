@@ -1,0 +1,69 @@
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum Language {
+  ENGLISH
+  NORWEGIAN
+}
+
+type AuthenticationToken {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input RegisterUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  termsAndPolicyAccepted: Boolean!
+  language: Language!
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  language: Language
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  role: UserRole!
+  language: Language!
+}
+
+input ResetPasswordInput {
+  email: String!
+}
+
+input RefreshAccessTokenInput {
+  refreshToken: String!
+}
+
+input UpdatePasswordInput {
+  password: String!
+}
+
+type Query {
+  hello: String!
+  user(id: ID!): User!
+}
+
+type Mutation {
+  registerUser(input: RegisterUserInput!): AuthenticationToken!
+  login(input: LoginInput!): AuthenticationToken!
+  refreshAccessToken(input: RefreshAccessTokenInput!): AuthenticationToken!
+  resetPassword(input: ResetPasswordInput!): Boolean!
+  updatePassword(id: ID!, token: String!, input: UpdatePasswordInput!): AuthenticationToken!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+}

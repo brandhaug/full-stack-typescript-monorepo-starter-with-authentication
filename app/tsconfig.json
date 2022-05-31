@@ -1,0 +1,4 @@
+{
+  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf",
+  "include": ["src/**/*"]
+}
