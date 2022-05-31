@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useCurrentUser } from '../utils/userUtils'
+import { useCurrentUser } from '../utils/currentUserUtils'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
 import { MenuIcon, UserCircleIcon } from '@heroicons/react/solid'

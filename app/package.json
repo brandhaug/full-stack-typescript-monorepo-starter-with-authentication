@@ -12,6 +12,7 @@
     "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
     "@full-stack-typescript-monorepo-starter-with-authentication/utils": "0.0.0",
     "@heroicons/react": "^1.0.6",
+    "flag-icons": "^6.6.4",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
     "i18next": "^21.8.9",

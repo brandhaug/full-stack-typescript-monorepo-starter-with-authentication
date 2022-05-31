@@ -34,6 +34,7 @@ importers:
       autoprefixer: ^10.4.7
       babel-jest: ^28.1.1
       eslint: ^8.17.0
+      flag-icons: ^6.6.4
       graphql: ^16.5.0
       graphql-tag: ^2.12.6
       i18next: ^21.8.9
@@ -56,6 +57,7 @@ importers:
       '@full-stack-typescript-monorepo-starter-with-authentication/conf': link:../conf
       '@full-stack-typescript-monorepo-starter-with-authentication/utils': link:../utils
       '@heroicons/react': 1.0.6_react@18.1.0
+      flag-icons: 6.6.4
       graphql: 16.5.0
       graphql-tag: 2.12.6_graphql@16.5.0
       i18next: 21.8.9
@@ -5142,6 +5144,10 @@ packages:
       locate-path: 5.0.0
       path-exists: 4.0.0
     dev: true
+
+  /flag-icons/6.6.4:
+    resolution: {integrity: sha512-hRRXKw3f5F2OCcDTOTXO0tc3ODqBx/ttA61V9mqy/hVbnFXzW+7tJMLQ+xd77+BXwdUzQAMLW2G4RZqqvaN3Mg==}
+    dev: false
 
   /flat-cache/3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}

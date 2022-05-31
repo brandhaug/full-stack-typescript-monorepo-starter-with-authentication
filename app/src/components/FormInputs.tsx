@@ -1,7 +1,7 @@
 import React from 'react'
 import { SetStateFn } from '../types/custom'
 
-type InputProps = { key: string; type: string; label: string | JSX.Element, options?: { text: string, value: string }[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type InputProps = { key: string; type: string; label: string | JSX.Element, options?: { text: string, value: string, icon: JSX.Element }[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 export const FormInputs = <T extends { [key: string]: string | number | boolean }>({
   inputs,
@@ -44,7 +44,7 @@ export const FormInputs = <T extends { [key: string]: string | number | boolean 
               <select className='form-control' onChange={handleSelectChange(input.key)} value={formData[input.key] as string}>
                 {input.options?.map(option => {
                   return (
-                    <option key={option.value} value={option.value}>{option.text}</option>
+                    <option key={option.value} value={option.value}>{option.icon} {option.text}</option>
                   )
                 })}
               </select>

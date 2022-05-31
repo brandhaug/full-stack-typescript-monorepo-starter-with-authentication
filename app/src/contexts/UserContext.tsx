@@ -4,16 +4,16 @@ import { useQuery } from '@apollo/client'
 import USER from '../graphql/users/queries/user.graphql'
 import { useDecodedAccessToken } from '../utils/authenticationUtils'
 
-interface UserContextProps {
-  user: UserFragment | null
+interface CurrentUserContextProps {
+  currentUser: UserFragment | null
 }
 
-export const UserContext = React.createContext<UserContextProps>({ user: null })
+export const UserContext = React.createContext<CurrentUserContextProps>({ currentUser: null })
 
-export const UserContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const CurrentUserContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
   const decodedAccessToken = useDecodedAccessToken()
   const { data } = useQuery<UserQuery, UserQueryVariables>(USER, { variables: { id: decodedAccessToken?.id as string }, skip: !decodedAccessToken })
-  const user = data?.user ?? null
+  const currentUser = data?.user ?? null
 
-  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ currentUser }}>{children}</UserContext.Provider>
 }

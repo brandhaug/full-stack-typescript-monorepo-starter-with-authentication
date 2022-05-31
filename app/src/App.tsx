@@ -6,7 +6,7 @@ import { ApolloClientProvider } from './components/apollo/ApolloProvider'
 import { Routes } from './components/Routes'
 import { NavBar } from './components/NavBar'
 import { Footer } from './components/Footer'
-import { UserContextProvider } from './contexts/UserContext'
+import { CurrentUserContextProvider } from './contexts/UserContext'
 import { LanguageContextProvider } from './contexts/LanguageContext'
 
 export const AppContent = () => {
@@ -26,14 +26,14 @@ export const App = () => {
     <BrowserRouter>
       <AuthenticationContextProvider>
         <ApolloClientProvider>
-          <UserContextProvider>
+          <CurrentUserContextProvider>
             <LanguageContextProvider>
               <React.Suspense fallback='Loading'>
                 <AppContent />
                 <Toaster position='top-right' />
               </React.Suspense>
             </LanguageContextProvider>
-          </UserContextProvider>
+          </CurrentUserContextProvider>
         </ApolloClientProvider>
       </AuthenticationContextProvider>
     </BrowserRouter>
