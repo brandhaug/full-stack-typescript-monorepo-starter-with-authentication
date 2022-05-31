@@ -7,7 +7,7 @@ import { useDependencyState } from '../utils/stateHooks'
 import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
 import { languageOptions } from '../utils/languageUtils'
-import { useCurrentUser } from '../utils/userUtils'
+import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
 
 const useInputs = () => {

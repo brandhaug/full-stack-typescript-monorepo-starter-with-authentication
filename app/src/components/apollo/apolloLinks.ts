@@ -23,7 +23,7 @@ export const useErrorLink = (apolloClient: ApolloClient<any>) => {
       }
 
       for (let err of graphQLErrors) {
-        if (err.extensions.code === 401) {
+        if (err.extensions?.code === 401) {
           // ignore 401 error for a refresh request
           if (operation.operationName === 'refreshToken') return
 

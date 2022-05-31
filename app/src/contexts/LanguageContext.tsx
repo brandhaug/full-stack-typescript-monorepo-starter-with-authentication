@@ -1,7 +1,7 @@
 import i18n from '../config/i18n'
 import { I18nextProvider } from 'react-i18next'
 import React from 'react'
-import { useCurrentUser } from '../utils/userUtils'
+import { useCurrentUser } from '../utils/currentUserUtils'
 import { languageToIso } from '../utils/languageUtils'
 
 export const LanguageContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {

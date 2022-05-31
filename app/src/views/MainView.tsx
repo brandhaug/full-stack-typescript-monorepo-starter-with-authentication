@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCurrentUser } from '../utils/userUtils'
+import { useCurrentUser } from '../utils/currentUserUtils'
 import { useDecodedAccessToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 
