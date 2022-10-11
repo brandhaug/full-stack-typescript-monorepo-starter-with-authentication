@@ -45,10 +45,6 @@ export const fetchOne = async ({ id, email }: { id?: string; email?: string }) =
       throw new Error('Kunne ikke hente bruker.')
     })
 
-  if (!result) {
-    throw new Error('Bruker eksisterer ikke')
-  }
-
   return result
 }
 
