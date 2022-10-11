@@ -2,10 +2,10 @@ import React, { useRef } from 'react'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { MenuIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { useOutsideClick } from '../utils/hooks'
 import { useTranslation } from 'react-i18next'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
+import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const useMainMenuItems = () => {
   const { t } = useTranslation()
@@ -99,7 +99,7 @@ const MobileMainMenu = () => {
   return (
     <div className='md:hidden relative' ref={ref}>
       <button type='button' className='flex rounded-lg md:mr-0 text-gray-500 hover:bg-gray-100 p-3' onClick={toggleIsOpen}>
-        <MenuIcon className='h-8' />
+        <Bars3Icon className='h-8' />
       </button>
       {isOpen && (
         <div className='absolute right-0 top-10 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow'>

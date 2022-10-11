@@ -1,3 +1,6 @@
+- Update Prisma to 4
+- Chakra UI
+- Toasts
 - Add register email with validation
 - Add input validation backend
 - Add mixpanel
