@@ -6,9 +6,18 @@ import { Language, UpdateUserMutation, UpdateUserMutationVariables } from '../ty
 import { useDependencyState } from '../utils/stateHooks'
 import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
-import { languageOptions } from '../utils/languageUtils'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
+
+const languageOptions = [{
+  value: Language.Norwegian,
+  text: 'Norsk',
+  icon: <span className='fi fi-no' />
+}, {
+  value: Language.English,
+  text: 'English',
+  icon: <span className='fi fi-gb-eng' />
+}]
 
 const useInputs = () => {
   const { t } = useTranslation()
