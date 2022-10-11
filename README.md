@@ -62,5 +62,9 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - Edit GraphQL Schema in `server/src/schema.graphql`
 - Open GraphiQL in `localhost:4000` while running server
 
-#### 3.3 Testing
+#### 3.3 Translations
+- Run `pnpm run extract-translations` in `app`
+- Edit json files in `app/src/translations`
+
+#### 3.4 Testing
 - Run tests with `pnpm run test --recursive`

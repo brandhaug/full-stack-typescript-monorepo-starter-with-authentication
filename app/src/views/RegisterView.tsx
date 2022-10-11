@@ -67,6 +67,7 @@ export const RegisterView = () => {
       return
     }
 
+    toast.success(t('Registered'))
     saveAuthenticationToken(data.registerUser)
     navigate(RoutePaths.MAIN)
   }

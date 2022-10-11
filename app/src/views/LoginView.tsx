@@ -37,6 +37,7 @@ const useLogin = () => {
       return
     }
 
+    toast.success(t('Signed in'))
     saveAuthenticationToken(data.login)
     navigate(RoutePaths.MAIN)
   }
