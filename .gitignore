@@ -7,3 +7,4 @@ graphql.ts
 .env
 app/.env
 server/.env
+*.log

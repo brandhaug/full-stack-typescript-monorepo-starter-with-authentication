@@ -9,6 +9,7 @@
   "dependencies": {
     "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
     "@full-stack-typescript-monorepo-starter-with-authentication/utils": "0.0.0",
+    "@graphql-tools/schema": "^9.0.4",
     "@graphql-yoga/node": "^2.9.1",
     "@prisma/client": "^3.15.1",
     "axios": "^0.27.2",

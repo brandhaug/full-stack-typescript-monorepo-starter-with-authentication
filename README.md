@@ -31,23 +31,23 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 
 - [GitHub Actions](https://github.com/features/actions)
 
-### 2. Setup
-
-1. Install dependencies in all projects with `pnpm install --recursive`
-2. Build types by running `pnpm run graphql-codegen`
-3. Download, install and setup [PostgreSQL](https://www.postgresql.org/)
-4. Create the file `server/.env` and add
+### 2 Setup
+1. Install [Docker Compose](https://docs.docker.com/compose/install/)
+2. Install dependencies in all projects: `pnpm install --recursive`
+3. Build types from  GraphQL schema: `pnpm run graphql-codegen`
+4. Create the file `server/.env` and add:
+   - `DATABASE_URL="postgresql://postgres:postgres@localhost:5432/full-stack-typescript-monorepo-starter-with-authentication?schema=public"`
    - `ACCESS_TOKEN_SECRET`
    - `REFRESH_TOKEN_SECRET`
-   - `DATABASE_URL`
    - `EMAIL_HOST`
    - `EMAIL_PORT`
    - `EMAIL_PASSWORD`
    - `APP_URL`
-5. Migrate DB schema by running `npx prisma migrate dev` in `server`
-6. Generate types by running `npx prisma generate` in `server`
-7. Run server with `pnpm run dev --prefix server`
-8. Run app with `pnpm run dev --prefix app`
+5. Run DB: `docker-compose up db`
+6. Migrate DB schema: `npx prisma migrate dev` in `server`
+7. Generate types: `npx prisma generate` in `server`
+8. Run server: `pnpm run dev --prefix server`
+9. Run app: `pnpm run dev --prefix app`
 
 ### 3. Maintenance and further development
 
