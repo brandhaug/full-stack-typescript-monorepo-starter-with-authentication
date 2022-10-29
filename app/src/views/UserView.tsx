@@ -11,11 +11,11 @@ import { useTranslation } from 'react-i18next'
 
 const languageOptions = [{
   value: Language.Norwegian,
-  text: 'Norsk',
+  label: 'Norsk',
   icon: <span className='fi fi-no' />
 }, {
   value: Language.English,
-  text: 'English',
+  label: 'English',
   icon: <span className='fi fi-gb' />
 }]
 

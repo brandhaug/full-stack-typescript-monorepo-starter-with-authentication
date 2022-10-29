@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-i18next": "^11.18.6",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.2",
+    "react-select": "^5.5.7"
   },
   "devDependencies": {
     "@rollup/plugin-graphql": "^2.0.0",
