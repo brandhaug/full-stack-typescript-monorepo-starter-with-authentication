@@ -6,6 +6,7 @@ import { useOutsideClick } from '../utils/hooks'
 import { useTranslation } from 'react-i18next'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
+import Logo from '../assets/logo_no-bg_cropped.png'
 
 const useMainMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   const { t } = useTranslation()
@@ -79,7 +80,7 @@ const UserMenu = (): JSX.Element | null => {
 const Brand = (): JSX.Element => {
   return (
     <NavLink to={RoutePaths.MAIN} className='flex items-center'>
-      <img src='../assets/logo_no-bg_cropped.png' className='mr-3 h-9' alt='App logo' />
+      <img src={Logo} className='mr-3 h-9' alt='App logo' />
       <span className='self-center text-xl font-semibold whitespace-nowrap'>App</span>
     </NavLink>
   )

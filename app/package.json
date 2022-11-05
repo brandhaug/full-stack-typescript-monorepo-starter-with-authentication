@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "test": "tsc && eslint .",
     "extract-translations": "i18next 'src/**/*.{ts,tsx}'"
   },
@@ -12,7 +13,6 @@
     "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
     "@full-stack-typescript-monorepo-starter-with-authentication/utils": "0.0.0",
     "@heroicons/react": "^2.0.12",
-    "flag-icons": "^6.6.6",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "i18next": "^21.10.0",

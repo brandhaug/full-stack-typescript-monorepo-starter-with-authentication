@@ -8,6 +8,7 @@ import { RoutePaths } from '../types/custom'
 import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useTranslation } from 'react-i18next'
+import Logo from '../assets/logo_no-bg_cropped.png'
 
 const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
@@ -69,7 +70,7 @@ export const ForgotPasswordView = (): JSX.Element => {
       <div className='w-full max-w-lg'>
         <div className='card'>
           <div className='flex justify-center'>
-            <img className='mb-2 text-center' width={150} src='../assets/logo_no-bg_cropped.png' alt='App logo' />
+            <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
           </div>
           {content}
         </div>
