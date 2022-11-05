@@ -5,12 +5,12 @@ import UPDATE_PASSWORD from '../graphql/users/mutations/updatePassword.graphql'
 import { toast } from 'react-hot-toast'
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInputs } from '../components/FormInputs'
+import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 
-const useInputs = () => {
+const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
 
   return [
@@ -23,7 +23,7 @@ const useInputs = () => {
   ]
 }
 
-export const UpdatePasswordView = () => {
+export const UpdatePasswordView = (): JSX.Element => {
   const { t } = useTranslation()
   const [formData, setFormData] = React.useState({ password: '' })
   const [searchParams] = useSearchParams()
@@ -32,7 +32,7 @@ export const UpdatePasswordView = () => {
 
   const navigate = useNavigate()
 
-  const handleUpdatePasswordCompleted = (data: UpdatePasswordMutation) => {
+  const handleUpdatePasswordCompleted = (data: UpdatePasswordMutation): void => {
     if (!data?.updatePassword) {
       toast.error(t('Something went wrong'))
       return
@@ -44,7 +44,7 @@ export const UpdatePasswordView = () => {
 
   const [updatePassword, { loading }] = useMutation<UpdatePasswordMutation, UpdatePasswordMutationVariables>(UPDATE_PASSWORD, { onCompleted: handleUpdatePasswordCompleted })
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
 
     const id = searchParams.get('id')
@@ -55,7 +55,7 @@ export const UpdatePasswordView = () => {
       return
     }
 
-    updatePassword({ variables: { id, token, input: formData } })
+    await updatePassword({ variables: { id, token, input: formData } })
   }
 
   const inputs = useInputs()

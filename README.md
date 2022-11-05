@@ -36,7 +36,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 2. Install dependencies in all projects: `pnpm install --recursive`
 3. Build types from  GraphQL schema: `pnpm run graphql-codegen`
 4. Create the file `server/.env` and add:
-   - `DATABASE_URL="postgresql://postgres:postgres@localhost:5432/full-stack-typescript-monorepo-starter-with-authentication?schema=public"`
+   - `DATABASE_URL=postgresql://postgres:postgres@localhost:5432/full-stack-typescript-monorepo-starter-with-authentication?schema=public`
    - `ACCESS_TOKEN_SECRET`
    - `REFRESH_TOKEN_SECRET`
    - `EMAIL_HOST`

@@ -3,7 +3,7 @@ import { RoutePaths } from '../types/custom'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const TermsAndPrivacy = () => {
+export const TermsAndPrivacy = (): JSX.Element => {
   const { t } = useTranslation()
   return (
     <div className='flex justify-center mt-4 text-gray-500'>

@@ -1,8 +1,9 @@
-import { UserContext } from '../contexts/UserContext'
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import React from 'react'
+import { UserFragment } from '../types/graphql'
 
-export const useCurrentUser = () => {
-  const { currentUser } = React.useContext(UserContext)
+export const useCurrentUser = (): UserFragment | null => {
+  const { currentUser } = React.useContext(CurrentUserContext)
 
   if (!currentUser) return null
 

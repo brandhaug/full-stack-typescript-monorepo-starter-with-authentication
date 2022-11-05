@@ -1,22 +1,22 @@
 import React from 'react'
 import { SetStateFn } from '../types/custom'
-import Select  from 'react-select'
+import Select from 'react-select'
 
 type ValueType = string | number | boolean | object | null
 
-type Option = { label: string, value: ValueType, icon: JSX.Element }
+interface Option { label: string, value: ValueType, icon: JSX.Element }
 
-type InputProps = { key: string; type: string; label: string | JSX.Element, options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+export type FormInput = { key: string, type: string, label: string | JSX.Element, options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 export const FormInputs = <T extends { [key: string]: ValueType }>({
   inputs,
   formData,
   setFormData
 }: {
-  inputs: InputProps[]
+  inputs: FormInput[]
   formData: T
   setFormData: SetStateFn<T>
-}) => {
+}): JSX.Element | null => {
   const handleChange = (key: string) => (value: string | number | boolean | object | null) => {
     setFormData(prevFormData => {
       return { ...prevFormData, [key]: value }

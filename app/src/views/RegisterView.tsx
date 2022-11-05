@@ -4,14 +4,14 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import REGISTER_USER from '../graphql/users/mutations/registerUser.graphql'
 import { RoutePaths } from '../types/custom'
-import { FormInputs } from '../components/FormInputs'
+import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { Language, RegisterUserMutation, RegisterUserMutationVariables } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { languageIsoToLanguage } from '../utils/languageUtils'
 
-const useInputs = () => {
+const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
   return [
     {
@@ -54,14 +54,14 @@ const useInputs = () => {
   ]
 }
 
-export const RegisterView = () => {
+export const RegisterView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const defaultLanguage = languageIsoToLanguage[navigator.language] ?? Language.English
   const [formData, setFormData] = React.useState({ firstName: '', lastName: '', email: '', password: '', termsAndPolicyAccepted: false, language: defaultLanguage })
   const saveAuthenticationToken = useSaveAuthenticationToken()
   const navigate = useNavigate()
 
-  const handleRegisterCompleted = (data: RegisterUserMutation) => {
+  const handleRegisterCompleted = (data: RegisterUserMutation): void => {
     if (!data?.registerUser) {
       toast.error(t('Something went wrong'))
       return
@@ -74,9 +74,9 @@ export const RegisterView = () => {
 
   const [registerUser, { loading }] = useMutation<RegisterUserMutation, RegisterUserMutationVariables>(REGISTER_USER, { onCompleted: handleRegisterCompleted })
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
-    registerUser({ variables: { input: formData } })
+    await registerUser({ variables: { input: formData } })
   }
 
   const inputs = useInputs()

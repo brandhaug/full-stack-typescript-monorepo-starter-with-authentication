@@ -15,7 +15,7 @@ export const AuthenticationContext = React.createContext<AuthenticationContextPr
   setRefreshToken: (token: string | null) => token
 })
 
-export const AuthenticationContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const AuthenticationContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const [accessToken, setAccessToken] = usePersistentState<string | null>('accessToken', null)
   const [refreshToken, setRefreshToken] = usePersistentState<string | null>('refreshToken', null)
 

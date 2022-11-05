@@ -10,6 +10,18 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+  db-test:
+    image: postgres:14.5
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5431:5431'
+    command:
+      - -p 5431
 volumes:
   db:
+    driver: local
+  db-test:
     driver: local

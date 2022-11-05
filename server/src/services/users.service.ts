@@ -1,12 +1,16 @@
 import * as UserDao from '../daos/users.dao'
-import { RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '../types/graphql'
+import { AuthenticationToken, RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '../types/graphql'
 import * as AuthenticationUtils from '../utils/authentication.utils'
 import { randomString } from '@full-stack-typescript-monorepo-starter-with-authentication/utils'
 import * as EmailService from '../services/email.service'
 import { User as DbUser } from '@prisma/client'
 import Logger from '../config/logger'
 
-const generateResetPasswordHtml = (id: string, token: string) => {
+const generateResetPasswordHtml = (id: string, token: string): string => {
+  if (!process.env.APP_URL) {
+    throw new Error('Missing APP_URL env variable')
+  }
+
   const href = `${process.env.APP_URL}/update-password?id=${id}&token=${token}`
   return `
     <p>Hei,</p>
@@ -20,12 +24,12 @@ const generateResetPasswordHtml = (id: string, token: string) => {
   `
 }
 
-export const login = async ({ email, password }: { email: string; password: string }) => {
+export const login = async ({ email, password }: { email: string, password: string }): Promise<AuthenticationToken> => {
   const user = await fetchOne({ email })
 
   if (!user) throw new Error('Fant ikke bruker')
 
-  const validPassword = AuthenticationUtils.validatePassword(password, user.hash)
+  const validPassword = await AuthenticationUtils.validatePassword(password, user.hash)
 
   if (!validPassword) throw new Error('Feil passord')
 
@@ -33,12 +37,12 @@ export const login = async ({ email, password }: { email: string; password: stri
   return authenticationToken
 }
 
-export const fetchAll = async () => {
+export const fetchAll = async (): Promise<DbUser[]> => {
   const result = await UserDao.fetch()
   return result
 }
 
-export const fetchOne = async ({ id, email }: { id?: string; email?: string }) => {
+export const fetchOne = async ({ id, email }: { id?: string, email?: string }): Promise<DbUser | null> => {
   const result = await UserDao.fetchOne({ id, email })
     .catch(err => {
       Logger.error(err)
@@ -48,7 +52,7 @@ export const fetchOne = async ({ id, email }: { id?: string; email?: string }) =
   return result
 }
 
-export const register = async (input: RegisterUserInput) => {
+export const register = async (input: RegisterUserInput): Promise<AuthenticationToken> => {
   const existingUser = await fetchOne({ email: input.email })
 
   if (existingUser) {
@@ -69,14 +73,13 @@ export const register = async (input: RegisterUserInput) => {
       throw new Error('Kunne ikke opprette bruker.')
     })
 
-
   if (!createdUser) throw new Error('Fikk ikke til å opprette bruker')
 
   const authenticationToken = AuthenticationUtils.generateAuthenticationToken(createdUser as User)
   return authenticationToken
 }
 
-export const refreshAccessToken = async (input: RefreshAccessTokenInput) => {
+export const refreshAccessToken = async (input: RefreshAccessTokenInput): Promise<AuthenticationToken> => {
   const verifiedToken = await AuthenticationUtils.verifyAndDecodeRefreshToken(input.refreshToken)
     .catch(err => {
       Logger.error(err)
@@ -90,7 +93,7 @@ export const refreshAccessToken = async (input: RefreshAccessTokenInput) => {
   return { refreshToken: input.refreshToken, accessToken }
 }
 
-export const resetPassword = async (input: ResetPasswordInput) => {
+export const resetPassword = async (input: ResetPasswordInput): Promise<boolean> => {
   const existingUser = await fetchOne({ email: input.email })
     .catch(err => {
       Logger.error(err)
@@ -125,7 +128,7 @@ export const resetPassword = async (input: ResetPasswordInput) => {
   return true
 }
 
-export const updatePassword = async (id: string, token: string, input: UpdatePasswordInput) => {
+export const updatePassword = async (id: string, token: string, input: UpdatePasswordInput): Promise<AuthenticationToken> => {
   const user = await fetchOne({ id })
 
   if (!user) throw new Error('Kunne ikke finne bruker')
@@ -143,12 +146,12 @@ export const updatePassword = async (id: string, token: string, input: UpdatePas
   return accessToken
 }
 
-export const update = async (id: string, data: Partial<Omit<DbUser, 'id'>>) => {
+export const update = async (id: string, data: Partial<Omit<DbUser, 'id'>>): Promise<DbUser> => {
   const result = await UserDao.update(id, data)
   return result
 }
 
-export const remove = async (id: string) => {
+export const remove = async (id: string): Promise<DbUser> => {
   const result = await UserDao.remove(id)
   return result
 }

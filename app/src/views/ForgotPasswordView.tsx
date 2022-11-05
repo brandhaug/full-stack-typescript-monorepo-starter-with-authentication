@@ -5,11 +5,11 @@ import RESET_PASSWORD from '../graphql/users/mutations/resetPassword.graphql'
 import { toast } from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInputs } from '../components/FormInputs'
+import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useTranslation } from 'react-i18next'
 
-const useInputs = () => {
+const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
   return [
     {
@@ -20,12 +20,12 @@ const useInputs = () => {
   ]
 }
 
-export const ForgotPasswordView = () => {
+export const ForgotPasswordView = (): JSX.Element => {
   const { t } = useTranslation()
   const [formData, setFormData] = React.useState({ email: '' })
   const [submitted, setSubmitted] = React.useState(false)
 
-  const handleForgotPasswordCompleted = (data: ResetPasswordMutation) => {
+  const handleForgotPasswordCompleted = (data: ResetPasswordMutation): void => {
     if (!data?.resetPassword) {
       toast.error(t('Something went wrong'))
       return
@@ -36,10 +36,10 @@ export const ForgotPasswordView = () => {
 
   const [resetPassword, { loading }] = useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(RESET_PASSWORD, { onCompleted: handleForgotPasswordCompleted })
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
 
-    resetPassword({ variables: { input: formData } })
+    await resetPassword({ variables: { input: formData } })
   }
 
   const inputs = useInputs()

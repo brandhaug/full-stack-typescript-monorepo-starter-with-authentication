@@ -8,12 +8,12 @@ interface CurrentUserContextProps {
   currentUser: UserFragment | null
 }
 
-export const UserContext = React.createContext<CurrentUserContextProps>({ currentUser: null })
+export const CurrentUserContext = React.createContext<CurrentUserContextProps>({ currentUser: null })
 
-export const CurrentUserContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const CurrentUserContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const decodedAccessToken = useDecodedAccessToken()
   const { data } = useQuery<UserQuery, UserQueryVariables>(USER, { variables: { id: decodedAccessToken?.id as string }, skip: !decodedAccessToken })
   const currentUser = data?.user ?? null
 
-  return <UserContext.Provider value={{ currentUser }}>{children}</UserContext.Provider>
+  return <CurrentUserContext.Provider value={{ currentUser }}>{children}</CurrentUserContext.Provider>
 }

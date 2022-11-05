@@ -4,6 +4,7 @@ import graphql from '@rollup/plugin-graphql'
 
 export default defineConfig({
   root: './src',
+
   plugins: [
     graphql(),
     react()

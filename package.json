@@ -5,7 +5,8 @@
   "author": "Martin Brandhaug <martin@brandhaug.net>",
   "license": "ISC",
   "scripts": {
-    "graphql-codegen": "graphql-codegen --config codegen.yml"
+    "graphql-codegen": "graphql-codegen --config codegen.yml",
+    "test": "pnpm run test --recursive --parallel"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.2",

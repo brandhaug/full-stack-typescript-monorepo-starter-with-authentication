@@ -3,7 +3,7 @@ import { RoutePaths } from '../types/custom'
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-export const LogOutView = () => {
+export const LogOutView = (): JSX.Element => {
   const logout = useLogout()
 
   React.useEffect(() => {

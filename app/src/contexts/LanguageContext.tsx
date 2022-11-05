@@ -4,12 +4,14 @@ import React from 'react'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { languageToIso } from '../utils/languageUtils'
 
-export const LanguageContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const LanguageContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const currentUser = useCurrentUser()
   React.useEffect(() => {
-    if (!currentUser) return
+    void (async () => {
+      if (!currentUser) return
 
-    i18n.changeLanguage(languageToIso[currentUser.language])
+      await i18n.changeLanguage(languageToIso[currentUser.language])
+    })()
   }, [currentUser?.language])
 
   return (

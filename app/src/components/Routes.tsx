@@ -13,7 +13,7 @@ import { ContactUsView } from '../views/ContactUsView'
 import { UpdatePasswordView } from '../views/UpdatePasswordView'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 
-const ProtectedRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+const ProtectedRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }): JSX.Element => {
   if (!isAuthenticated) {
     return <Navigate to={RoutePaths.LOGIN} replace />
   }
@@ -21,7 +21,7 @@ const ProtectedRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   return <Outlet />
 }
 
-export const Routes = () => {
+export const Routes = (): JSX.Element => {
   const isAuthenticated = useIsAuthenticated()
 
   return (

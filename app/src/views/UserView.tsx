@@ -1,4 +1,4 @@
-import { FormInputs } from '../components/FormInputs'
+import { FormInput, FormInputs } from '../components/FormInputs'
 import React from 'react'
 import { useMutation } from '@apollo/client'
 import UPDATE_USER from '../graphql/users/mutations/updateUser.graphql'
@@ -19,7 +19,7 @@ const languageOptions = [{
   icon: <span className='fi fi-gb' />
 }]
 
-const useInputs = () => {
+const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
   return [
     {
@@ -40,22 +40,24 @@ const useInputs = () => {
   ]
 }
 
-export const UserView = () => {
+export const UserView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const currentUser = useCurrentUser()
-  const [formData, setFormData] = useDependencyState({ firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }, [currentUser])
+  const [formData, setFormData] = useDependencyState({ firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }, [JSON.stringify(currentUser)])
 
-  const handleCompleted = () => toast.success(t('User updated'))
+  const handleCompleted = (): void => {
+    toast.success(t('User updated'))
+  }
   const [updateUser, { loading: updateUserLoading }] = useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UPDATE_USER, { onCompleted: handleCompleted })
 
   const inputs = useInputs()
 
   if (!currentUser) return null
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
 
-    updateUser({ variables: { id: currentUser.id, input: formData } })
+    await updateUser({ variables: { id: currentUser.id, input: formData } })
   }
 
   return (

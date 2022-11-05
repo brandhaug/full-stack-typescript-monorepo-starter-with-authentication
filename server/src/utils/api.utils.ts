@@ -2,7 +2,7 @@ import * as AuthenticationUtils from './authentication.utils'
 import Logger from '../config/logger'
 import { GraphQLYogaError } from '@graphql-yoga/node'
 
-export const requireAuthenticated = async (accessTokenWithPrefix: string, userId?: string) => {
+export const requireAuthenticated = async (accessTokenWithPrefix: string, userId?: string): Promise<void> => {
   const accessToken = accessTokenWithPrefix.replace('Bearer ', '')
 
   const decodedToken = await AuthenticationUtils.verifyAndDecodeAccessToken(accessToken)

@@ -6,10 +6,10 @@ import { ApolloClientProvider } from './components/apollo/ApolloProvider'
 import { Routes } from './components/Routes'
 import { NavBar } from './components/NavBar'
 import { Footer } from './components/Footer'
-import { CurrentUserContextProvider } from './contexts/UserContext'
+import { CurrentUserContextProvider } from './contexts/CurrentUserContext'
 import { LanguageContextProvider } from './contexts/LanguageContext'
 
-export const AppContent = () => {
+export const AppContent = (): JSX.Element | null => {
   return (
     <div className='flex flex-col h-screen justify-between'>
       <NavBar />
@@ -21,7 +21,7 @@ export const AppContent = () => {
   )
 }
 
-export const App = () => {
+export const App = (): JSX.Element | null => {
   return (
     <BrowserRouter>
       <AuthenticationContextProvider>

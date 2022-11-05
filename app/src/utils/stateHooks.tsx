@@ -2,7 +2,7 @@ import React from 'react'
 import { SetStateFn } from '../types/custom'
 
 export const usePersistentState = <T,>(key: string, defaultValue: T): [T, SetStateFn<T>, () => void] => {
-  const [state, setState] = React.useState(() => {
+  const [state, setState] = React.useState<T>(() => {
     try {
       const currentValue = window.localStorage.getItem(key)
 
@@ -19,14 +19,14 @@ export const usePersistentState = <T,>(key: string, defaultValue: T): [T, SetSta
     window.localStorage.setItem(key, JSON.stringify(state))
   }, [key, state])
 
-  const reset = () => {
+  const reset = (): void => {
     window.localStorage.removeItem(key)
   }
 
   return [state, setState, reset]
 }
 
-export const useDependencyState = <T,>(initValue: T | (() => T), dependencies: any[]): [T, SetStateFn<T>] => {
+export const useDependencyState = <T,>(initValue: T | (() => T), dependencies: Array<string | number | boolean | null | undefined>): [T, SetStateFn<T>] => {
   const [value, setValue] = React.useState<T>(initValue)
   const firstRun = React.useRef(true)
 

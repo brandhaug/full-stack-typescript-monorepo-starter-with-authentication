@@ -6,12 +6,14 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
-    "@typescript-eslint/eslint-plugin": "^5.27.1",
-    "@typescript-eslint/parser": "^5.27.1",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.25.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-graphql": "^4.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "typescript": "^4.7.3"
-  },
-  "devDependencies": {
+    "eslint-plugin-jest": "^27.1.2",
+    "eslint-plugin-n": "^15.4.0",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }

@@ -1,16 +1,16 @@
 import React from 'react'
-import { useMutation } from '@apollo/client'
+import { MutationFunction, useMutation } from '@apollo/client'
 import LOGIN from '../graphql/users/mutations/login.graphql'
 import { LoginMutation, LoginMutationVariables } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInputs } from '../components/FormInputs'
+import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useIsAuthenticated, useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 
-const useInputs = () => {
+const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
   return [
     {
@@ -26,12 +26,12 @@ const useInputs = () => {
   ]
 }
 
-const useLogin = () => {
+const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVariables>, loading: boolean } => {
   const { t } = useTranslation()
   const saveAuthenticationToken = useSaveAuthenticationToken()
   const navigate = useNavigate()
 
-  const handleLoginCompleted = (data: LoginMutation) => {
+  const handleLoginCompleted = (data: LoginMutation): void => {
     if (!data?.login) {
       toast.error(t('Something went wrong'))
       return
@@ -47,7 +47,7 @@ const useLogin = () => {
   return { login, loading }
 }
 
-export const LoginView = () => {
+export const LoginView = (): JSX.Element => {
   const isAuthenticated = useIsAuthenticated()
   const { t } = useTranslation()
   const [formData, setFormData] = React.useState({ email: '', password: '' })
@@ -55,17 +55,16 @@ export const LoginView = () => {
   const { login, loading } = useLogin()
   const inputs = useInputs()
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
 
-    login({ variables: { input: formData } })
+    await login({ variables: { input: formData } })
   }
 
   React.useEffect(() => {
     if (!isAuthenticated) return
     navigate(RoutePaths.MAIN)
   }, [])
-
 
   return (
     <div className='container-centered'>

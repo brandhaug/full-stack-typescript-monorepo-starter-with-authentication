@@ -9,7 +9,7 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-export const ApolloClientProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const ApolloClientProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const errorLink = useErrorLink(apolloClient)
   const authLink = useAuthLink()
   const links = from([authLink, errorLink, new HttpLink({ uri })])

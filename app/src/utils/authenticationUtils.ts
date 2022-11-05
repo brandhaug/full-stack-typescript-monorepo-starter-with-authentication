@@ -3,30 +3,32 @@ import { AuthenticationToken } from '../types/graphql'
 import { AuthenticationContext } from '../contexts/AuthenticationContext'
 import React from 'react'
 
-export const useAccessToken = () => {
+interface DecodedAccessToken { id: string, email: string, exp: number }
+
+export const useAccessToken = (): string | null => {
   const { accessToken } = React.useContext(AuthenticationContext)
   return accessToken
 }
 
-export const useIsAuthenticated = () => {
+export const useIsAuthenticated = (): boolean => {
   const accessToken = useAccessToken()
   return Boolean(accessToken)
 }
 
-export const useRefreshToken = () => {
+export const useRefreshToken = (): string | null => {
   const { refreshToken } = React.useContext(AuthenticationContext)
   return refreshToken
 }
 
-const decodeToken = (token: string) => {
+const decodeToken = (token: string): DecodedAccessToken | null => {
   try {
-    return jwtDecode<{ id: string; email: string; exp: number }>(token)
+    return jwtDecode<{ id: string, email: string, exp: number }>(token)
   } catch {
     return null
   }
 }
 
-export const useDecodedAccessToken = () => {
+export const useDecodedAccessToken = (): DecodedAccessToken | null => {
   const logout = useLogout()
 
   const accessToken = useAccessToken()
@@ -44,7 +46,7 @@ export const useDecodedAccessToken = () => {
   return decodedAccessToken
 }
 
-export const useSaveAuthenticationToken = () => {
+export const useSaveAuthenticationToken = (): (authenticationToken: AuthenticationToken) => void => {
   const { setAccessToken, setRefreshToken } = React.useContext(AuthenticationContext)
 
   return (authenticationToken: AuthenticationToken) => {
@@ -53,7 +55,7 @@ export const useSaveAuthenticationToken = () => {
   }
 }
 
-export const useLogout = () => {
+export const useLogout = (): () => void => {
   const { setAccessToken, setRefreshToken } = React.useContext(AuthenticationContext)
 
   return () => {

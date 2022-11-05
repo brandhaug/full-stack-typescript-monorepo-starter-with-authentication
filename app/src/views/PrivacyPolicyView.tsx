@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const PrivacyPolicyView = () => {
+export const PrivacyPolicyView = (): JSX.Element => {
   const { t } = useTranslation()
   return (
     <div className='flex justify-center py-20 px-12'>

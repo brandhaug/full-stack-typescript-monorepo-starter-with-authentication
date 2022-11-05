@@ -1,7 +1,5 @@
 import nodemailer from 'nodemailer'
 
-export const defaultMail = process.env.EMAIL
-
 export const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: Number(process.env.EMAIL_PORT),

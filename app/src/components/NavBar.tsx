@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
-const useMainMenuItems = () => {
+const useMainMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   const { t } = useTranslation()
   return [
     {
@@ -21,7 +21,7 @@ const useMainMenuItems = () => {
   ]
 }
 
-const useUserMenuItems = () => {
+const useUserMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   const { t } = useTranslation()
   return [
     {
@@ -35,12 +35,12 @@ const useUserMenuItems = () => {
   ]
 }
 
-const UserMenu = () => {
+const UserMenu = (): JSX.Element | null => {
   const currentUser = useCurrentUser()
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = () => setIsOpen(prevIsOpen => !prevIsOpen)
+  const toggleIsOpen = (): void => setIsOpen(prevIsOpen => !prevIsOpen)
 
   useOutsideClick(ref, () => setIsOpen(false))
 
@@ -76,7 +76,7 @@ const UserMenu = () => {
   )
 }
 
-const Brand = () => {
+const Brand = (): JSX.Element => {
   return (
     <NavLink to={RoutePaths.MAIN} className='flex items-center'>
       <img src='../assets/logo_no-bg_cropped.png' className='mr-3 h-9' alt='App logo' />
@@ -85,11 +85,11 @@ const Brand = () => {
   )
 }
 
-const MobileMainMenu = () => {
+const MobileMainMenu = (): JSX.Element | null => {
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = () => setIsOpen(prevIsOpen => !prevIsOpen)
+  const toggleIsOpen = (): void => setIsOpen(prevIsOpen => !prevIsOpen)
 
   const mainMenuItems = useMainMenuItems()
   const userMenuItems = useUserMenuItems()
@@ -120,7 +120,7 @@ const MobileMainMenu = () => {
   )
 }
 
-const MainMenu = () => {
+const MainMenu = (): JSX.Element => {
   const location = useLocation()
   const mainMenuItems = useMainMenuItems()
 
@@ -142,7 +142,7 @@ const MainMenu = () => {
   )
 }
 
-export const NavBar = () => {
+export const NavBar = (): JSX.Element | null => {
   const isAuthenticated = useIsAuthenticated()
 
   if (!isAuthenticated) return null

@@ -4,7 +4,5 @@ package-lock.json
 *.iml
 dist
 graphql.ts
-.env
-app/.env
-server/.env
+.env.*
 *.log

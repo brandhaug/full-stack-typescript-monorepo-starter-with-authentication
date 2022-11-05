@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-i18n
+void i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -12,7 +12,7 @@ i18n
     supportedLngs: ['en', 'no'],
     fallbackLng: 'en',
     backend: {
-      loadPath: '../translations/{{lng}}.json',
+      loadPath: '../translations/{{lng}}.json'
     },
     debug: process.env.NODE_ENV !== 'production',
     interpolation: {

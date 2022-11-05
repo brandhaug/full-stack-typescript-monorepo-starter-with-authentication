@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 
-const useMenuItems = () => {
+const useMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   const { t } = useTranslation()
   return [
     {
@@ -26,7 +26,7 @@ const useMenuItems = () => {
   ]
 }
 
-export const Footer = () => {
+export const Footer = (): JSX.Element | null => {
   const { t } = useTranslation()
 
   const isAuthenticated = useIsAuthenticated()

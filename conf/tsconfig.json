@@ -4,7 +4,7 @@
     "lib": [
       "dom",
       "es2019",
-      "esnext",
+      "esnext"
     ],
     "target": "es5",
     // Allow JSX
@@ -29,16 +29,13 @@
     "isolatedModules": false,
     // Import non-ES modules as default imports.
     "esModuleInterop": true,
-    // I think we need this one.
     "allowSyntheticDefaultImports": true,
-    // noUnusedLocals & noUnusedParameters!
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "noEmit": true,
-    "baseUrl": ".",
+    "baseUrl": "./conf",
     "sourceMap": true
-  },
-  "exclude": ["node_modules"]
+  }
 }
 
