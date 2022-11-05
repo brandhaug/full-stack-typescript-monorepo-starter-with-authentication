@@ -1,7 +1,6 @@
 - Add register email with validation
 - Add input validation backend
 - Translations backend
-- Add list-mismatches and pnpm audit to deploy.yml
 
 Services
 - Mixpanel

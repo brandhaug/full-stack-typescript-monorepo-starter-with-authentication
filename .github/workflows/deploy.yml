@@ -10,7 +10,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.2.2
         with:
-          version: 7
+          version: 6
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -18,14 +18,20 @@ jobs:
           node-version: 16.15.x
           cache: pnpm
 
+      - name: Audit dependencies
+        run: pnpm audit --audit-level critical
+
       - name: Install dependencies
         run: pnpm install --recursive
 
+      - name: List mismatching dependencies
+        run: pnpm run list-mismatches
+
       - name: Test
-        run: pnpm run test --recursive
+        run: pnpm run test
 
       - name: Build
-        run: pnpm run build --recursive
+        run: pnpm run build
 
       - name: Deploy
         run: echo Deployed!
