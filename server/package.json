@@ -5,7 +5,8 @@
     "dev": "dotenv -e .env.development -- ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "dotenv -e .env.production ts-node src/server.ts",
     "test": "tsc && eslint . && npm run test:jest",
-    "test:jest": "docker compose up --force-recreate -d db-test && sleep 1 && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest && docker compose rm --stop --force -v db-test"
+    "test:jest": "docker compose up --force-recreate -d db-test && sleep 1 && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest && docker compose rm --stop --force -v db-test",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",

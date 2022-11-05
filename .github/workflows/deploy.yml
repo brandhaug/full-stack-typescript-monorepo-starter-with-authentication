@@ -27,6 +27,12 @@ jobs:
       - name: List mismatching dependencies
         run: pnpm run list-mismatches
 
+      - name: Build GraphQL types
+        run: pnpm run graphql-codegen
+
+      - name: Build DB types
+        run: pnpm run prisma:generate --prefix server
+
       - name: Test
         run: pnpm run test
 
