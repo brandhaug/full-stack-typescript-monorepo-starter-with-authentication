@@ -6,13 +6,21 @@
   "license": "ISC",
   "scripts": {
     "graphql-codegen": "graphql-codegen --config codegen.yml",
-    "test": "pnpm run test --recursive --parallel"
+    "test": "pnpm run test --recursive --parallel",
+    "list-mismatches": "syncpack list-mismatches",
+    "prepare": "husky install",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.5.0",
     "@graphql-codegen/typescript-operations": "^2.4.1",
     "@graphql-codegen/typescript-react-query": "^3.5.13",
-    "@graphql-codegen/typescript-resolvers": "2.6.5"
+    "@graphql-codegen/typescript-resolvers": "2.6.5",
+    "eslint": "^8.25.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "syncpack": "^8.3.9"
   }
 }

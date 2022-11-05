@@ -1,0 +1,14 @@
+*.md
+*.mdx
+*.ts
+*.tsx
+*.yaml
+*.png
+*.svg
+**/dist
+.prettierignore
+.gitignore
+*.json
+*.js
+*.jsx
+.env*
