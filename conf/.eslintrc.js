@@ -16,18 +16,6 @@ module.exports = {
     'dist/**'
   ],
   rules: {
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
-    'multiline-ternary': 'off',
-    'prefer-regex-literals': 'off',
-    'no-use-before-define': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': [
-      'error'
-    ],
-    'import/no-named-as-default': 'off',
-    'import/namespace': 'off',
     'import/no-named-as-default-member': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off'
   }
