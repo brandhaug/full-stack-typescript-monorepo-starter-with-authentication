@@ -2,7 +2,6 @@
 - Add input validation backend
 - Backend API hot reload
 - Translations backend
-- Prune db migrations
 
 Services
 - Mixpanel
