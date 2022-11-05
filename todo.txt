@@ -1,6 +1,5 @@
 - Add register email with validation
 - Add input validation backend
-- Backend API hot reload
 - Translations backend
 
 Services
