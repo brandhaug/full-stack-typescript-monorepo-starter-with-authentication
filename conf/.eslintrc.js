@@ -12,7 +12,8 @@ module.exports = {
     'graphql.ts', // API types
     '.eslintrc.js',
     '*.config.ts',
-    '*.config.js'
+    '*.config.js',
+    'dist/**'
   ],
   rules: {
     'no-unused-vars': 'off',
