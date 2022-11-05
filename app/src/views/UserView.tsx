@@ -11,12 +11,10 @@ import { useTranslation } from 'react-i18next'
 
 const languageOptions = [{
   value: Language.Norwegian,
-  label: 'Norsk',
-  icon: <span className='fi fi-no' />
+  label: 'Norsk'
 }, {
   value: Language.English,
-  label: 'English',
-  icon: <span className='fi fi-gb' />
+  label: 'English'
 }]
 
 const useInputs = (): FormInput[] => {

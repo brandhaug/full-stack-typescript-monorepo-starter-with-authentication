@@ -4,7 +4,7 @@ import Select from 'react-select'
 
 type ValueType = string | number | boolean | object | null
 
-interface Option { label: string, value: ValueType, icon: JSX.Element }
+interface Option { label: string, value: ValueType }
 
 export type FormInput = { key: string, type: string, label: string | JSX.Element, options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
