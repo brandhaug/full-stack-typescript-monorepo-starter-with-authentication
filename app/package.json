@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
-    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
-    "@full-stack-typescript-monorepo-starter-with-authentication/utils": "0.0.0",
+    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "workspace:0.0.0",
+    "@full-stack-typescript-monorepo-starter-with-authentication/utils": "workspace:0.0.0",
     "@heroicons/react": "^2.0.13",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",

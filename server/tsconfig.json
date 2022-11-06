@@ -1,4 +1,7 @@
 {
   "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf",
-  "include": ["src/**/*", "test/**/*"]
+  "include": ["src/**/*", "test/**/*"],
+  "compilerOptions": {
+    "outDir": "dist"
+  }
 }

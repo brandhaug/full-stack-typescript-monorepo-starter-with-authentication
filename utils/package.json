@@ -9,7 +9,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "0.0.0",
+    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "workspace:0.0.0",
     "@types/jest": "^29.2.2",
     "eslint": "^8.26.0",
     "jest": "^29.2.2",

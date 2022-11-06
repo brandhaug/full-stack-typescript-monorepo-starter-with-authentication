@@ -1,6 +1,7 @@
 // https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
 {
   "compilerOptions": {
+    "baseUrl": "./conf",
     "lib": [
       "dom",
       "es2019",
@@ -33,8 +34,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
-    "noEmit": true,
-    "baseUrl": "./conf",
     "sourceMap": true
   }
 }

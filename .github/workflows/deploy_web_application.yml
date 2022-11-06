@@ -1,0 +1,72 @@
+name: Deploy Web Application
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.x
+          cache: pnpm
+
+      - name: Audit dependencies
+        run: pnpm audit --audit-level critical
+
+      - name: Install dependencies
+        run: pnpm install --recursive
+
+      - name: List mismatching dependencies
+        run: pnpm run list-mismatches
+
+      - name: Build GraphQL types
+        run: pnpm run graphql-codegen
+
+      - name: Build DB types
+        run: pnpm run prisma:generate --prefix server
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Deploy Server
+        id: deploy
+        uses: google-github-actions/deploy-appengine@v0
+        with:
+          deliverables: server/app.yaml
+          version: v1
+          project_id: ${{ secrets.GCP_PROJECT }}
+          credentials: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Test Server deployment
+        run: curl "${{ steps.deploy.outputs.url }}"
+
+      - name: Deploy App
+        id: deploy
+        uses: google-github-actions/deploy-appengine@v0
+        with:
+          deliverables: app/app.yaml
+          version: v1deployment
+          project_id: ${{ secrets.GCP_PROJECT }}
+          credentials: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Test App deployment
+        run: curl "${{ steps.deploy.outputs.url }}"
