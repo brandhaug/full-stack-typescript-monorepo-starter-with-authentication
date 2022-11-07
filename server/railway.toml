@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pnpm run build --prefix server"
+watchPatterns = ["src/**"]
+
+[deploy]
+startCommand = "pnpm run start --prefix server"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

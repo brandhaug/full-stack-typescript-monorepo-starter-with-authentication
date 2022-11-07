@@ -1,7 +1,7 @@
 import * as UserDao from '../daos/users.dao'
 import { AuthenticationToken, RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '../types/graphql'
 import * as AuthenticationUtils from '../utils/authentication.utils'
-import { randomString } from '@full-stack-typescript-monorepo-starter-with-authentication/utils'
+import * as StringUtils from '../utils/string.utils'
 import * as EmailService from '../services/email.service'
 import { User as DbUser } from '@prisma/client'
 import Logger from '../config/logger'
@@ -104,7 +104,7 @@ export const resetPassword = async (input: ResetPasswordInput): Promise<boolean>
     throw new Error('Finner ikke bruker med denne emailen')
   }
 
-  const randomResetPasswordString = randomString(7)
+  const randomResetPasswordString = StringUtils.randomString(7)
   const resetPasswordToken = await AuthenticationUtils.hashString(randomResetPasswordString)
 
   const updatedUser = await update(existingUser.id, { resetPasswordToken })

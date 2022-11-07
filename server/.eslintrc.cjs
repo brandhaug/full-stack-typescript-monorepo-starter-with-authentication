@@ -10,7 +10,6 @@ module.exports = {
     }
   ],
   rules: {
-    'multiline-ternary': 'off',
-    '@typescript-eslint/no-misused-promises': 'off'
+    '@typescript-eslint/no-var-requires': 'off'
   }
 }

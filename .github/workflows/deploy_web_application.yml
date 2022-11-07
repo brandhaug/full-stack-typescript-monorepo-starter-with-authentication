@@ -48,25 +48,11 @@ jobs:
         run: pnpm run build
 
       - name: Deploy Server
-        id: deploy
-        uses: google-github-actions/deploy-appengine@v0
-        with:
-          deliverables: server/app.yaml
-          version: v1
-          project_id: ${{ secrets.GCP_PROJECT }}
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
-
-      - name: Test Server deployment
-        run: curl "${{ steps.deploy.outputs.url }}"
+        run: railway up --service server
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Deploy App
-        id: deploy
-        uses: google-github-actions/deploy-appengine@v0
-        with:
-          deliverables: app/app.yaml
-          version: v1deployment
-          project_id: ${{ secrets.GCP_PROJECT }}
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
-
-      - name: Test App deployment
-        run: curl "${{ steps.deploy.outputs.url }}"
+        run: railway up --service app
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

@@ -1,7 +1,0 @@
-{
-  "presets": [
-    [
-      "@full-stack-typescript-monorepo-starter-with-authentication/conf/babel/node"
-    ]
-  ]
-}

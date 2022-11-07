@@ -12,6 +12,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [GraphQL Yoga](https://www.graphql-yoga.com/) Server API
 - [Prisma](https://www.prisma.io/) ORM with [PostgreSQL](https://www.postgresql.org/) database
 - [Winston](https://github.com/winstonjs/winston) logging
+- [SWC](https://swc.io/) compiling
 
 #### 1.2 Frontend
 
@@ -24,7 +25,6 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 
 - [PNPM](https://pnpm.io/) package manager
 - [Jest](https://jestjs.io/) testing
-- [Babel](https://babeljs.io/) compiling
 - [ESLint](https://eslint.org/) linting
 
 #### 1.4 CI
@@ -68,3 +68,6 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 
 #### 3.4 Testing
 - Run tests with `pnpm run test --recursive`
+
+### 4. Deploy
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app?referralCode=brandhaug)

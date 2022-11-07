@@ -1,4 +1,4 @@
-import * as StringUtils from '../src/string.utils'
+import * as StringUtils from '../../src/utils/string.utils'
 
 test('generate random string', () => {
   const a1 = StringUtils.randomString(7)
