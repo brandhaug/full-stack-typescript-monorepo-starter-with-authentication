@@ -3,6 +3,6 @@ builder = "nixpacks"
 buildCommand = "pnpm run graphql-codegen && pnpm run build --prefix app"
 
 [deploy]
-startCommand = "pnpm run start"
+startCommand = "pnpm run start --prefix app"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

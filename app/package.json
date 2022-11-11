@@ -2,10 +2,10 @@
   "name": "@full-stack-typescript-monorepo-starter-with-authentication/app",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "dotenv -e .env.development -- vite",
     "build": "vite build",
     "start": "http-server ./dist",
-    "preview": "vite preview",
+    "preview": "dotenv -e .env.development -- vite preview",
     "test": "tsc --noEmit && eslint .",
     "extract-translations": "i18next 'src/**/*.{ts,tsx}'"
   },
@@ -21,7 +21,6 @@
     "http-server": "^14.1.1",
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^6.1.8",
-    "i18next-http-backend": "^1.4.4",
     "jwt-decode": "^3.1.2",
     "postcss": "^8.4.18",
     "react": "^18.2.0",
@@ -34,10 +33,9 @@
     "vite": "^3.2.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "dotenv-cli": "^6.0.0",
     "eslint": "^8.26.0",
     "i18next-parser": "^6.6.0",
     "react-test-renderer": "^18.2.0",
