@@ -1,3 +1,7 @@
+Bugs
+- Load translations in prod
+- CurrentUserContext
+
 - Add register email with validation
 - Add input validation backend
 - Translations backend

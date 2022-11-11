@@ -4,6 +4,9 @@ Setting up a new project is time-consuming. The purpose of this project is to ma
 
 In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend. The whole stack is with TypeScript.
 
+### 1 Demo
+[https://full-stack-typescript-monorepo-starter-with-authentication.up.railway.app](https://full-stack-typescript-monorepo-starter-with-authentication.up.railway.app)
+
 ### 1 Features
 
 #### 1.1 Backend
@@ -64,10 +67,11 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 
 #### 3.3 Translations
 - Run `pnpm run extract-translations` in `app`
-- Edit json files in `app/src/translations`
+- Edit json files in `app/src/assets/translations`
 
 #### 3.4 Testing
 - Run tests with `pnpm run test --recursive`
 
 ### 4. Deploy
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app?referralCode=brandhaug)
+- Configure deploys in `server/railway.toml` and `app/railway.toml`

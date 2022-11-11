@@ -24,6 +24,7 @@ const useMainMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
 
 const useUserMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   const { t } = useTranslation()
+
   return [
     {
       title: t('My account'),
@@ -87,6 +88,7 @@ const Brand = (): JSX.Element => {
 }
 
 const MobileMainMenu = (): JSX.Element | null => {
+  const currentUser = useCurrentUser()
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -96,6 +98,8 @@ const MobileMainMenu = (): JSX.Element | null => {
   const userMenuItems = useUserMenuItems()
 
   useOutsideClick(ref, () => setIsOpen(false))
+
+  if (!currentUser) return null
 
   return (
     <div className='md:hidden relative' ref={ref}>

@@ -5,6 +5,8 @@
     "test/**/*"
   ],
   "compilerOptions": {
+    "modulecon": "esnext",
     "jsx": "react",
+    "moduleResolution":"node"
   }
 }
