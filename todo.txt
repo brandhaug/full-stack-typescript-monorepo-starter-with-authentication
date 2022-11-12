@@ -1,5 +1,4 @@
 Bugs
-- Load translations in prod
 - CurrentUserContext
 
 - Add register email with validation

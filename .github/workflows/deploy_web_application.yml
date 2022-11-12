@@ -1,49 +1,58 @@
 name: Deploy Web Application
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 permissions:
   contents: write
 
 jobs:
-  Deploy:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
+  Setup:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: 6
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: pnpm
+
+    - name: Audit dependencies
+      run: pnpm audit --audit-level critical
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: List mismatching dependencies
+      run: pnpm run list-mismatches
+
+    - name: Build GraphQL types
+      run: pnpm run graphql-codegen
+
+    - name: Build DB types
+      run: pnpm run prisma generate --prefix server
+
+  Test app:
+    needs: Setup
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: 6
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Audit dependencies
-        run: pnpm audit --audit-level critical
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: List mismatching dependencies
-        run: pnpm run list-mismatches
-
-      - name: Build GraphQL types
-        run: pnpm run graphql-codegen
-
-      - name: Build DB types
-        run: pnpm run prisma generate --prefix server
-
       - name: Test
-        run: pnpm run test
+        run: pnpm run nx run @full-stack-typescript-monorepo-starter-with-authentication/app:test
 
+  Test server:
+    needs: Setup
+    steps:
+      - name: Test
+        run: pnpm run nx run @full-stack-typescript-monorepo-starter-with-authentication/server:test
+
+  Deploy:
+    needs: [Test app, Test server]
+    if: github.ref == 'refs/heads/master'
+    steps:
       - name: Deploy Server
         run: pnpm run railway up -- --service server
         env:

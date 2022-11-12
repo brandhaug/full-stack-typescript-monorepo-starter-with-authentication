@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm run build --prefix server"
+buildCommand = "pnpm run nx run @full-stack-typescript-monorepo-starter-with-authentication/server:build"
 
 [deploy]
 startCommand = "pnpm run start --prefix server"

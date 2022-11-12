@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm run graphql-codegen && pnpm run build --prefix app"
+buildCommand = "pnpm run graphql-codegen && pnpm nx run @full-stack-typescript-monorepo-starter-with-authentication/app:build"
 
 [deploy]
 startCommand = "pnpm run start --prefix app"
