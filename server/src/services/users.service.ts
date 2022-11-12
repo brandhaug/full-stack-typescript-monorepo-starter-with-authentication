@@ -88,6 +88,12 @@ export const refreshAccessToken = async (input: RefreshAccessTokenInput): Promis
 
   if (!verifiedToken) throw new Error('Ugyldig refresh token')
 
+  await fetchOne(({ id: verifiedToken.id }))
+    .catch(err => {
+      Logger.error(err)
+      throw new Error('Finner ikke bruker')
+    })
+
   const accessToken = AuthenticationUtils.generateAccessToken(verifiedToken)
 
   return { refreshToken: input.refreshToken, accessToken }

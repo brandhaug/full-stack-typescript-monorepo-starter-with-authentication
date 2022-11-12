@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "dotenv -e .env.development -- vite",
-    "build": "vite build",
+    "build": "dotenv -e .env.production -- vite build",
     "start": "http-server ./dist",
     "preview": "dotenv -e .env.development -- vite preview",
     "test": "tsc --noEmit && eslint .",

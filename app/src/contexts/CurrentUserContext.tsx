@@ -12,7 +12,7 @@ export const CurrentUserContext = React.createContext<CurrentUserContextProps>({
 
 export const CurrentUserContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const decodedAccessToken = useDecodedAccessToken()
-  const { data } = useQuery<UserQuery, UserQueryVariables>(USER, { variables: { id: decodedAccessToken.id }, skip: !decodedAccessToken })
+  const { data } = useQuery<UserQuery, UserQueryVariables>(USER, { variables: { id: decodedAccessToken?.id }, skip: !decodedAccessToken })
   const currentUser = data?.user ?? null
 
   return <CurrentUserContext.Provider value={{ currentUser }}>{children}</CurrentUserContext.Provider>

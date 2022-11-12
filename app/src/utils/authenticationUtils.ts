@@ -3,7 +3,11 @@ import { AuthenticationToken } from '../types/graphql'
 import { AuthenticationContext } from '../contexts/AuthenticationContext'
 import React from 'react'
 
-interface DecodedAccessToken { id: string, email: string, exp: number }
+interface DecodedAccessToken {
+  id: string
+  email: string
+  exp: number
+}
 
 export const useAccessToken = (): string | null => {
   const { accessToken } = React.useContext(AuthenticationContext)
@@ -29,17 +33,15 @@ const decodeToken = (token: string): DecodedAccessToken | null => {
 }
 
 export const useDecodedAccessToken = (): DecodedAccessToken | null => {
-  const logout = useLogout()
-
   const accessToken = useAccessToken()
+
   if (!accessToken) {
-    logout()
     return null
   }
 
   const decodedAccessToken = decodeToken(accessToken)
+
   if (!decodedAccessToken) {
-    logout()
     return null
   }
 

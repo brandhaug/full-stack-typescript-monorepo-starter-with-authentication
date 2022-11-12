@@ -9,7 +9,8 @@
     "test": "pnpm run test --recursive --parallel",
     "list-mismatches": "syncpack list-mismatches",
     "prepare": "husky install",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "railway": "railway"
   },
   "dependencies": {
     "@graphql-codegen/cli": "2.13.11",

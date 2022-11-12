@@ -2,7 +2,11 @@ import jwt, { Secret } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { AuthenticationToken, User, UserRole } from '../types/graphql'
 
-export interface TokenPayload { id: string, role: UserRole, exp: number }
+export interface TokenPayload {
+  id: string
+  role: UserRole
+  exp: number
+}
 
 export const generateAuthenticationToken = (user: User): AuthenticationToken => {
   const accessToken = generateAccessToken(user)
