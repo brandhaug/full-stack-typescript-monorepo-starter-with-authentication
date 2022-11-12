@@ -29,6 +29,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [PNPM](https://pnpm.io/) package manager
 - [Jest](https://jestjs.io/) testing
 - [ESLint](https://eslint.org/) linting
+- [NX](https://cloud.nx.app) caching
 
 #### 1.4 CI
 
@@ -75,3 +76,5 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 ### 4. Deploy
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app?referralCode=brandhaug)
 - Configure deploys in `server/railway.toml` and `app/railway.toml`
+- Add `RAILWAY_TOKEN` to GitHub actions secret
+- Setup [NX](https://cloud.nx.app) and add `NX_CLOUD_ACCESS_TOKEN`
