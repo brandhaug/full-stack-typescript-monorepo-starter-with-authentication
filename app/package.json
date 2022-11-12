@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "dotenv -e .env.development -- vite",
     "build": "dotenv -e .env.production -- vite build",
-    "start": "http-server ./dist",
+    "start": "serve ./dist",
     "preview": "dotenv -e .env.development -- vite preview",
     "test": "tsc --noEmit && eslint .",
     "extract-translations": "i18next 'src/**/*.{ts,tsx}'"
@@ -18,7 +18,7 @@
     "autoprefixer": "^10.4.13",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
-    "http-server": "^14.1.1",
+    "serve": "^14.1.1",
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^6.1.8",
     "jwt-decode": "^3.1.2",
