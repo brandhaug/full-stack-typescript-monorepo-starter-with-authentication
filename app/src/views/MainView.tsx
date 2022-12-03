@@ -8,7 +8,7 @@ export const MainView = (): JSX.Element | null => {
   const decodedAccessToken = useDecodedAccessToken()
   const currentUser = useCurrentUser()
 
-  if ((!currentUser) || (!decodedAccessToken)) return null
+  if (!currentUser || !decodedAccessToken) return null
 
   return (
     <div className='p-20'>

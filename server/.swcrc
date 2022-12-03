@@ -9,7 +9,7 @@
     "type": "commonjs",
     "strict": true,
     "strictMode": true, // Default
-    "lazy": false,  // Default
-    "noInterop": false  // Default
+    "lazy": false, // Default
+    "noInterop": false // Default
   }
 }

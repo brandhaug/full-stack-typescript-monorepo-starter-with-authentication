@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 
-const useMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
+const useMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
   const { t } = useTranslation()
   return [
     {
@@ -39,11 +39,13 @@ export const Footer = (): JSX.Element | null => {
   return (
     <footer className='flex justify-between bg-white py-4 px-8 shadow-xl'>
       <div className='self-center w-1/3'>
-        <p>© {currentYear} {t('Company Inc. All rights reserved.')}</p>
+        <p>
+          © {currentYear} {t('Company Inc. All rights reserved.')}
+        </p>
       </div>
       <div className='text-center w-1/3'>
         <ul>
-          {menuItems.map(menuItem => {
+          {menuItems.map((menuItem) => {
             return (
               <li key={menuItem.to}>
                 <NavLink to={menuItem.to}>{menuItem.title}</NavLink>

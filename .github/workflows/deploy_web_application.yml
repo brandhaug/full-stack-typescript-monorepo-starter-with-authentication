@@ -3,7 +3,7 @@ name: Deploy Web Application
 on: push
 
 jobs:
-  Deploy:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,20 +35,31 @@ jobs:
       - name: Build DB types
         run: pnpm run prisma generate --prefix server
 
-      - name: Test app
+  test-app:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Test
         run: pnpm run nx run @full-stack-typescript-monorepo-starter-with-authentication/app:test
 
-      - name: Test server
+  test-server:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Test
         run: pnpm run nx run @full-stack-typescript-monorepo-starter-with-authentication/server:test
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test-app, test-server]
+    if: github.ref == 'refs/heads/master'
+    steps:
       - name: Deploy Server
-        if: github.ref == 'refs/heads/master'
         run: pnpm run railway up -- --service server
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Deploy App
-        if: github.ref == 'refs/heads/master'
         run: pnpm run railway up -- --service app
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
