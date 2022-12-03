@@ -7,7 +7,7 @@ export const fetch = async (): Promise<User[]> => {
   return result
 }
 
-export const fetchOne = async ({ id, email }: { id?: string, email?: string }): Promise<User | null> => {
+export const fetchOne = async ({ id, email }: { id?: string; email?: string }): Promise<User | null> => {
   const result = await prismaClient.user.findUnique({
     where: {
       id,

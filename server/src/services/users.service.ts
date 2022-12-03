@@ -24,7 +24,7 @@ const generateResetPasswordHtml = (id: string, token: string): string => {
   `
 }
 
-export const login = async ({ email, password }: { email: string, password: string }): Promise<AuthenticationToken> => {
+export const login = async ({ email, password }: { email: string; password: string }): Promise<AuthenticationToken> => {
   const user = await fetchOne({ email })
 
   if (!user) throw new Error('Fant ikke bruker')
@@ -42,12 +42,11 @@ export const fetchAll = async (): Promise<DbUser[]> => {
   return result
 }
 
-export const fetchOne = async ({ id, email }: { id?: string, email?: string }): Promise<DbUser | null> => {
-  const result = await UserDao.fetchOne({ id, email })
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke hente bruker.')
-    })
+export const fetchOne = async ({ id, email }: { id?: string; email?: string }): Promise<DbUser | null> => {
+  const result = await UserDao.fetchOne({ id, email }).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke hente bruker.')
+  })
 
   return result
 }
@@ -60,18 +59,16 @@ export const register = async (input: RegisterUserInput): Promise<Authentication
   }
 
   const { password, ...restUser } = input
-  const hashedPassword = await AuthenticationUtils.hashString(input.password)
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke opprette passord.')
-    })
+  const hashedPassword = await AuthenticationUtils.hashString(input.password).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke opprette passord.')
+  })
 
   const userToCreate = { ...restUser, hash: hashedPassword }
-  const createdUser = await UserDao.create(userToCreate)
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke opprette bruker.')
-    })
+  const createdUser = await UserDao.create(userToCreate).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke opprette bruker.')
+  })
 
   if (!createdUser) throw new Error('Fikk ikke til å opprette bruker')
 
@@ -80,19 +77,17 @@ export const register = async (input: RegisterUserInput): Promise<Authentication
 }
 
 export const refreshAccessToken = async (input: RefreshAccessTokenInput): Promise<AuthenticationToken> => {
-  const verifiedToken = await AuthenticationUtils.verifyAndDecodeRefreshToken(input.refreshToken)
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke oppdatere token.')
-    })
+  const verifiedToken = await AuthenticationUtils.verifyAndDecodeRefreshToken(input.refreshToken).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke oppdatere token.')
+  })
 
   if (!verifiedToken) throw new Error('Ugyldig refresh token')
 
-  await fetchOne(({ id: verifiedToken.id }))
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Finner ikke bruker')
-    })
+  await fetchOne({ id: verifiedToken.id }).catch((err) => {
+    Logger.error(err)
+    throw new Error('Finner ikke bruker')
+  })
 
   const accessToken = AuthenticationUtils.generateAccessToken(verifiedToken)
 
@@ -100,11 +95,10 @@ export const refreshAccessToken = async (input: RefreshAccessTokenInput): Promis
 }
 
 export const resetPassword = async (input: ResetPasswordInput): Promise<boolean> => {
-  const existingUser = await fetchOne({ email: input.email })
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke hente bruker.')
-    })
+  const existingUser = await fetchOne({ email: input.email }).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke hente bruker.')
+  })
 
   if (!existingUser) {
     throw new Error('Finner ikke bruker med denne emailen')
@@ -113,21 +107,19 @@ export const resetPassword = async (input: ResetPasswordInput): Promise<boolean>
   const randomResetPasswordString = StringUtils.randomString(7)
   const resetPasswordToken = await AuthenticationUtils.hashString(randomResetPasswordString)
 
-  const updatedUser = await update(existingUser.id, { resetPasswordToken })
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke oppdatere bruker.')
-    })
+  const updatedUser = await update(existingUser.id, { resetPasswordToken }).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke oppdatere bruker.')
+  })
 
   if (!updatedUser) throw new Error('Kunne ikke oppdatere bruker.')
 
   const emailHtml = generateResetPasswordHtml(existingUser.id, resetPasswordToken)
 
-  const email = await EmailService.sendMail({ to: existingUser.email, subject: 'Tilbakestill passord i Company Inc.', html: emailHtml })
-    .catch(err => {
-      Logger.error(err)
-      throw new Error('Kunne ikke sende email.')
-    })
+  const email = await EmailService.sendMail({ to: existingUser.email, subject: 'Tilbakestill passord i Company Inc.', html: emailHtml }).catch((err) => {
+    Logger.error(err)
+    throw new Error('Kunne ikke sende email.')
+  })
 
   if (!email) throw new Error('Kunne ikke sende email.')
 

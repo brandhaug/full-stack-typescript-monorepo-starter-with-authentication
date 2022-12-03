@@ -8,7 +8,7 @@ import { useIsAuthenticated } from '../utils/authenticationUtils'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Logo from '../assets/logo_no-bg_cropped.png'
 
-const useMainMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
+const useMainMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
   const { t } = useTranslation()
   return [
     {
@@ -22,7 +22,7 @@ const useMainMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
   ]
 }
 
-const useUserMenuItems = (): Array<{ title: string, to: RoutePaths }> => {
+const useUserMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
   const { t } = useTranslation()
 
   return [
@@ -42,7 +42,7 @@ const UserMenu = (): JSX.Element | null => {
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = (): void => setIsOpen(prevIsOpen => !prevIsOpen)
+  const toggleIsOpen = (): void => setIsOpen((prevIsOpen) => !prevIsOpen)
 
   useOutsideClick(ref, () => setIsOpen(false))
 
@@ -62,7 +62,7 @@ const UserMenu = (): JSX.Element | null => {
             <span className='block font-medium text-gray-500 truncate'>{currentUser.email}</span>
           </div>
           <ul className='py-1'>
-            {userMenuItems.map(menuItem => {
+            {userMenuItems.map((menuItem) => {
               return (
                 <li key={menuItem.to}>
                   <NavLink to={menuItem.to} className='block py-4 px-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
@@ -92,7 +92,7 @@ const MobileMainMenu = (): JSX.Element | null => {
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = (): void => setIsOpen(prevIsOpen => !prevIsOpen)
+  const toggleIsOpen = (): void => setIsOpen((prevIsOpen) => !prevIsOpen)
 
   const mainMenuItems = useMainMenuItems()
   const userMenuItems = useUserMenuItems()
@@ -109,7 +109,7 @@ const MobileMainMenu = (): JSX.Element | null => {
       {isOpen && (
         <div className='absolute right-0 top-10 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow'>
           <ul className='py-1'>
-            {[...mainMenuItems, ...userMenuItems].map(menuItem => {
+            {[...mainMenuItems, ...userMenuItems].map((menuItem) => {
               return (
                 <li key={menuItem.to}>
                   <NavLink to={menuItem.to} className='w-40 block py-4 px-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
@@ -132,7 +132,7 @@ const MainMenu = (): JSX.Element => {
   return (
     <div className='hidden md:block items-center w-full flex w-auto ml-10'>
       <ul className='flex flex-col md:flex-row md:space-x-0'>
-        {mainMenuItems.map(menuItem => {
+        {mainMenuItems.map((menuItem) => {
           const isActive = location.pathname === menuItem.to
           return (
             <li key={menuItem.to}>

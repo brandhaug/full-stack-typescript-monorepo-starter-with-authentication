@@ -4,21 +4,16 @@ import Select from 'react-select'
 
 type ValueType = string | number | boolean | object | null
 
-interface Option { label: string, value: ValueType }
+interface Option {
+  label: string
+  value: ValueType
+}
 
-export type FormInput = { key: string, type: string, label: string | JSX.Element, options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+export type FormInput = { key: string; type: string; label: string | JSX.Element; options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export const FormInputs = <T extends { [key: string]: ValueType }>({
-  inputs,
-  formData,
-  setFormData
-}: {
-  inputs: FormInput[]
-  formData: T
-  setFormData: SetStateFn<T>
-}): JSX.Element | null => {
+export const FormInputs = <T extends { [key: string]: ValueType }>({ inputs, formData, setFormData }: { inputs: FormInput[]; formData: T; setFormData: SetStateFn<T> }): JSX.Element | null => {
   const handleChange = (key: string) => (value: string | number | boolean | object | null) => {
-    setFormData(prevFormData => {
+    setFormData((prevFormData) => {
       return { ...prevFormData, [key]: value }
     })
   }
@@ -34,7 +29,7 @@ export const FormInputs = <T extends { [key: string]: ValueType }>({
 
   return (
     <>
-      {inputs.map(input => {
+      {inputs.map((input) => {
         if (input.type === 'checkbox') {
           return (
             <div key={input.key} className='flex align-center my-2'>
@@ -45,7 +40,7 @@ export const FormInputs = <T extends { [key: string]: ValueType }>({
         }
 
         if (input.type === 'select' && input.options) {
-          const matchingOption = input.options.find(option => option.value === formData[input.key])
+          const matchingOption = input.options.find((option) => option.value === formData[input.key])
 
           return (
             <div key={input.key}>
@@ -58,7 +53,15 @@ export const FormInputs = <T extends { [key: string]: ValueType }>({
         return (
           <div key={input.key}>
             <label>{input.label}</label>
-            <input className='form-control' type={input.type} placeholder={input.label as string} onChange={handleInputChange(input.key)} value={formData[input.key] as string} minLength={input.minLength} required />
+            <input
+              className='form-control'
+              type={input.type}
+              placeholder={input.label as string}
+              onChange={handleInputChange(input.key)}
+              value={formData[input.key] as string}
+              minLength={input.minLength}
+              required
+            />
           </div>
         )
       })}

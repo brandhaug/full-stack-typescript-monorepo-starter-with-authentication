@@ -26,7 +26,7 @@ export const useRefreshToken = (): string | null => {
 
 const decodeToken = (token: string): DecodedAccessToken | null => {
   try {
-    return jwtDecode<{ id: string, email: string, exp: number }>(token)
+    return jwtDecode<{ id: string; email: string; exp: number }>(token)
   } catch {
     return null
   }
@@ -48,7 +48,7 @@ export const useDecodedAccessToken = (): DecodedAccessToken | null => {
   return decodedAccessToken
 }
 
-export const useSaveAuthenticationToken = (): (authenticationToken: AuthenticationToken) => void => {
+export const useSaveAuthenticationToken = (): ((authenticationToken: AuthenticationToken) => void) => {
   const { setAccessToken, setRefreshToken } = React.useContext(AuthenticationContext)
 
   return (authenticationToken: AuthenticationToken) => {
@@ -57,7 +57,7 @@ export const useSaveAuthenticationToken = (): (authenticationToken: Authenticati
   }
 }
 
-export const useLogout = (): () => void => {
+export const useLogout = (): (() => void) => {
   const { setAccessToken, setRefreshToken } = React.useContext(AuthenticationContext)
 
   return () => {

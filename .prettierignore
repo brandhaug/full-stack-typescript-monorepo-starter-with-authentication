@@ -1,7 +1,5 @@
 *.md
 *.mdx
-*.ts
-*.tsx
 *.yaml
 *.png
 *.svg
@@ -9,6 +7,4 @@
 .prettierignore
 .gitignore
 *.json
-*.js
-*.jsx
 .env*

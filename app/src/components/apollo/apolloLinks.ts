@@ -15,7 +15,7 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
   const saveAuthenticationToken = useSaveAuthenticationToken()
 
   const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-    if ((!graphQLErrors) && (!networkError)) return
+    if (!graphQLErrors && !networkError) return
 
     if (!graphQLErrors) {
       toast.error(t('Something went wrong'))
@@ -27,43 +27,41 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
         // ignore 401 error for a refresh request
         if (operation.operationName === 'refreshToken') return
 
-        const observable = new Observable<FetchResult<Record<string, object>>>(
-          (observer) => {
-            void (async () => {
-              try {
-                if (!refreshToken) {
-                  throw new GraphQLError('Empty refresh token')
-                }
-
-                const { data } = await apolloClient.mutate<RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables>({ mutation: REFRESH_ACCESS_TOKEN, variables: { input: { refreshToken } } })
-
-                if (!data?.refreshAccessToken.accessToken) {
-                  throw new GraphQLError('Empty access token')
-                }
-
-                saveAuthenticationToken(data.refreshAccessToken)
-
-                // Retry the failed request
-                const subscriber = {
-                  next: observer.next.bind(observer),
-                  error: observer.error.bind(observer),
-                  complete: observer.complete.bind(observer)
-                }
-
-                forward(operation).subscribe(subscriber)
-              } catch (err) {
-                observer.error(err)
-                logout()
+        const observable = new Observable<FetchResult<Record<string, object>>>((observer) => {
+          void (async () => {
+            try {
+              if (!refreshToken) {
+                throw new GraphQLError('Empty refresh token')
               }
-            })()
-          }
-        )
+
+              const { data } = await apolloClient.mutate<RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables>({ mutation: REFRESH_ACCESS_TOKEN, variables: { input: { refreshToken } } })
+
+              if (!data?.refreshAccessToken.accessToken) {
+                throw new GraphQLError('Empty access token')
+              }
+
+              saveAuthenticationToken(data.refreshAccessToken)
+
+              // Retry the failed request
+              const subscriber = {
+                next: observer.next.bind(observer),
+                error: observer.error.bind(observer),
+                complete: observer.complete.bind(observer)
+              }
+
+              forward(operation).subscribe(subscriber)
+            } catch (err) {
+              observer.error(err)
+              logout()
+            }
+          })()
+        })
 
         return observable
       }
     }
 
-    const errorString = graphQLErrors.map(error => error.message).join('\n')
+    const errorString = graphQLErrors.map((error) => error.message).join('\n')
     toast.error(errorString)
   })
 

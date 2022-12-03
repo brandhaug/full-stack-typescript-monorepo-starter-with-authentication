@@ -8,8 +8,5 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true
   },
-  plugins: [
-    graphql(),
-    react()
-  ]
+  plugins: [graphql(), react()]
 })

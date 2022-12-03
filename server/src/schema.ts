@@ -16,34 +16,34 @@ const resolvers: Resolvers = {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 
-      return await (UsersService.fetchOne({ id }).catch(err => {
+      return await (UsersService.fetchOne({ id }).catch((err) => {
         throw new GraphQLYogaError(err)
       }) as Promise<User>)
     }
   },
   Mutation: {
     registerUser: async (_, { input }) => {
-      return await UsersService.register(input).catch(err => {
+      return await UsersService.register(input).catch((err) => {
         throw new GraphQLYogaError(err)
       })
     },
     login: async (_, { input }) => {
-      return await UsersService.login(input).catch(err => {
+      return await UsersService.login(input).catch((err) => {
         throw new GraphQLYogaError(err)
       })
     },
     refreshAccessToken: async (_, { input }) => {
-      return await UsersService.refreshAccessToken(input).catch(err => {
+      return await UsersService.refreshAccessToken(input).catch((err) => {
         throw new GraphQLYogaError(err)
       })
     },
     resetPassword: async (_, { input }) => {
-      return await UsersService.resetPassword(input).catch(err => {
+      return await UsersService.resetPassword(input).catch((err) => {
         throw new GraphQLYogaError(err)
       })
     },
     updatePassword: async (_, { id, token, input }) => {
-      return await UsersService.updatePassword(id, token, input).catch(err => {
+      return await UsersService.updatePassword(id, token, input).catch((err) => {
         throw new GraphQLYogaError(err)
       })
     },
@@ -51,7 +51,7 @@ const resolvers: Resolvers = {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 
-      return await (UsersService.update(id, input as Partial<Omit<DbUser, 'id'>>).catch(err => {
+      return await (UsersService.update(id, input as Partial<Omit<DbUser, 'id'>>).catch((err) => {
         throw new GraphQLYogaError(err)
       }) as Promise<User>)
     }

@@ -27,7 +27,7 @@ const useInputs = (): FormInput[] => {
   ]
 }
 
-const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVariables>, loading: boolean } => {
+const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVariables>; loading: boolean } => {
   const { t } = useTranslation()
   const saveAuthenticationToken = useSaveAuthenticationToken()
   const navigate = useNavigate()
@@ -83,7 +83,7 @@ export const LoginView = (): JSX.Element => {
               {t('Log in')}
             </button>
             <p className='text-center mt-8'>
-              {t('You don\'t have a user?')}&nbsp;
+              {t("You don't have a user?")}&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.REGISTER}>
                 {t('Register')}
               </NavLink>

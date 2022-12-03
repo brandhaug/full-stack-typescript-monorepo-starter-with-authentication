@@ -9,13 +9,16 @@ import { toast } from 'react-hot-toast'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
 
-const languageOptions = [{
-  value: Language.Norwegian,
-  label: 'Norsk'
-}, {
-  value: Language.English,
-  label: 'English'
-}]
+const languageOptions = [
+  {
+    value: Language.Norwegian,
+    label: 'Norsk'
+  },
+  {
+    value: Language.English,
+    label: 'English'
+  }
+]
 
 const useInputs = (): FormInput[] => {
   const { t } = useTranslation()
@@ -29,7 +32,8 @@ const useInputs = (): FormInput[] => {
       key: 'lastName',
       type: 'text',
       label: t('Last name')
-    }, {
+    },
+    {
       key: 'language',
       type: 'select',
       label: t('Language'),
@@ -41,7 +45,9 @@ const useInputs = (): FormInput[] => {
 export const UserView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const currentUser = useCurrentUser()
-  const [formData, setFormData] = useDependencyState({ firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }, [JSON.stringify(currentUser)])
+  const [formData, setFormData] = useDependencyState({ firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }, [
+    JSON.stringify(currentUser)
+  ])
 
   const handleCompleted = (): void => {
     toast.success(t('User updated'))
