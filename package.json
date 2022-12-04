@@ -16,20 +16,20 @@
   "dependencies": {
     "@graphql-codegen/cli": "2.13.11",
     "@graphql-codegen/typescript": "2.8.1",
-    "@graphql-codegen/typescript-operations": "^2.5.6",
-    "@graphql-codegen/typescript-react-query": "^4.0.5",
+    "@graphql-codegen/typescript-operations": "^2.5.8",
+    "@graphql-codegen/typescript-react-query": "^4.0.6",
     "@graphql-codegen/typescript-resolvers": "2.7.6",
-    "nx": "^15.0.13",
-    "@nrwl/nx-cloud": "^15.0.2"
+    "@nrwl/nx-cloud": "^15.0.2",
+    "nx": "^15.2.4"
   },
   "devDependencies": {
     "@railway/cli": "^2.0.13",
     "dotenv-cli": "^6.0.0",
-    "eslint": "^8.26.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "syncpack": "^8.3.9"
+    "eslint": "^8.29.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
+    "prettier": "^2.8.0",
+    "syncpack": "^8.4.11"
   },
   "engines": {
     "node": ">=18",

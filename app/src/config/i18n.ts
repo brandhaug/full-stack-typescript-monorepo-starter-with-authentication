@@ -4,8 +4,6 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import norwegianTranslations from '../assets/translations/no.json'
 import englishTranslations from '../assets/translations/en.json'
 
-console.log('nor', norwegianTranslations)
-
 void i18n
   .use(LanguageDetector)
   .use(initReactI18next)

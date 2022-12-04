@@ -2,7 +2,7 @@ Bugs
 - CurrentUserContext
 
 - Add register email with validation
-- Add input validation backend
+- Add input Zod validation frontend/backend
 - Translations backend
 
 Services

@@ -3,11 +3,11 @@ import React from 'react'
 import { useMutation } from '@apollo/client'
 import UPDATE_USER from '../graphql/users/mutations/updateUser.graphql'
 import { Language, UpdateUserMutation, UpdateUserMutationVariables } from '../types/graphql'
-import { useDependencyState } from '../utils/stateHooks'
 import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
+import { useDependencyState } from '../utils/stateHooks'
 
 const languageOptions = [
   {
@@ -45,9 +45,9 @@ const useInputs = (): FormInput[] => {
 export const UserView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const currentUser = useCurrentUser()
-  const [formData, setFormData] = useDependencyState({ firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }, [
-    JSON.stringify(currentUser)
-  ])
+
+  const defaultValue = { firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }
+  const [formData, setFormData] = useDependencyState(defaultValue, [JSON.stringify(currentUser)])
 
   const handleCompleted = (): void => {
     toast.success(t('User updated'))

@@ -3,7 +3,7 @@ import { MutationFunction, useMutation } from '@apollo/client'
 import LOGIN from '../graphql/users/mutations/login.graphql'
 import { LoginMutation, LoginMutationVariables } from '../types/graphql'
 import { toast } from 'react-hot-toast'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
 import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
@@ -52,7 +52,6 @@ export const LoginView = (): JSX.Element => {
   const isAuthenticated = useIsAuthenticated()
   const { t } = useTranslation()
   const [formData, setFormData] = React.useState({ email: '', password: '' })
-  const navigate = useNavigate()
   const { login, loading } = useLogin()
   const inputs = useInputs()
 
@@ -62,10 +61,7 @@ export const LoginView = (): JSX.Element => {
     await login({ variables: { input: formData } })
   }
 
-  React.useEffect(() => {
-    if (!isAuthenticated) return
-    navigate(RoutePaths.MAIN)
-  }, [])
+  if (isAuthenticated) return <Navigate to={RoutePaths.MAIN} replace />
 
   return (
     <div className='container-centered'>
