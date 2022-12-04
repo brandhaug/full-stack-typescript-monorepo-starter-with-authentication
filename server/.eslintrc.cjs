@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['./node_modules/@full-stack-typescript-monorepo-starter-with-authentication/conf/.eslintrc.js'],
+  extends: ['./node_modules/@full-stack-typescript-monorepo-starter-with-authentication/conf/eslint/.eslintrc.node.js'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

@@ -6,7 +6,7 @@
     "build": "dotenv -e .env.production -- vite build",
     "start": "serve ./dist",
     "preview": "dotenv -e .env.development -- vite preview",
-    "test": "tsc --noEmit && eslint . && jest",
+    "test": "tsc && eslint . && jest",
     "extract-translations": "i18next 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {

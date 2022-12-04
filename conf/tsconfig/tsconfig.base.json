@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "target": "es6",
     // Enables noImplicitAny, strictNullChecks, strictFunctionTypes,
     // strictBindCallApply, strictPropertyInitialization, noImplicitThis, alwaysStrict
     "strict": true,
@@ -14,6 +18,8 @@
     // Skips type checking for declaration files (*.d.ts)
     "skipLibCheck": true,
     // Generates an error when an unchecked index is used in a type-checked expression
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    // tsc is only used for tests
+    "noEmit": true
   }
 }

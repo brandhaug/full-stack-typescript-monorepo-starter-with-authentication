@@ -1,12 +1,7 @@
 {
-  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf",
+  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf/tsconfig/tsconfig.react.json",
   "include": [
     "src/**/*",
     "test/**/*"
-  ],
-  "compilerOptions": {
-    "module": "esnext",
-    "jsx": "react",
-    "moduleResolution": "node"
-  }
+  ]
 }

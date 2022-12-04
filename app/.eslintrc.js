@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['./node_modules/@full-stack-typescript-monorepo-starter-with-authentication/conf/.eslintrc.js'],
+  extends: ['./node_modules/@full-stack-typescript-monorepo-starter-with-authentication/conf/eslint/.eslintrc.react.js'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -9,8 +9,5 @@ module.exports = {
       }
     }
   ],
-  rules: {
-    'multiline-ternary': 'off',
-    '@typescript-eslint/no-misused-promises': 'off'
-  }
+  rules: {}
 }

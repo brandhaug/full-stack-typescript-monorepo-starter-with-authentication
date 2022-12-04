@@ -1,10 +1,7 @@
 {
-  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf",
+  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf/tsconfig/tsconfig.node.json",
   "include": [
     "src/**/*",
     "test/**/*"
-  ],
-  "compilerOptions": {
-    "module": "commonjs",
-  }
+  ]
 }
