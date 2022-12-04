@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import axiosRetry, { exponentialDelay } from 'axios-retry'
 import logger from './logger'
 
-// @ts-expect-error I don't know
 axiosRetry(axios, { retries: 3, retryDelay: exponentialDelay, shouldResetTimeout: true })
 
 export const get = async <T extends object>(url: string, config: AxiosRequestConfig): Promise<AxiosResponse<T>> => {

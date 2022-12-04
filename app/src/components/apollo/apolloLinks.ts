@@ -14,18 +14,19 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
   const logout = useLogout()
   const saveAuthenticationToken = useSaveAuthenticationToken()
 
-  const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-    if (!graphQLErrors && !networkError) return
+  // @ts-expect-error Unsure of the return type
+  const errorLink = onError(({ graphQLErrors, networkError, operation, forward }): Observable<FetchResult<Record<string, object>>> | null | undefined => {
+    if (!graphQLErrors && !networkError) return null
 
     if (!graphQLErrors) {
       toast.error(t('Something went wrong'))
-      return
+      return null
     }
 
     for (const graphqlError of graphQLErrors) {
       if (graphqlError.extensions?.code === 401) {
         // ignore 401 error for a refresh request
-        if (operation.operationName === 'refreshToken') return
+        if (operation.operationName === 'refreshToken') return null
 
         const observable = new Observable<FetchResult<Record<string, object>>>((observer) => {
           void (async () => {
@@ -63,6 +64,7 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
 
     const errorString = graphQLErrors.map((error) => error.message).join('\n')
     toast.error(errorString)
+    return null
   })
 
   return errorLink
