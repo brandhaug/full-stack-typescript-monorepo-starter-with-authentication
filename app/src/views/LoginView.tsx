@@ -1,7 +1,6 @@
 import React from 'react'
-import { MutationFunction, useMutation } from '@apollo/client'
-import LOGIN from '../graphql/users/mutations/login.graphql'
-import { LoginMutation, LoginMutationVariables } from '../types/graphql'
+import { MutationFunction } from '@apollo/client'
+import { LoginMutation, LoginMutationVariables, useLoginMutation } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
@@ -43,7 +42,7 @@ const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVaria
     navigate(RoutePaths.MAIN)
   }
 
-  const [login, { loading }] = useMutation<LoginMutation, LoginMutationVariables>(LOGIN, { onCompleted: handleLoginCompleted })
+  const [login, { loading }] = useLoginMutation({ onCompleted: handleLoginCompleted })
 
   return { login, loading }
 }

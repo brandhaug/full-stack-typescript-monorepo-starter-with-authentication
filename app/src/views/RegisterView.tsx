@@ -1,13 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useMutation } from '@apollo/client'
-import REGISTER_USER from '../graphql/users/mutations/registerUser.graphql'
 import { RoutePaths } from '../types/custom'
 import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
-import { Language, RegisterUserMutation, RegisterUserMutationVariables } from '../types/graphql'
+import { Language, RegisterUserMutation, useRegisterUserMutation } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { languageIsoToLanguage } from '../utils/languageUtils'
 import Logo from '../assets/logo_no-bg_cropped.png'
@@ -73,7 +71,7 @@ export const RegisterView = (): JSX.Element | null => {
     navigate(RoutePaths.MAIN)
   }
 
-  const [registerUser, { loading }] = useMutation<RegisterUserMutation, RegisterUserMutationVariables>(REGISTER_USER, { onCompleted: handleRegisterCompleted })
+  const [registerUser, { loading }] = useRegisterUserMutation({ onCompleted: handleRegisterCompleted })
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()

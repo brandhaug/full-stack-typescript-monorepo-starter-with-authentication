@@ -1,8 +1,6 @@
 import { FormInput, FormInputs } from '../components/FormInputs'
 import React from 'react'
-import { useMutation } from '@apollo/client'
-import UPDATE_USER from '../graphql/users/mutations/updateUser.graphql'
-import { Language, UpdateUserMutation, UpdateUserMutationVariables } from '../types/graphql'
+import { Language, useUpdateUserMutation } from '../types/graphql'
 import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
 import { useCurrentUser } from '../utils/currentUserUtils'
@@ -52,7 +50,7 @@ export const UserView = (): JSX.Element | null => {
   const handleCompleted = (): void => {
     toast.success(t('User updated'))
   }
-  const [updateUser, { loading: updateUserLoading }] = useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UPDATE_USER, { onCompleted: handleCompleted })
+  const [updateUser, { loading: updateUserLoading }] = useUpdateUserMutation({ onCompleted: handleCompleted })
 
   const inputs = useInputs()
 

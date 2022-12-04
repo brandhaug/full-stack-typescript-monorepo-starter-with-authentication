@@ -5,7 +5,7 @@
   "author": "Martin Brandhaug <martin@brandhaug.net>",
   "license": "ISC",
   "scripts": {
-    "graphql-codegen": "graphql-codegen --config codegen.yml",
+    "graphql-codegen": "graphql-codegen",
     "test": "pnpm run test --recursive --parallel",
     "list-mismatches": "syncpack list-mismatches",
     "prepare": "husky install",
@@ -17,7 +17,7 @@
     "@graphql-codegen/cli": "2.13.11",
     "@graphql-codegen/typescript": "2.8.1",
     "@graphql-codegen/typescript-operations": "^2.5.8",
-    "@graphql-codegen/typescript-react-query": "^4.0.6",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@graphql-codegen/typescript-resolvers": "2.7.6",
     "@nrwl/nx-cloud": "^15.0.2",
     "nx": "^15.2.4"

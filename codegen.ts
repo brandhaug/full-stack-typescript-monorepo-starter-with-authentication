@@ -1,0 +1,15 @@
+const config = {
+  overwrite: true,
+  schema: 'server/src/schema.graphql',
+  documents: 'app/src/graphql/**/*.graphql',
+  generates: {
+    'server/src/types/graphql.ts': {
+      plugins: ['typescript', 'typescript-resolvers']
+    },
+    'app/src/types/graphql.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo']
+    }
+  }
+}
+
+export default config

@@ -1,7 +1,5 @@
 import React from 'react'
-import { useMutation } from '@apollo/client'
-import { UpdatePasswordMutation, UpdatePasswordMutationVariables } from '../types/graphql'
-import UPDATE_PASSWORD from '../graphql/users/mutations/updatePassword.graphql'
+import { UpdatePasswordMutation, useUpdatePasswordMutation } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
@@ -43,7 +41,7 @@ export const UpdatePasswordView = (): JSX.Element => {
     navigate(RoutePaths.MAIN)
   }
 
-  const [updatePassword, { loading }] = useMutation<UpdatePasswordMutation, UpdatePasswordMutationVariables>(UPDATE_PASSWORD, { onCompleted: handleUpdatePasswordCompleted })
+  const [updatePassword, { loading }] = useUpdatePasswordMutation({ onCompleted: handleUpdatePasswordCompleted })
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()

@@ -1,7 +1,5 @@
 import React from 'react'
-import { useMutation } from '@apollo/client'
-import { ResetPasswordMutation, ResetPasswordMutationVariables } from '../types/graphql'
-import RESET_PASSWORD from '../graphql/users/mutations/resetPassword.graphql'
+import { ResetPasswordMutation, useResetPasswordMutation } from '../types/graphql'
 import { toast } from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
@@ -35,7 +33,7 @@ export const ForgotPasswordView = (): JSX.Element => {
     setSubmitted(true)
   }
 
-  const [resetPassword, { loading }] = useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(RESET_PASSWORD, { onCompleted: handleForgotPasswordCompleted })
+  const [resetPassword, { loading }] = useResetPasswordMutation({ onCompleted: handleForgotPasswordCompleted })
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()

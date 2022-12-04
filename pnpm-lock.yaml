@@ -7,7 +7,7 @@ importers:
       '@graphql-codegen/cli': 2.13.11
       '@graphql-codegen/typescript': 2.8.1
       '@graphql-codegen/typescript-operations': ^2.5.8
-      '@graphql-codegen/typescript-react-query': ^4.0.6
+      '@graphql-codegen/typescript-react-apollo': ^3.3.7
       '@graphql-codegen/typescript-resolvers': 2.7.6
       '@nrwl/nx-cloud': ^15.0.2
       '@railway/cli': ^2.0.13
@@ -22,7 +22,7 @@ importers:
       '@graphql-codegen/cli': 2.13.11
       '@graphql-codegen/typescript': 2.8.1
       '@graphql-codegen/typescript-operations': 2.5.8
-      '@graphql-codegen/typescript-react-query': 4.0.6
+      '@graphql-codegen/typescript-react-apollo': 3.3.7
       '@graphql-codegen/typescript-resolvers': 2.7.6
       '@nrwl/nx-cloud': 15.0.2
       nx: 15.2.4
@@ -1285,10 +1285,11 @@ packages:
       - supports-color
     dev: false
 
-  /@graphql-codegen/typescript-react-query/4.0.6:
-    resolution: {integrity: sha512-8eXpv6EzyMSji6RmO/txdBVHRb/dwJCIeMUuR7sMhKn2m0kXffrJL9v3u4AR7pdMsME4NChF3hb53PF1tHBSRw==}
+  /@graphql-codegen/typescript-react-apollo/3.3.7:
+    resolution: {integrity: sha512-9DUiGE8rcwwEkf/S1kpBT/Py/UUs9Qak14bOnTT1JHWs1MWhiDA7vml+A8opU7YFI1EVbSSaE5jjRv11WHoikQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      graphql-tag: ^2.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 2.7.2
       '@graphql-codegen/visitor-plugin-common': 2.13.1
@@ -3728,7 +3729,7 @@ packages:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.2.0
+      tslib: 2.4.1
 
   /camelcase-css/2.0.1:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
@@ -9604,7 +9605,7 @@ packages:
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.3.1
+      jest: 29.3.1_@types+node@18.11.10
       jest-util: 29.3.1
       json5: 2.2.1
       lodash.memoize: 4.1.2
@@ -9752,6 +9753,7 @@ packages:
 
   /tslib/2.2.0:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
+    dev: true
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
