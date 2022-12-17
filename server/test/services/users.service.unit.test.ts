@@ -1,5 +1,5 @@
 import * as UsersService from '../../src/services/users.service'
-import { Language } from '../../src/types/graphql'
+import { Language } from '@fstmswa/types'
 
 describe('create, fetch, update and delete users', () => {
   test('create, fetch, update and delete user', async () => {

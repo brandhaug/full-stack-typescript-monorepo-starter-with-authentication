@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context'
 import { ApolloClient, ApolloLink, FetchResult, Observable } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import { GraphQLError } from 'graphql'
-import { RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables } from '../../types/graphql'
+import { RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables } from '../../types/graphqlTypes'
 import REFRESH_ACCESS_TOKEN from '../../graphql/users/mutations/refreshAccessToken.graphql'
 
 export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => {

@@ -1,0 +1,20 @@
+{
+  "name": "@fstmswa/types",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {
+    "graphql-codegen": "graphql-codegen"
+  },
+  "dependencies": {
+    "@fstmswa/conf": "0.0.0",
+    "@graphql-codegen/cli": "2.13.11",
+    "@graphql-codegen/typescript": "2.8.1",
+    "@graphql-codegen/typescript-operations": "^2.5.8",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@graphql-codegen/typescript-resolvers": "2.7.6"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { MutationFunction } from '@apollo/client'
-import { LoginMutation, LoginMutationVariables, useLoginMutation } from '../types/graphql'
+import { LoginMutation, LoginMutationVariables } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
@@ -9,8 +9,16 @@ import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useIsAuthenticated, useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 import Logo from '../assets/logo_no-bg_cropped.png'
+import { useForm } from 'react-hook-form'
+import { Form } from '../types/form'
+import { useLoginMutation } from '../types/graphqlOperations'
 
-const useInputs = (): FormInput[] => {
+interface LoginForm extends Form {
+  email: string
+  password: string
+}
+
+const useInputs = (): Array<FormInput<LoginForm>> => {
   const { t } = useTranslation()
   return [
     {
@@ -50,14 +58,12 @@ const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVaria
 export const LoginView = (): JSX.Element => {
   const isAuthenticated = useIsAuthenticated()
   const { t } = useTranslation()
-  const [formData, setFormData] = React.useState({ email: '', password: '' })
+  const formData = useForm<LoginForm>()
   const { login, loading } = useLogin()
   const inputs = useInputs()
 
-  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    event.preventDefault()
-
-    await login({ variables: { input: formData } })
+  const handleLogin = async (input: LoginForm): Promise<void> => {
+    await login({ variables: { input } })
   }
 
   if (isAuthenticated) return <Navigate to={RoutePaths.MAIN} replace />
@@ -69,8 +75,8 @@ export const LoginView = (): JSX.Element => {
           <div className='flex justify-center'>
             <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
           </div>
-          <form onSubmit={handleSubmit}>
-            <FormInputs inputs={inputs} formData={formData} setFormData={setFormData} />
+          <form onSubmit={formData.handleSubmit(handleLogin)}>
+            <FormInputs inputs={inputs} formData={formData} />
             <div className='flex justify-end mb-2'>
               <NavLink to={RoutePaths.FORGOT_PASSWORD}>{t('Forgot your password?')}</NavLink>
             </div>

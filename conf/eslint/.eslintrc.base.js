@@ -24,10 +24,7 @@ module.exports = {
       }
     }
   ],
-  ignorePatterns: [
-    'graphql.ts', // API types
-    'dist/**'
-  ],
+  ignorePatterns: ['graphqlTypes.ts', 'graphqlOperations.ts', 'dist/**'],
   rules: {
     'import/no-named-as-default-member': 'off'
   }

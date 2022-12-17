@@ -1,5 +1,5 @@
 import * as UserDao from '../daos/users.dao'
-import { AuthenticationToken, RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '../types/graphql'
+import { AuthenticationToken, RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '@fstmswa/types'
 import * as AuthenticationUtils from '../utils/authentication.utils'
 import * as StringUtils from '../utils/string.utils'
 import * as EmailService from '../services/email.service'

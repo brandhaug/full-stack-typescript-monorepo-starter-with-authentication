@@ -6,6 +6,7 @@ import { languageToIso } from '../utils/languageUtils'
 
 export const LanguageContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
   const currentUser = useCurrentUser()
+
   React.useEffect(() => {
     void (async () => {
       if (!currentUser) return

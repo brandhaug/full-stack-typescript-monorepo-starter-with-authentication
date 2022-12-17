@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['./node_modules/@fstmswa/conf/eslint/.eslintrc.react.js'],
+  extends: ['./node_modules/@fstmswa/conf/eslint/.eslintrc.node.js'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -9,5 +9,7 @@ module.exports = {
       }
     }
   ],
-  rules: {}
+  rules: {
+    '@typescript-eslint/no-var-requires': 'off'
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@full-stack-typescript-monorepo-starter-with-authentication/app",
+  "name": "@fstmswa/app",
   "version": "0.0.0",
   "scripts": {
     "dev": "dotenv -e .env.development -- vite",
@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
-    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "workspace:0.0.0",
+    "@fstmswa/conf": "0.0.0",
+    "@fstmswa/types": "0.0.0",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
     "@heroicons/react": "^2.0.13",
     "@rollup/plugin-graphql": "^2.0.2",
     "@vitejs/plugin-react": "^2.2.0",
@@ -24,6 +26,7 @@
     "postcss": "^8.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.40.0",
     "react-hot-toast": "^2.4.0",
     "react-i18next": "^12.0.0",
     "react-router-dom": "^6.4.4",

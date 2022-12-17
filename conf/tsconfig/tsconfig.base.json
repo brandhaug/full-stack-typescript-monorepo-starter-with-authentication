@@ -1,25 +1,17 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": ["esnext"],
-    "target": "es6",
-    // Enables noImplicitAny, strictNullChecks, strictFunctionTypes,
-    // strictBindCallApply, strictPropertyInitialization, noImplicitThis, alwaysStrict
-    "strict": true,
-    // Generates an error when a function or method is missing a return statement
-    "noImplicitReturns": true,
-    // Generates an error when a variable is declared but never used
-    "noUnusedLocals": true,
-    // Generates an error when a function parameter is declared but never used
-    "noUnusedParameters": true,
-    // Enables compatibility between TypeScript modules and ECMAScript modules
-    "esModuleInterop": true,
-    // Skips type checking for declaration files (*.d.ts)
-    "skipLibCheck": true,
-    // Generates an error when an unchecked index is used in a type-checked expression
-    "noUncheckedIndexedAccess": true,
-    // tsc is only used for tests
-    "noEmit": true
-  }
+    "module": "esnext", // specifies the module type
+    "moduleResolution": "node", // specifies how modules are resolved
+    "lib": ["esnext"], // specifies the library files to be included
+    "target": "es6", // specifies the ECMAScript target version
+    "strict": true, // enables strict type-checking
+    "noImplicitReturns": true, // disallows implicit return values for functions
+    "noUnusedLocals": true, // disallows unused local variables
+    "noUnusedParameters": true, // disallows unused function parameters
+    "esModuleInterop": true, // enables interoperability between CommonJS and ES modules
+    "skipLibCheck": true, // skips type-checking of all declaration files
+    "noUncheckedIndexedAccess": true, // disallows unchecked indexing for arrays and objects
+    "noEmit": true // prevents the compiler from emitting output files
+  },
+  "exclude": ["graphqlTypes.ts", "graphqlOperations.ts"]
 }

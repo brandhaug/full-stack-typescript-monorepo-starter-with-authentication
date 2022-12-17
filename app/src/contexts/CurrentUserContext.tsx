@@ -1,6 +1,7 @@
 import React from 'react'
-import { UserFragment, useUserQuery } from '../types/graphql'
+import { UserFragment } from '../types/graphqlTypes'
 import { useDecodedAccessToken } from '../utils/authenticationUtils'
+import { useUserQuery } from '../types/graphqlOperations'
 
 interface CurrentUserContextProps {
   currentUser: UserFragment | null

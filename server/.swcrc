@@ -2,7 +2,7 @@
   "jsc": {
     "parser": {
       "syntax": "typescript",
-      "target": "es5"
+      "target": "es6"
     }
   },
   "module": {

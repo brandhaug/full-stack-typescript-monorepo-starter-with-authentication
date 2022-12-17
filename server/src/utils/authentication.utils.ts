@@ -1,6 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { AuthenticationToken, User, UserRole } from '../types/graphql'
+import { AuthenticationToken, User, UserRole } from '@fstmswa/types'
 
 export interface TokenPayload {
   id: string

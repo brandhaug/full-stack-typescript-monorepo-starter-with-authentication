@@ -1,5 +1,5 @@
 {
-  "name": "@full-stack-typescript-monorepo-starter-with-authentication/server",
+  "name": "@fstmswa/server",
   "version": "0.0.0",
   "scripts": {
     "dev": "dotenv -e .env.development -- ts-node-dev --respawn --transpile-only src/server.ts",
@@ -11,7 +11,8 @@
     "prisma:migrate": "dotenv -e .env.development -- prisma migrate dev"
   },
   "dependencies": {
-    "@full-stack-typescript-monorepo-starter-with-authentication/conf": "workspace:0.0.0",
+    "@fstmswa/conf": "0.0.0",
+    "@fstmswa/types": "0.0.0",
     "@graphql-tools/schema": "^9.0.10",
     "@graphql-yoga/node": "^2.13.13",
     "@prisma/client": "^4.7.1",

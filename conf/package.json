@@ -1,5 +1,5 @@
 {
-  "name": "@full-stack-typescript-monorepo-starter-with-authentication/conf",
+  "name": "@fstmswa/conf",
   "version": "0.0.0",
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "^3.13.1",

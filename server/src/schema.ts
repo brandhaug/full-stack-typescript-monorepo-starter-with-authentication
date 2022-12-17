@@ -1,11 +1,12 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import * as UsersService from './services/users.service'
 import { readFileSync } from 'fs'
-import { Resolvers, User } from './types/graphql'
+import { Resolvers } from './types/graphqlTypes'
 import { GraphQLYogaError } from '@graphql-yoga/node'
 import { User as DbUser } from '@prisma/client'
 import * as ApiUtils from './utils/api.utils'
 import path from 'path'
+import { User } from '@fstmswa/types'
 
 const typeDefs = readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
 

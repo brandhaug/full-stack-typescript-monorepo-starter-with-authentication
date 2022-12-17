@@ -1,5 +1,5 @@
 {
-  "extends": "@full-stack-typescript-monorepo-starter-with-authentication/conf/tsconfig/tsconfig.node.json",
+  "extends": "@fstmswa/conf/tsconfig/tsconfig.node.json",
   "include": [
     "src/**/*",
     "test/**/*"

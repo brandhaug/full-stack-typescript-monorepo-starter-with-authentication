@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['./node_modules/@full-stack-typescript-monorepo-starter-with-authentication/conf/eslint/.eslintrc.node.js'],
+  extends: ['./node_modules/@fstmswa/conf/eslint/.eslintrc.base.js'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -9,7 +9,5 @@ module.exports = {
       }
     }
   ],
-  rules: {
-    '@typescript-eslint/no-var-requires': 'off'
-  }
+  rules: {}
 }

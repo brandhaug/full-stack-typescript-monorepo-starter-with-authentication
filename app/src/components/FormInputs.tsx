@@ -1,67 +1,42 @@
 import React from 'react'
-import { SetStateFn } from '../types/custom'
-import Select from 'react-select'
 
-type ValueType = string | number | boolean | object | null
+import { Path, UseFormReturn } from 'react-hook-form'
+import { Form } from '../types/form'
+import { Option, Select } from './Select'
 
-interface Option {
-  label: string
-  value: ValueType
-}
+export type FormInput<T extends Form> = { key: keyof T; type: string; label: string | JSX.Element; options?: Option[] } & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>
 
-export type FormInput = { key: string; type: string; label: string | JSX.Element; options?: Option[] } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
-export const FormInputs = <T extends { [key: string]: ValueType }>({ inputs, formData, setFormData }: { inputs: FormInput[]; formData: T; setFormData: SetStateFn<T> }): JSX.Element | null => {
-  const handleChange = (key: string) => (value: string | number | boolean | object | null) => {
-    setFormData((prevFormData) => {
-      return { ...prevFormData, [key]: value }
-    })
-  }
-
-  const handleSelectChange = (key: string) => (option: Option | null) => {
-    handleChange(key)(option?.value ?? null)
-  }
-
-  const handleInputChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = typeof formData[key] === 'boolean' ? event.target.checked : event.target.value
-    handleChange(key)(newValue)
-  }
-
+export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array<FormInput<T>>; formData: UseFormReturn<T> }): JSX.Element | null => {
   return (
     <>
       {inputs.map((input) => {
+        const key = String(input.key) as Path<T>
+
         if (input.type === 'checkbox') {
           return (
-            <div key={input.key} className='flex align-center my-2'>
-              <input className='checkbox mr-2' type={input.type} id={input.key} name={input.key} onChange={handleInputChange(input.key)} checked={formData[input.key] as boolean} required />
-              <label htmlFor={input.key}>{input.label}</label>
+            <div key={key} className='flex align-center my-2'>
+              <input className='checkbox mr-2' type={input.type} {...formData.register(key)} required />
+              <label htmlFor={key}>{input.label}</label>
             </div>
           )
         }
 
         if (input.type === 'select' && input.options) {
-          const matchingOption = input.options.find((option) => option.value === formData[input.key])
-
           return (
-            <div key={input.key}>
+            <div key={key}>
               <label>{input.label}</label>
-              <Select<Option> classNamePrefix='react-select' isSearchable={false} onChange={handleSelectChange(input.key)} value={matchingOption} options={input.options} />
+              <Select formData={formData} input={input} />
             </div>
           )
         }
 
         return (
-          <div key={input.key}>
+          <div key={key}>
             <label>{input.label}</label>
-            <input
-              className='form-control'
-              type={input.type}
-              placeholder={input.label as string}
-              onChange={handleInputChange(input.key)}
-              value={formData[input.key] as string}
-              minLength={input.minLength}
-              required
-            />
+            <input className='form-control' type={input.type} placeholder={String(input.label)} minLength={input.minLength} required {...formData.register(key)} />
           </div>
         )
       })}

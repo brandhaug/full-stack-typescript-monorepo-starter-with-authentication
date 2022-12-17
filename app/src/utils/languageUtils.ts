@@ -1,4 +1,4 @@
-import { Language } from '../types/graphql'
+import { Language } from '@fstmswa/types'
 
 export const languageToIso = {
   [Language.Norwegian]: 'no',

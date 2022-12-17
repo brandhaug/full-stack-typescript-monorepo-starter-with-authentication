@@ -5,12 +5,25 @@ import { RoutePaths } from '../types/custom'
 import { FormInput, FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
-import { Language, RegisterUserMutation, useRegisterUserMutation } from '../types/graphql'
+import { RegisterUserMutation } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { languageIsoToLanguage } from '../utils/languageUtils'
 import Logo from '../assets/logo_no-bg_cropped.png'
+import { useRegisterUserMutation } from '../types/graphqlOperations'
+import { Language } from '@fstmswa/types'
+import { useForm } from 'react-hook-form'
+import { Form } from '../types/form'
 
-const useInputs = (): FormInput[] => {
+interface RegisterForm extends Form {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  termsAndPolicyAccepted: boolean
+  language: Language
+}
+
+const useInputs = (): Array<FormInput<RegisterForm>> => {
   const { t } = useTranslation()
   return [
     {
@@ -56,7 +69,7 @@ const useInputs = (): FormInput[] => {
 export const RegisterView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const defaultLanguage = languageIsoToLanguage[navigator.language] ?? Language.English
-  const [formData, setFormData] = React.useState({ firstName: '', lastName: '', email: '', password: '', termsAndPolicyAccepted: false, language: defaultLanguage })
+  const formData = useForm<RegisterForm>({ defaultValues: { language: defaultLanguage } })
   const saveAuthenticationToken = useSaveAuthenticationToken()
   const navigate = useNavigate()
 
@@ -73,9 +86,8 @@ export const RegisterView = (): JSX.Element | null => {
 
   const [registerUser, { loading }] = useRegisterUserMutation({ onCompleted: handleRegisterCompleted })
 
-  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    event.preventDefault()
-    await registerUser({ variables: { input: formData } })
+  const handleRegister = async (input: RegisterForm): Promise<void> => {
+    await registerUser({ variables: { input } })
   }
 
   const inputs = useInputs()
@@ -87,8 +99,8 @@ export const RegisterView = (): JSX.Element | null => {
           <div className='flex justify-center'>
             <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
           </div>
-          <form onSubmit={handleSubmit}>
-            <FormInputs inputs={inputs} formData={formData} setFormData={setFormData} />
+          <form onSubmit={formData.handleSubmit(handleRegister)}>
+            <FormInputs inputs={inputs} formData={formData} />
             <button className='w-full btn btn-primary mt-4' type='submit' disabled={loading}>
               {t('Register')}
             </button>

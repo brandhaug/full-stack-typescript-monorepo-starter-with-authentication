@@ -1,10 +1,12 @@
 *.md
-*.mdx
 *.yaml
 *.png
 *.svg
-**/dist
+*.json
 .prettierignore
 .gitignore
-*.json
-.env*
+
+dist
+graphqlTypes.ts
+graphqlOperations.ts
+

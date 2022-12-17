@@ -3,7 +3,12 @@ node_modules
 package-lock.json
 *.iml
 dist
-graphql.ts
+*.log
+
+# Env
 .env.development
 .env.production
-*.log
+
+# Types
+graphqlTypes.ts
+graphqlOperations.ts

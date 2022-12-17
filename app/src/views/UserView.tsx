@@ -1,11 +1,13 @@
 import { FormInput, FormInputs } from '../components/FormInputs'
 import React from 'react'
-import { Language, useUpdateUserMutation } from '../types/graphql'
 import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
-import { useDependencyState } from '../utils/stateHooks'
+import { Language } from '@fstmswa/types'
+import { useUpdateUserMutation } from '../types/graphqlOperations'
+import { useForm } from 'react-hook-form'
+import { Form } from '../types/form'
 
 const languageOptions = [
   {
@@ -18,7 +20,13 @@ const languageOptions = [
   }
 ]
 
-const useInputs = (): FormInput[] => {
+interface UserForm extends Form {
+  firstName: string
+  lastName: string
+  language: Language
+}
+
+const useInputs = (): Array<FormInput<UserForm>> => {
   const { t } = useTranslation()
   return [
     {
@@ -44,8 +52,14 @@ export const UserView = (): JSX.Element | null => {
   const { t } = useTranslation()
   const currentUser = useCurrentUser()
 
-  const defaultValue = { firstName: currentUser?.firstName ?? '', lastName: currentUser?.lastName ?? '', language: currentUser?.language ?? Language.English }
-  const [formData, setFormData] = useDependencyState(defaultValue, [JSON.stringify(currentUser)])
+  const formData = useForm<UserForm>()
+
+  React.useEffect(() => {
+    if (!currentUser) return
+
+    const defaultValues = { firstName: currentUser.firstName ?? '', lastName: currentUser.lastName ?? '', language: currentUser.language ?? Language.English }
+    formData.reset(defaultValues)
+  }, [currentUser])
 
   const handleCompleted = (): void => {
     toast.success(t('User updated'))
@@ -56,16 +70,14 @@ export const UserView = (): JSX.Element | null => {
 
   if (!currentUser) return null
 
-  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    event.preventDefault()
-
-    await updateUser({ variables: { id: currentUser.id, input: formData } })
+  const handleUpdate = async (input: UserForm): Promise<void> => {
+    await updateUser({ variables: { id: currentUser.id, input } })
   }
 
   return (
     <div className='flex justify-center py-12'>
-      <form className='max-w-lg' onSubmit={handleSubmit}>
-        <FormInputs inputs={inputs} formData={formData} setFormData={setFormData} />
+      <form className='max-w-lg' onSubmit={formData.handleSubmit(handleUpdate)}>
+        <FormInputs inputs={inputs} formData={formData} />
         <button className='w-full btn btn-primary' type='submit' disabled={updateUserLoading}>
           {updateUserLoading && <ButtonLoader className='inline mr-2' />}
           {t('Update')}

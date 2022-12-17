@@ -1,0 +1,5 @@
+{
+  "extends": "@fstmswa/conf/tsconfig/tsconfig.base.json",
+  "compilerOptions": {
+  },
+}
