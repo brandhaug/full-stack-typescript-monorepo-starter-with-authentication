@@ -15,7 +15,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [GraphQL Yoga](https://www.graphql-yoga.com/) Server API
 - [Prisma](https://www.prisma.io/) ORM with [PostgreSQL](https://www.postgresql.org/) database
 - [Winston](https://github.com/winstonjs/winston) logging
-- [SWC](https://swc.io/) compiling
+- [ESBuild](https://esbuild.github.io) bundling
 
 #### 1.2 Frontend
 
