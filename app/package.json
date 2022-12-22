@@ -16,6 +16,8 @@
     "@graphql-codegen/import-types-preset": "^2.2.6",
     "@heroicons/react": "^2.0.13",
     "@rollup/plugin-graphql": "^2.0.2",
+    "@sentry/react": "^7.28.1",
+    "@sentry/tracing": "^7.28.1",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
     "graphql": "^16.6.0",
