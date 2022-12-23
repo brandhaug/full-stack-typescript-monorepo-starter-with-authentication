@@ -1,16 +1,16 @@
 import * as AuthenticationUtils from './authentication.utils'
 import Logger from '../config/logger'
-import { GraphQLYogaError } from '@graphql-yoga/node'
+import { GraphQLError } from 'graphql/error'
 
 export const requireAuthenticated = async (accessTokenWithPrefix: string, userId?: string): Promise<void> => {
   const accessToken = accessTokenWithPrefix.replace('Bearer ', '')
 
   const decodedToken = await AuthenticationUtils.verifyAndDecodeAccessToken(accessToken).catch((err) => {
     Logger.error(err)
-    throw new GraphQLYogaError('Not authenticated', { code: 401 })
+    throw new GraphQLError('Not authenticated', { extensions: { code: 401 } })
   })
 
   if (userId && decodedToken.id !== userId) {
-    throw new GraphQLYogaError('Forbidden', { code: 403 })
+    throw new GraphQLError('Forbidden', { extensions: { code: 403 } })
   }
 }

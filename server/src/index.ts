@@ -1,17 +1,26 @@
 import './config/sentry'
+import './config/prometheus'
 
-import * as graphqlYoga from '@graphql-yoga/node'
+import express from 'express'
+import * as graphqlYoga from 'graphql-yoga'
 import { schema } from './schema'
-import Logger from './config/logger'
 import { useSentry } from '@envelop/sentry'
+import { usePrometheus } from '@envelop/prometheus'
 
-void (async () => {
-  const graphqlServer = graphqlYoga.createServer({
-    schema,
-    plugins: [useSentry()]
-  })
+const promBundle = require('express-prom-bundle')
 
-  await graphqlServer.start()
-})().catch((err: Error) => {
-  Logger.error(err)
+const app = express()
+
+// GraphQL
+const yoga = graphqlYoga.createYoga({
+  schema,
+  plugins: [useSentry(), usePrometheus()]
+})
+app.use('/graphql', yoga)
+
+// Prometheus
+app.use(promBundle({}))
+
+app.listen(4000, () => {
+  console.log('Running server at http://localhost:4000')
 })
