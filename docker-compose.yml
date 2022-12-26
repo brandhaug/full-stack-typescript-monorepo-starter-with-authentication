@@ -1,8 +1,8 @@
 version: '3'
 services:
   db:
-    image: postgres:14.6
     container_name: db
+    image: postgres:14.6
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -12,8 +12,8 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
   db-test:
-    image: postgres:14.6
     container_name: db-test
+    image: postgres:14.6
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -23,29 +23,40 @@ services:
     command:
       - '-p 5431'
   prometheus:
-    image: prom/prometheus:v2.41.0
     container_name: prometheus
+    image: prom/prometheus:v2.41.0
     restart: unless-stopped
     ports:
-      - 9000:9090
+      - "9090:9090"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
-    command:
-      - '--web.enable-lifecycle'
-      - '--config.file=/etc/prometheus/prometheus.yml'
   grafana:
-    image: grafana/grafana:9.3.2
     container_name: grafana
+    image: grafana/grafana:9.3.2
     ports:
-      - 3000:3000
+      - '3000:3000'
     restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/grafana/dashboards
       - grafana-data:/var/lib/grafana
+  loki:
+    container_name: loki
+    image: grafana/loki:2.7.1
+    ports:
+      - '3100:3100'
+    restart: unless-stopped
+    volumes:
+      - ./loki/config:/etc/loki/local
+      - ./loki/data:/data
+
 volumes:
   db:
     driver: local
