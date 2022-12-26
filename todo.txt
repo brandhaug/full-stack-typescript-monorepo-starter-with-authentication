@@ -8,4 +8,3 @@ Bugs
 Services
 - Mixpanel
 - NX Cloud caching
-- Sentry error logging

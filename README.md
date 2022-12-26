@@ -14,7 +14,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [Node.js](https://nodejs.org/en/) with [TypeScript](https://www.typescriptlang.org/)
 - [GraphQL Yoga](https://www.graphql-yoga.com/) Server API
 - [Prisma](https://www.prisma.io/) ORM with [PostgreSQL](https://www.postgresql.org/) database
-- [Winston](https://github.com/winstonjs/winston) logging
+- [Winston](https://github.com/winstonjs/winston)/[Grafana Loki](https://grafana.com/oss/loki/) logging
 - [ESBuild](https://esbuild.github.io) bundling
 
 #### 1.2 Frontend
@@ -31,9 +31,11 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [ESLint](https://eslint.org/) linting
 - [NX](https://cloud.nx.app) caching
 
-#### 1.4 CI
+#### 1.4 Infrastructure
 
-- [GitHub Actions](https://github.com/features/actions)
+- [GitHub Actions](https://github.com/features/actions) CI/CD
+- [Prometheus](https://prometheus.io/) metrics
+- [Grafana](https://grafana.com/grafana/) monitoring
 
 ### 2 Setup
 1. Install [Docker Compose](https://docs.docker.com/compose/install/)
