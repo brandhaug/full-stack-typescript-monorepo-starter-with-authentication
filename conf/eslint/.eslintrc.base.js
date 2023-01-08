@@ -7,7 +7,8 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: ['plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended'],
       rules: {
-        '@typescript-eslint/strict-boolean-expressions': 'off'
+        '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/no-inferrable-types': 'off'
       }
     },
     {
@@ -26,6 +27,7 @@ module.exports = {
   ],
   ignorePatterns: ['graphqlTypes.ts', 'graphqlOperations.ts', 'dist/**'],
   rules: {
-    'import/no-named-as-default-member': 'off'
+    'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off'
   }
 }

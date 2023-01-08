@@ -24,18 +24,17 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [Tailwind CSS](https://tailwindcss.com)
 - [Vite](https://vitejs.dev) building
 
-#### 1.3 Configuration
-
-- [PNPM](https://pnpm.io/) package manager
-- [Jest](https://jestjs.io/) testing
-- [ESLint](https://eslint.org/) linting
-- [NX](https://cloud.nx.app) caching
-
-#### 1.4 Infrastructure
+#### 1.3 Tooling/Infrastructure
 
 - [GitHub Actions](https://github.com/features/actions) CI/CD
 - [Prometheus](https://prometheus.io/) metrics
 - [Grafana](https://grafana.com/grafana/) monitoring
+- [Sentry](https://sentry.io) error monitoring
+- [Railway](https://railway.app) hosting
+- [PNPM](https://pnpm.io/) package manager
+- [Jest](https://jestjs.io/) testing
+- [ESLint](https://eslint.org/) linting
+- [NX](https://cloud.nx.app) caching
 
 ### 2 Setup
 1. Install [Docker Compose](https://docs.docker.com/compose/install/)

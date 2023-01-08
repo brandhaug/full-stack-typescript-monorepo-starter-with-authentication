@@ -1,29 +1,57 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import axiosRetry, { exponentialDelay } from 'axios-retry'
+import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { logger } from './logger'
+import { jsonStringify } from '../utils/object.utils'
+import axiosRetry, { exponentialDelay, isNetworkOrIdempotentRequestError } from 'axios-retry'
+import { setupCache } from 'axios-cache-interceptor'
 
-// ts-expect-error this keeps on happening
-axiosRetry(axios, { retries: 3, retryDelay: exponentialDelay, shouldResetTimeout: true })
+const axios = setupCache(Axios)
+axiosRetry(axios, {
+  retries: 10,
+  retryDelay: exponentialDelay,
+  retryCondition: (err) => isNetworkOrIdempotentRequestError(err) || err.response?.status === 429
+})
 
-export const get = async <T extends object>(url: string, config: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-  logger.debug(`GET ${url}${config ? ` - ${JSON.stringify(config)} ` : ''}`)
+axios.interceptors.request.use((requestConfig) => {
+  const url = axios.getUri(requestConfig)
+  logger.debug(`${requestConfig.method?.toUpperCase() ?? ''} ${url}${requestConfig.data ? ` | Data: ${jsonStringify(requestConfig.data)}` : ''}`)
+  return requestConfig
+})
 
-  try {
-    const response = await axios.get<T>(url, config)
+axios.interceptors.response.use(
+  (response) => {
+    logger.debug(
+      `${response.status} ${response.statusText} ${response.config.method?.toUpperCase() ?? 'HTTP'} ${response.config.url ?? 'Unknown URL'} - ${response.config.cache ? 'Cache hit' : 'Cache miss'}`
+    )
     return response
-  } catch (error) {
-    logger.error(`Failed to GET to ${url}`)
-    throw error
+  },
+  async (error) => {
+    if (Axios.isAxiosError(error)) {
+      logger.error(`${error.name}: ${error.message}, (${error.config?.method?.toUpperCase() ?? 'HTTP'} ${error.config?.url ?? 'Unknown URL'})`)
+    } else if (error) {
+      logger.error(error)
+    } else {
+      logger.error('Axios unknown error')
+    }
+
+    return await Promise.reject(error)
   }
+)
+
+const extractConfig = (config?: AxiosRequestConfig): AxiosRequestConfig => {
+  const baseHeaders = {
+    'Accept-Encoding': 'gzip,deflate,compress'
+  }
+
+  // @ts-expect-error Wut
+  return { ...config, headers: { ...baseHeaders, ...config?.headers } }
 }
 
-export const post = async <T extends object>(url: string, data: object, config: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-  logger.debug(`POST ${url}${data ? ` - ${JSON.stringify(data)}` : ''}${config ? ` - ${JSON.stringify(config)} ` : ''}`)
-  try {
-    const response = await axios.post<T>(url, data, config)
-    return response
-  } catch (error) {
-    logger.error(`Failed to POST to ${url}`)
-    throw error
-  }
+export const get = async <T extends object>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T | undefined>> => {
+  const response = await axios.get<T>(url, extractConfig(config))
+  return response
+}
+
+export const post = async <T extends object>(url: string, data: object, config?: AxiosRequestConfig): Promise<AxiosResponse<T | undefined>> => {
+  const response = await axios.post<T>(url, data, extractConfig(config))
+  return response
 }
