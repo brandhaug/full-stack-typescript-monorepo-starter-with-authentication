@@ -1,7 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['eslint:recommended', 'eslint-config-standard-with-typescript', 'plugin:prettier/recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'plugin:jest/recommended'],
-  plugins: ['@typescript-eslint', 'import', 'prettier', 'graphql', 'jest'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

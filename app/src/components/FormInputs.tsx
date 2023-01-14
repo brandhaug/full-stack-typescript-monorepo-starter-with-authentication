@@ -1,13 +1,8 @@
 import React from 'react'
 
 import { Path, UseFormReturn } from 'react-hook-form'
-import { Form } from '../types/form'
-import { Option, Select } from './Select'
-
-export type FormInput<T extends Form> = { key: keyof T; type: string; label: string | JSX.Element; options?: Option[] } & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+import { Form, FormInput } from '../types/form'
+import { Select } from './Select'
 
 export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array<FormInput<T>>; formData: UseFormReturn<T> }): JSX.Element | null => {
   return (

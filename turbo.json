@@ -1,0 +1,55 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "circular": {
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "test/**/*.tsx"
+      ],
+      "outputMode": "new-only"
+    },
+    "lint": {
+      "inputs": [
+        ".eslintrc*",
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "test/**/*.tsx"
+      ],
+      "outputMode": "new-only"
+    },
+    "tsc": {
+      "inputs": [
+        "tsconfig.json",
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "test/**/*.tsx"
+      ],
+      "outputMode": "new-only",
+      "dependsOn": [
+        "circular",
+        "lint",
+        "^tsc"
+      ]
+    },
+    "jest": {
+      "inputs": [
+        "jest.config.js",
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "test/**/*.tsx"
+      ],
+      "outputMode": "new-only",
+      "dependsOn": [
+        "tsc"
+      ]
+    },
+    "remoteCache": {
+      "signature": true
+    }
+  }
+}

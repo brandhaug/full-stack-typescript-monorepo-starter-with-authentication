@@ -35,19 +35,12 @@ jobs:
       - name: Build DB types
         run: pnpm run prisma generate --prefix server
 
-  test-app:
+  test:
     runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Test
-        run: pnpm run nx run @fstmswa/app:test
-
-  test-server:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Test
-        run: pnpm run nx run @fstmswa/server:test
+        run: pnpm run test
 
   deploy:
     runs-on: ubuntu-latest

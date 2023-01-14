@@ -34,7 +34,7 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - [PNPM](https://pnpm.io/) package manager
 - [Jest](https://jestjs.io/) testing
 - [ESLint](https://eslint.org/) linting
-- [NX](https://cloud.nx.app) caching
+- [Turborepo](https://turbo.build/repo) caching
 
 ### 2 Setup
 1. Install [Docker Compose](https://docs.docker.com/compose/install/)
@@ -75,7 +75,12 @@ In short - it's a monorepo with Node.js backend, GraphQL API, and React frontend
 - Run tests with `pnpm run test --recursive`
 
 ### 4. Deploy
+#### 4.1 Railway
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app?referralCode=brandhaug)
 - Configure deploys in `server/railway.toml` and `app/railway.toml`
 - Add `RAILWAY_TOKEN` to GitHub actions secret
-- Setup [NX](https://cloud.nx.app) and add `NX_CLOUD_ACCESS_TOKEN`
+
+#### 4.2 Turborepo
+- Setup [Turborepo docker image](https://hub.docker.com/r/fox1t/turborepo-remote-cache)
+- Add `TURBO_TOKEN` to GitHub actions secret
+- Edit `.turbo/config.json`

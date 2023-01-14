@@ -5,16 +5,11 @@
   "author": "Martin Brandhaug <martin@brandhaug.net>",
   "license": "ISC",
   "scripts": {
-    "test": "pnpm run test --recursive --parallel",
+    "test": "turbo run jest --token=\"$TURBO_TOKEN\"",
     "list-mismatches": "syncpack list-mismatches",
     "prepare": "husky install",
     "prettier": "prettier --write .",
-    "railway": "railway",
-    "nx": "nx"
-  },
-  "dependencies": {
-    "@nrwl/nx-cloud": "^15.0.2",
-    "nx": "^15.4.1"
+    "railway": "railway"
   },
   "devDependencies": {
     "@railway/cli": "^2.0.13",
@@ -23,7 +18,8 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.1",
-    "syncpack": "^8.4.11"
+    "syncpack": "^8.4.11",
+    "turbo": "^1.7.0"
   },
   "engines": {
     "node": ">=18",

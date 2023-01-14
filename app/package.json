@@ -2,12 +2,16 @@
   "name": "@fstmswa/app",
   "version": "0.0.0",
   "scripts": {
-    "dev": "dotenv -e .env.development -- vite",
     "build": "dotenv -e .env.production -- vite build",
-    "start": "serve ./dist",
+    "circular": "madge --circular ./src/index.tsx",
+    "dev": "dotenv -e .env.development -- vite",
+    "extract-translations": "i18next 'src/**/*.{ts,tsx}'",
+    "jest": "jest",
+    "lint": "eslint .",
     "preview": "dotenv -e .env.development -- vite preview",
-    "test": "tsc && eslint . && jest",
-    "extract-translations": "i18next 'src/**/*.{ts,tsx}'"
+    "start": "serve ./dist",
+    "test": "pnpm run tsc && pnpm run lint && pnpm run jest",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.7.4",
@@ -43,11 +47,13 @@
     "@types/jest": "^29.2.5",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "circular": "^1.0.5",
     "dotenv-cli": "^6.0.0",
     "eslint": "^8.31.0",
     "i18next-parser": "^7.2.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
+    "madge": "^5.0.1",
     "react-test-renderer": "^18.2.0",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.4"
