@@ -4,7 +4,6 @@ import { useAccessToken, useLogout, useRefreshToken, useSaveAuthenticationToken 
 import { setContext } from '@apollo/client/link/context'
 import { ApolloClient, ApolloLink, FetchResult, Observable } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
-import { GraphQLError } from 'graphql'
 import { RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables } from '../../types/graphqlTypes'
 import REFRESH_ACCESS_TOKEN from '../../graphql/users/mutations/refreshAccessToken.graphql'
 
@@ -24,7 +23,7 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
     }
 
     for (const graphqlError of graphQLErrors) {
-      if (graphqlError.extensions?.code === 401) {
+      if (graphqlError.extensions.code === 401) {
         // ignore 401 error for a refresh request
         if (operation.operationName === 'refreshToken') return null
 
@@ -32,16 +31,16 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
           void (async () => {
             try {
               if (!refreshToken) {
-                throw new GraphQLError('Empty refresh token')
+                throw new Error('Empty refresh token')
               }
 
               const { data } = await apolloClient.mutate<RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables>({ mutation: REFRESH_ACCESS_TOKEN, variables: { input: { refreshToken } } })
 
-              if (!data?.refreshAccessToken.accessToken) {
-                throw new GraphQLError('Empty access token')
+              if (!data?.refreshAccessToken.authenticationToken.accessToken) {
+                throw new Error('Empty access token')
               }
 
-              saveAuthenticationToken(data.refreshAccessToken)
+              saveAuthenticationToken(data.refreshAccessToken.authenticationToken)
 
               // Retry the failed request
               const subscriber = {
@@ -74,7 +73,7 @@ export const useAuthLink = (): ApolloLink => {
   const accessToken = useAccessToken()
   const refreshToken = useRefreshToken()
 
-  const authLink = setContext((request, { headers }: { headers: { [_: string]: string } }): { headers: { [_: string]: string } } => {
+  const authLink = setContext((request, { headers }: { headers: Record<string, string> }): { headers: Record<string, string> } => {
     const token = request.operationName !== 'refreshAccessToken' ? accessToken : refreshToken
 
     if (!token) {

@@ -74,13 +74,8 @@ export const RegisterView = (): JSX.Element | null => {
   const navigate = useNavigate()
 
   const handleRegisterCompleted = (data: RegisterUserMutation): void => {
-    if (!data?.registerUser) {
-      toast.error(t('Something went wrong'))
-      return
-    }
-
     toast.success(t('Registered'))
-    saveAuthenticationToken(data.registerUser)
+    saveAuthenticationToken(data.registerUser.authenticationToken)
     navigate(RoutePaths.MAIN)
   }
 

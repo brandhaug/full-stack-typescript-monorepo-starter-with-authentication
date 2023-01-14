@@ -3,6 +3,6 @@
   "compilerOptions": {
     "lib": ["dom", "esnext"],
     "jsx": "react",
-    "types": ["vite/client"]
+    "types": ["vite/client", "jest"]
   }
 }

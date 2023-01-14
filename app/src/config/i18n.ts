@@ -4,6 +4,13 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import norwegianTranslations from '../assets/translations/no.json'
 import englishTranslations from '../assets/translations/en.json'
 
+// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
+
 void i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -18,10 +25,11 @@ void i18n
         translation: norwegianTranslations
       }
     },
-    debug: process.env.NODE_ENV !== 'production',
+    debug: import.meta.env.NODE_ENV !== 'production',
     interpolation: {
       escapeValue: false
-    }
+    },
+    returnNull: false
   })
 
 export default i18n

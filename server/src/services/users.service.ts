@@ -17,7 +17,7 @@ const generateResetPasswordHtml = (id: string, token: string): string => {
     <p>Du er nå registert hos Company Inc.</p>
     <br />
     <p>Opprett passord ved å følge lenken nedenfor:</p>
-    <p><a href="${href}">${href}</a></p>
+    <p><a href='${href}'>${href}</a></p>
     <br />
     <p>Med vennlig hilsen</p>
     <p>Company Inc.</p>
@@ -70,8 +70,6 @@ export const register = async (input: RegisterUserInput): Promise<Authentication
     throw new Error('Kunne ikke opprette bruker.')
   })
 
-  if (!createdUser) throw new Error('Fikk ikke til å opprette bruker')
-
   const authenticationToken = AuthenticationUtils.generateAuthenticationToken(createdUser as User)
   return authenticationToken
 }
@@ -81,8 +79,6 @@ export const refreshAccessToken = async (input: RefreshAccessTokenInput): Promis
     logger.error(err)
     throw new Error('Kunne ikke oppdatere token.')
   })
-
-  if (!verifiedToken) throw new Error('Ugyldig refresh token')
 
   await fetchOne({ id: verifiedToken.id }).catch((err) => {
     logger.error(err)
@@ -107,12 +103,10 @@ export const resetPassword = async (input: ResetPasswordInput): Promise<boolean>
   const randomResetPasswordString = StringUtils.randomString(7)
   const resetPasswordToken = await AuthenticationUtils.hashString(randomResetPasswordString)
 
-  const updatedUser = await update(existingUser.id, { resetPasswordToken }).catch((err) => {
+  await update(existingUser.id, { resetPasswordToken }).catch((err) => {
     logger.error(err)
     throw new Error('Kunne ikke oppdatere bruker.')
   })
-
-  if (!updatedUser) throw new Error('Kunne ikke oppdatere bruker.')
 
   const emailHtml = generateResetPasswordHtml(existingUser.id, resetPasswordToken)
 
@@ -136,8 +130,6 @@ export const updatePassword = async (id: string, token: string, input: UpdatePas
   const hashedPassword = await AuthenticationUtils.hashString(input.password)
 
   const updatedUser = await update(id, { hash: hashedPassword, resetPasswordToken: null })
-
-  if (!updatedUser) throw new Error('Kunne ikke oppdatere bruker')
 
   const accessToken = AuthenticationUtils.generateAuthenticationToken(updatedUser as User)
 

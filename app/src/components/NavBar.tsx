@@ -42,9 +42,14 @@ const UserMenu = (): JSX.Element | null => {
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = (): void => setIsOpen((prevIsOpen) => !prevIsOpen)
+  const toggleIsOpen = (): void => {
+    setIsOpen((prevIsOpen) => !prevIsOpen)
+  }
 
-  useOutsideClick(ref, () => setIsOpen(false))
+  const handleClose = (): void => {
+    setIsOpen(false)
+  }
+  useOutsideClick(ref, handleClose)
 
   const userMenuItems = useUserMenuItems()
 
@@ -92,12 +97,17 @@ const MobileMainMenu = (): JSX.Element | null => {
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const toggleIsOpen = (): void => setIsOpen((prevIsOpen) => !prevIsOpen)
+  const toggleIsOpen = (): void => {
+    setIsOpen((prevIsOpen) => !prevIsOpen)
+  }
 
   const mainMenuItems = useMainMenuItems()
   const userMenuItems = useUserMenuItems()
 
-  useOutsideClick(ref, () => setIsOpen(false))
+  const handleClose = (): void => {
+    setIsOpen(false)
+  }
+  useOutsideClick(ref, handleClose)
 
   if (!currentUser) return null
 

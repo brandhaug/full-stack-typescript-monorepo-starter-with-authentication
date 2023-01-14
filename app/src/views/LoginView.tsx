@@ -40,13 +40,8 @@ const useLogin = (): { login: MutationFunction<LoginMutation, LoginMutationVaria
   const navigate = useNavigate()
 
   const handleLoginCompleted = (data: LoginMutation): void => {
-    if (!data?.login) {
-      toast.error(t('Something went wrong'))
-      return
-    }
-
     toast.success(t('Signed in'))
-    saveAuthenticationToken(data.login)
+    saveAuthenticationToken(data.login.authenticationToken)
     navigate(RoutePaths.MAIN)
   }
 

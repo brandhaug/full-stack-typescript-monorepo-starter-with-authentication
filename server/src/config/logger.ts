@@ -12,7 +12,7 @@ const transports =
           level: 'info'
         }),
         new LokiTransport({
-          host: process.env.LOKI_HOST as string
+          host: process.env.LOKI_HOST ?? ''
         })
       ]
     : [new winston.transports.Console()]

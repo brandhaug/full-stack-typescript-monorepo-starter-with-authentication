@@ -22,6 +22,11 @@ input RegisterUserInput {
   language: Language!
 }
 
+type AuthenticationPayload {
+  authenticationToken: AuthenticationToken!
+  query: Query!
+}
+
 input UpdateUserInput {
   firstName: String
   lastName: String
@@ -42,6 +47,11 @@ type User {
   language: Language!
 }
 
+type UserPayload {
+  user: User!
+  query: Query!
+}
+
 input ResetPasswordInput {
   email: String!
 }
@@ -54,16 +64,21 @@ input UpdatePasswordInput {
   password: String!
 }
 
+type SuccessPayload {
+  success: Boolean!
+  query: Query!
+}
+
 type Query {
   hello: String!
   user(id: ID!): User!
 }
 
 type Mutation {
-  registerUser(input: RegisterUserInput!): AuthenticationToken!
-  login(input: LoginInput!): AuthenticationToken!
-  refreshAccessToken(input: RefreshAccessTokenInput!): AuthenticationToken!
-  resetPassword(input: ResetPasswordInput!): Boolean!
-  updatePassword(id: ID!, token: String!, input: UpdatePasswordInput!): AuthenticationToken!
-  updateUser(id: ID!, input: UpdateUserInput!): User!
+  registerUser(input: RegisterUserInput!): AuthenticationPayload!
+  login(input: LoginInput!): AuthenticationPayload!
+  refreshAccessToken(input: RefreshAccessTokenInput!): AuthenticationPayload!
+  resetPassword(input: ResetPasswordInput!): SuccessPayload!
+  updatePassword(id: ID!, token: String!, input: UpdatePasswordInput!): AuthenticationPayload!
+  updateUser(id: ID!, input: UpdateUserInput!): UserPayload!
 }

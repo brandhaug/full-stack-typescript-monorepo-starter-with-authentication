@@ -1,7 +1,9 @@
 #import '../fragments/AuthenticationTokenFragment.graphql'
 
-mutation login($input: LoginInput!) {
+mutation Login($input: LoginInput!) {
   login(input: $input) {
-    ...AuthenticationToken
+    authenticationToken {
+      ...AuthenticationToken
+    }
   }
 }

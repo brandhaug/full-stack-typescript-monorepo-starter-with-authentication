@@ -39,12 +39,7 @@ export const UpdatePasswordView = (): JSX.Element => {
   const navigate = useNavigate()
 
   const handleUpdatePasswordCompleted = (data: UpdatePasswordMutation): void => {
-    if (!data?.updatePassword) {
-      toast.error(t('Something went wrong'))
-      return
-    }
-
-    saveAuthenticationToken(data.updatePassword)
+    saveAuthenticationToken(data.updatePassword.authenticationToken)
     navigate(RoutePaths.MAIN)
   }
 

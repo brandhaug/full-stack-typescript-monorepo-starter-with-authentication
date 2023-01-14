@@ -1,6 +1,4 @@
 import React from 'react'
-import { ResetPasswordMutation } from '../types/graphqlTypes'
-import { toast } from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
 import { FormInput, FormInputs } from '../components/FormInputs'
@@ -31,12 +29,7 @@ export const ForgotPasswordView = (): JSX.Element => {
   const formData = useForm<ForgotPasswordForm>()
   const [submitted, setSubmitted] = React.useState(false)
 
-  const handleForgotPasswordCompleted = (data: ResetPasswordMutation): void => {
-    if (!data?.resetPassword) {
-      toast.error(t('Something went wrong'))
-      return
-    }
-
+  const handleForgotPasswordCompleted = (): void => {
     setSubmitted(true)
   }
 

@@ -16,6 +16,10 @@ const config = {
     '../app/src/types/graphqlTypes.ts': {
       preset: 'import-types',
       plugins: ['typescript-operations'],
+      config: {
+        nonOptionalTypename: true,
+        inlineFragmentTypes: 'combine'
+      },
       presetConfig: {
         typesPath: '@fstmswa/types'
       }

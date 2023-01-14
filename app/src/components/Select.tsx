@@ -1,5 +1,5 @@
 import { Path, useController, UseFormReturn } from 'react-hook-form'
-import ReactSelect from 'react-select'
+import ReactSelect, { SingleValue } from 'react-select'
 import React from 'react'
 import { FormValueType } from '@fstmswa/types'
 import { FormInput } from './FormInputs'
@@ -14,15 +14,9 @@ export const Select = <T extends Form>({ input, formData }: { input: FormInput<T
   const { field } = useController({ control: formData.control, name: input.key as Path<T> })
   const matchingOption = input.options?.find((option) => option.value === field.value)
 
-  return (
-    <ReactSelect<Option>
-      ref={field.ref}
-      isSearchable={false}
-      classNamePrefix='react-select'
-      name={field.name}
-      options={input.options}
-      value={matchingOption}
-      onChange={(newValue) => field.onChange(newValue?.value)}
-    />
-  )
+  const handleChange = (selectedOption: SingleValue<Option>): void => {
+    field.onChange(selectedOption?.value)
+  }
+
+  return <ReactSelect<Option> ref={field.ref} isSearchable={false} classNamePrefix='react-select' name={field.name} options={input.options} value={matchingOption} onChange={handleChange} />
 }

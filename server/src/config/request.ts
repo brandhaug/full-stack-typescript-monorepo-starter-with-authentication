@@ -5,6 +5,7 @@ import axiosRetry, { exponentialDelay, isNetworkOrIdempotentRequestError } from 
 import { setupCache } from 'axios-cache-interceptor'
 
 const axios = setupCache(Axios)
+
 axiosRetry(axios, {
   retries: 10,
   retryDelay: exponentialDelay,

@@ -1,7 +1,9 @@
 #import '../fragments/AuthenticationTokenFragment.graphql'
 
-mutation registerUser($input: RegisterUserInput!) {
+mutation RegisterUser($input: RegisterUserInput!) {
   registerUser(input: $input) {
-    ...AuthenticationToken
+    authenticationToken {
+      ...AuthenticationToken
+    }
   }
 }

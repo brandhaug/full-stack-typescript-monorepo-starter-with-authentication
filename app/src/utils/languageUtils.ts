@@ -5,7 +5,7 @@ export const languageToIso = {
   [Language.English]: 'en'
 }
 
-export const languageIsoToLanguage: { [key: string]: Language } = {
+export const languageIsoToLanguage: Record<string, Language> = {
   no: Language.Norwegian,
   en: Language.English
 }

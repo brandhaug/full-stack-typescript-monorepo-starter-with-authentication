@@ -57,7 +57,7 @@ export const UserView = (): JSX.Element | null => {
   React.useEffect(() => {
     if (!currentUser) return
 
-    const defaultValues = { firstName: currentUser.firstName ?? '', lastName: currentUser.lastName ?? '', language: currentUser.language ?? Language.English }
+    const defaultValues = { firstName: currentUser.firstName, lastName: currentUser.lastName, language: currentUser.language }
     formData.reset(defaultValues)
   }, [currentUser])
 
