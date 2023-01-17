@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInput, FormInputs } from '../components/FormInputs'
+import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useTranslation } from 'react-i18next'
 import Logo from '../assets/logo_no-bg_cropped.png'
 import { useResetPasswordMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
-import { Form } from '../types/form'
+import { Form, FormInput } from '../types/form'
 
 interface ForgotPasswordForm extends Form {
   email: string
@@ -43,16 +43,16 @@ export const ForgotPasswordView = (): JSX.Element => {
 
   const content = submitted ? (
     <div className='text-center'>
-      <h4 className='text-xl mb-2'>{t('Your password has been reset')}</h4>
+      <h4 className='mb-2 text-xl'>{t('Your password has been reset')}</h4>
       <p>{t('Follow the link sent to your email to create a new password')}</p>
     </div>
   ) : (
     <form onSubmit={formData.handleSubmit(handleReset)}>
       <FormInputs inputs={inputs} formData={formData} />
-      <button className='w-full btn btn-primary mt-4' type='submit' disabled={loading}>
+      <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
         {t('Reset password')}
       </button>
-      <p className='text-center mt-8'>
+      <p className='mt-8 text-center'>
         {t('Do you remember your password?')}&nbsp;
         <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
           {t('Log in')}

@@ -12,7 +12,7 @@ export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array
 
         if (input.type === 'checkbox') {
           return (
-            <div key={key} className='flex align-center my-2'>
+            <div key={key} className='my-2 flex align-middle'>
               <input className='checkbox mr-2' type={input.type} {...formData.register(key)} required />
               <label htmlFor={key}>{input.label}</label>
             </div>

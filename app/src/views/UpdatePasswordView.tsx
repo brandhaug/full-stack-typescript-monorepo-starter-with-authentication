@@ -3,14 +3,14 @@ import { UpdatePasswordMutation } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInput, FormInputs } from '../components/FormInputs'
+import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 import Logo from '../assets/logo_no-bg_cropped.png'
 import { useUpdatePasswordMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
-import { Form } from '../types/form'
+import { Form, FormInput } from '../types/form'
 
 interface UpdatePasswordForm extends Form {
   password: string
@@ -68,10 +68,10 @@ export const UpdatePasswordView = (): JSX.Element => {
           </div>
           <form onSubmit={formData.handleSubmit(handleUpdate)}>
             <FormInputs inputs={inputs} formData={formData} />
-            <button className='w-full btn btn-primary mt-4' type='submit' disabled={loading}>
+            <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
               {t('Create new password')}
             </button>
-            <p className='text-center mt-8'>
+            <p className='mt-8 text-center'>
               {t('Do you remember your password')}?&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
                 {t('Log in')}

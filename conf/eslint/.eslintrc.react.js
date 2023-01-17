@@ -1,12 +1,13 @@
 module.exports = {
-  extends: ['.eslintrc.base', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
+  extends: ['.eslintrc.base', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:eslint-plugin-tailwindcss/recommended'],
   settings: {
     react: {
       version: 'detect'
     }
   },
   env: {
-    browser: true
+    browser: true,
+    "jest/globals": true
   },
   rules: {
     'react-hooks/exhaustive-deps': 'off',

@@ -8,6 +8,7 @@
     "extract-translations": "i18next 'src/**/*.{ts,tsx}'",
     "jest": "jest",
     "lint": "eslint .",
+    "lint-fix": "npm run lint -- --fix",
     "preview": "dotenv -e .env.development -- vite preview",
     "start": "serve ./dist",
     "test": "pnpm run tsc && pnpm run lint && pnpm run jest",

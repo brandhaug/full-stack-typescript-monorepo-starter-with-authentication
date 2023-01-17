@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInput, FormInputs } from '../components/FormInputs'
+import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { RegisterUserMutation } from '../types/graphqlTypes'
@@ -12,7 +12,7 @@ import Logo from '../assets/logo_no-bg_cropped.png'
 import { useRegisterUserMutation } from '../types/graphqlOperations'
 import { Language } from '@fstmswa/types'
 import { useForm } from 'react-hook-form'
-import { Form } from '../types/form'
+import { Form, FormInput } from '../types/form'
 
 interface RegisterForm extends Form {
   firstName: string
@@ -96,10 +96,10 @@ export const RegisterView = (): JSX.Element | null => {
           </div>
           <form onSubmit={formData.handleSubmit(handleRegister)}>
             <FormInputs inputs={inputs} formData={formData} />
-            <button className='w-full btn btn-primary mt-4' type='submit' disabled={loading}>
+            <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
               {t('Register')}
             </button>
-            <p className='text-center mt-8'>
+            <p className='mt-8 text-center'>
               {t('Do you already have a user?')}&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
                 {t('Log in')}

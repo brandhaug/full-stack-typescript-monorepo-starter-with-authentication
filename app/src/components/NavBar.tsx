@@ -56,21 +56,21 @@ const UserMenu = (): JSX.Element | null => {
   if (!currentUser) return null
 
   return (
-    <div className='hidden md:block relative' ref={ref}>
-      <button type='button' className='flex mr-3 rounded-lg md:mr-0 text-gray-500 hover:bg-gray-100 p-3' onClick={toggleIsOpen}>
+    <div className='relative hidden md:block' ref={ref}>
+      <button type='button' className='mr-3 flex rounded-lg p-3 text-gray-500 hover:bg-gray-100 md:mr-0' onClick={toggleIsOpen}>
         <span className='sr-only'>Open user menu</span>
-        <UserCircleIcon className='w-8 h-8' />
+        <UserCircleIcon className='h-8 w-8' />
       </button>
       {isOpen && (
-        <div className='absolute right-0 top-10 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow'>
-          <div className='py-4 px-4'>
-            <span className='block font-medium text-gray-500 truncate'>{currentUser.email}</span>
+        <div className='absolute right-0 top-10 z-50 my-4 list-none divide-y divide-gray-100 rounded bg-white text-base shadow'>
+          <div className='p-4'>
+            <span className='block truncate font-medium text-gray-500'>{currentUser.email}</span>
           </div>
           <ul className='py-1'>
             {userMenuItems.map((menuItem) => {
               return (
                 <li key={menuItem.to}>
-                  <NavLink to={menuItem.to} className='block py-4 px-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
+                  <NavLink to={menuItem.to} className='block p-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
                     {menuItem.title}
                   </NavLink>
                 </li>
@@ -87,7 +87,7 @@ const Brand = (): JSX.Element => {
   return (
     <NavLink to={RoutePaths.MAIN} className='flex items-center'>
       <img src={Logo} className='mr-3 h-9' alt='App logo' />
-      <span className='self-center text-xl font-semibold whitespace-nowrap'>App</span>
+      <span className='self-center whitespace-nowrap text-xl font-semibold'>App</span>
     </NavLink>
   )
 }
@@ -112,17 +112,17 @@ const MobileMainMenu = (): JSX.Element | null => {
   if (!currentUser) return null
 
   return (
-    <div className='md:hidden relative' ref={ref}>
-      <button type='button' className='flex rounded-lg md:mr-0 text-gray-500 hover:bg-gray-100 p-3' onClick={toggleIsOpen}>
+    <div className='relative md:hidden' ref={ref}>
+      <button type='button' className='flex rounded-lg p-3 text-gray-500 hover:bg-gray-100 md:mr-0' onClick={toggleIsOpen}>
         <Bars3Icon className='h-8' />
       </button>
       {isOpen && (
-        <div className='absolute right-0 top-10 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow'>
+        <div className='absolute right-0 top-10 z-50 my-4 list-none divide-y divide-gray-100 rounded bg-white text-base shadow'>
           <ul className='py-1'>
             {[...mainMenuItems, ...userMenuItems].map((menuItem) => {
               return (
                 <li key={menuItem.to}>
-                  <NavLink to={menuItem.to} className='w-40 block py-4 px-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
+                  <NavLink to={menuItem.to} className='block w-40 p-4 text-gray-700 hover:bg-gray-100' onClick={toggleIsOpen}>
                     {menuItem.title}
                   </NavLink>
                 </li>
@@ -140,13 +140,13 @@ const MainMenu = (): JSX.Element => {
   const mainMenuItems = useMainMenuItems()
 
   return (
-    <div className='hidden md:block items-center w-full flex w-auto ml-10'>
+    <div className='ml-10 flex w-full items-center md:block'>
       <ul className='flex flex-col md:flex-row md:space-x-0'>
         {mainMenuItems.map((menuItem) => {
           const isActive = location.pathname === menuItem.to
           return (
             <li key={menuItem.to}>
-              <NavLink to={menuItem.to} className={`block py-4 pr-4 pl-3 text-lg border-b-4 hover:bg-gray-100 ${isActive ? 'border-blue-400' : 'border-transparent'}`}>
+              <NavLink to={menuItem.to} className={`block border-b-4 py-4 pr-4 pl-3 text-lg hover:bg-gray-100 ${isActive ? 'border-blue-400' : 'border-transparent'}`}>
                 {menuItem.title}
               </NavLink>
             </li>
@@ -163,11 +163,11 @@ export const NavBar = (): JSX.Element | null => {
   if (!isAuthenticated) return null
 
   return (
-    <nav className='bg-white shadow-sm px-2 sm:px-4'>
-      <div className='flex flex-wrap items-center mx-auto w-full'>
+    <nav className='bg-white px-2 shadow-sm sm:px-4'>
+      <div className='mx-auto flex w-full flex-wrap items-center'>
         <Brand />
         <MainMenu />
-        <div className='flex items-center ml-auto'>
+        <div className='ml-auto flex items-center'>
           <UserMenu />
           <MobileMainMenu />
         </div>

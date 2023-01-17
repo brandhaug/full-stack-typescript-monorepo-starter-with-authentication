@@ -38,12 +38,12 @@ export const Footer = (): JSX.Element | null => {
 
   return (
     <footer className='flex justify-between bg-white py-4 px-8 shadow-xl'>
-      <div className='self-center w-1/3'>
+      <div className='w-1/3 self-center'>
         <p>
           © {currentYear} {t('Company Inc. All rights reserved.')}
         </p>
       </div>
-      <div className='text-center w-1/3'>
+      <div className='w-1/3 text-center'>
         <ul>
           {menuItems.map((menuItem) => {
             return (
@@ -54,7 +54,7 @@ export const Footer = (): JSX.Element | null => {
           })}
         </ul>
       </div>
-      <div className='w-1/3 text-right self-center'>
+      <div className='w-1/3 self-center text-right'>
         <NavLink to={RoutePaths.CONTACT_US}>{t('Give feedback')}</NavLink>
       </div>
     </footer>

@@ -4,13 +4,13 @@ import { LoginMutation, LoginMutationVariables } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { FormInput, FormInputs } from '../components/FormInputs'
+import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useIsAuthenticated, useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
 import Logo from '../assets/logo_no-bg_cropped.png'
 import { useForm } from 'react-hook-form'
-import { Form } from '../types/form'
+import { Form, FormInput } from '../types/form'
 import { useLoginMutation } from '../types/graphqlOperations'
 
 interface LoginForm extends Form {
@@ -72,13 +72,13 @@ export const LoginView = (): JSX.Element => {
           </div>
           <form onSubmit={formData.handleSubmit(handleLogin)}>
             <FormInputs inputs={inputs} formData={formData} />
-            <div className='flex justify-end mb-2'>
+            <div className='mb-2 flex justify-end'>
               <NavLink to={RoutePaths.FORGOT_PASSWORD}>{t('Forgot your password?')}</NavLink>
             </div>
-            <button className='w-full btn btn-primary' type='submit' disabled={loading}>
+            <button className='btn btn-primary w-full' type='submit' disabled={loading}>
               {t('Log in')}
             </button>
-            <p className='text-center mt-8'>
+            <p className='mt-8 text-center'>
               {t("You don't have a user?")}&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.REGISTER}>
                 {t('Register')}
