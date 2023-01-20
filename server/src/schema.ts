@@ -8,12 +8,16 @@ import path from 'path'
 import { Query, User } from '@fstmswa/types'
 import { GraphQLError } from 'graphql/error'
 
+interface Context {
+  req: { headers: { authorization?: string } }
+}
+
 const typeDefs = readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
 
 const resolvers: Resolvers = {
   Query: {
     hello: () => 'Hello World!',
-    user: async (_, { id }, context) => {
+    user: async (_, { id }, context: Context) => {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 
@@ -73,7 +77,7 @@ const resolvers: Resolvers = {
         query: {} as Query
       }
     },
-    updateUser: async (_, { id, input }, context) => {
+    updateUser: async (_, { id, input }, context: Context) => {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 

@@ -9,6 +9,7 @@ const axios = setupCache(Axios)
 axiosRetry(axios, {
   retries: 10,
   retryDelay: exponentialDelay,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   retryCondition: (err) => isNetworkOrIdempotentRequestError(err) || err.response?.status === 429
 })
 

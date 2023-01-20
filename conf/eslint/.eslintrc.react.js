@@ -7,9 +7,12 @@ module.exports = {
   },
   env: {
     browser: true,
-    "jest/globals": true
+    'jest/globals': true
   },
   rules: {
+    'react/jsx-no-constructed-context-values': 'error',
+    'react/jsx-no-useless-fragment': 'error',
+    'react/no-unstable-nested-components': 'error',
     'react-hooks/exhaustive-deps': 'off',
     'multiline-ternary': 'off',
     '@typescript-eslint/no-misused-promises': 'off'

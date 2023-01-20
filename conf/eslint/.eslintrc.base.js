@@ -6,6 +6,14 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: ['plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/strict'],
       rules: {
+        // '@typescript-eslint/no-unsafe-call': 'error',
+        // '@typescript-eslint/no-unsafe-assignment': 'error',
+        '@typescript-eslint/no-unsafe-member-access': 'error',
+        '@typescript-eslint/require-await': 'error',
+        '@typescript-eslint/no-unsafe-return': 'error',
+        '@typescript-eslint/return-await': 'error',
+        '@typescript-eslint/default-param-last': 'error',
+        '@typescript-eslint/no-shadow': 'error',
         '@typescript-eslint/strict-boolean-expressions': 'off',
         '@typescript-eslint/no-inferrable-types': 'off'
       }
@@ -33,6 +41,13 @@ module.exports = {
   ],
   ignorePatterns: ['graphqlTypes.ts', 'graphqlOperations.ts', 'dist/**'],
   rules: {
+    'no-nested-ternary': 'error',
+    'no-restricted-globals': 'error',
+    'no-else-return': 'error',
+    'no-param-reassign': 'error',
+    'prefer-destructuring': 'error',
+    'prefer-template': 'error',
+    'no-lonely-if': 'error',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off'
   }

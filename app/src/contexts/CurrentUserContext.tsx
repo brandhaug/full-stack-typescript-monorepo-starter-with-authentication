@@ -14,5 +14,12 @@ export const CurrentUserContextProvider = ({ children }: { children: JSX.Element
   const { data } = useUserQuery({ variables: { id: decodedAccessToken?.id ?? '' }, skip: !decodedAccessToken })
   const currentUser = data?.user ?? null
 
-  return <CurrentUserContext.Provider value={{ currentUser }}>{children}</CurrentUserContext.Provider>
+  const value = React.useMemo(
+    () => ({
+      currentUser
+    }),
+    [currentUser]
+  )
+
+  return <CurrentUserContext.Provider value={value}>{children}</CurrentUserContext.Provider>
 }

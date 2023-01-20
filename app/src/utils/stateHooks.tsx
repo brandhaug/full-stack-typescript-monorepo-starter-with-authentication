@@ -7,9 +7,9 @@ export const usePersistentState = <T,>(key: string, defaultValue: T): [T, SetSta
       const currentValue = window.localStorage.getItem(key)
 
       if (!currentValue) return defaultValue
-      if (currentValue === 'undefined') return undefined
 
-      return JSON.parse(currentValue)
+      const value: T = JSON.parse(currentValue)
+      return value
     } catch {
       return defaultValue
     }

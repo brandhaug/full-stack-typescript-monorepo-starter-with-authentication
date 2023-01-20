@@ -1,6 +1,7 @@
 import winston from 'winston'
 import LokiTransport from 'winston-loki'
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const Sentry = require('winston-transport-sentry-node').default
 
 const transports =

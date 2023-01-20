@@ -19,5 +19,7 @@ export const AuthenticationContextProvider = ({ children }: { children: JSX.Elem
   const [accessToken, setAccessToken] = usePersistentState<string | null>('accessToken', null)
   const [refreshToken, setRefreshToken] = usePersistentState<string | null>('refreshToken', null)
 
-  return <AuthenticationContext.Provider value={{ accessToken, setAccessToken, refreshToken, setRefreshToken }}>{children}</AuthenticationContext.Provider>
+  const value = React.useMemo(() => ({ accessToken, setAccessToken, refreshToken, setRefreshToken }), [accessToken, refreshToken])
+
+  return <AuthenticationContext.Provider value={value}>{children}</AuthenticationContext.Provider>
 }

@@ -8,6 +8,7 @@
     "esbuild": "esbuild",
     "jest": "docker compose up --force-recreate -d db-test && sleep 3 && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- jest && docker compose rm --stop --force -v db-test",
     "lint": "eslint .",
+    "lint-fix": "eslint . -- --fix",
     "prisma": "prisma",
     "prisma:migrate": "dotenv -e .env.development -- prisma migrate dev",
     "start": "node dist/main.js",
