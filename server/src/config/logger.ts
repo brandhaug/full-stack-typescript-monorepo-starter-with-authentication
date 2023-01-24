@@ -1,13 +1,14 @@
 import winston from 'winston'
 import LokiTransport from 'winston-loki'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
 const Sentry = require('winston-transport-sentry-node').default
 
 const transports =
   process.env.NODE_ENV === 'production'
     ? [
         new winston.transports.Console(),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         new Sentry({
           sentry: { dsn: process.env.SENTRY_DSN },
           level: 'info'

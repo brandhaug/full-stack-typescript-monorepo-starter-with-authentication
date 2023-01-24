@@ -8,7 +8,7 @@ export const usePersistentState = <T,>(key: string, defaultValue: T): [T, SetSta
 
       if (!currentValue) return defaultValue
 
-      const value: T = JSON.parse(currentValue)
+      const value = JSON.parse(currentValue) as T
       return value
     } catch {
       return defaultValue

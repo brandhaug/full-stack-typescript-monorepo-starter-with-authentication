@@ -21,15 +21,15 @@ const resolvers: Resolvers = {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 
-      return await (UsersService.fetchOne({ id }).catch((err) => {
-        throw new GraphQLError(err)
+      return await (UsersService.fetchOne({ id }).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       }) as Promise<User>)
     }
   },
   Mutation: {
     registerUser: async (_, { input }) => {
-      const authenticationToken = await UsersService.register(input).catch((err) => {
-        throw new GraphQLError(err)
+      const authenticationToken = await UsersService.register(input).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {
@@ -38,8 +38,8 @@ const resolvers: Resolvers = {
       }
     },
     login: async (_, { input }) => {
-      const authenticationToken = await UsersService.login(input).catch((err) => {
-        throw new GraphQLError(err)
+      const authenticationToken = await UsersService.login(input).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {
@@ -48,8 +48,8 @@ const resolvers: Resolvers = {
       }
     },
     refreshAccessToken: async (_, { input }) => {
-      const authenticationToken = await UsersService.refreshAccessToken(input).catch((err) => {
-        throw new GraphQLError(err)
+      const authenticationToken = await UsersService.refreshAccessToken(input).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {
@@ -58,8 +58,8 @@ const resolvers: Resolvers = {
       }
     },
     resetPassword: async (_, { input }) => {
-      const success = await UsersService.resetPassword(input).catch((err) => {
-        throw new GraphQLError(err)
+      const success = await UsersService.resetPassword(input).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {
@@ -68,8 +68,8 @@ const resolvers: Resolvers = {
       }
     },
     updatePassword: async (_, { id, token, input }) => {
-      const authenticationToken = await UsersService.updatePassword(id, token, input).catch((err) => {
-        throw new GraphQLError(err)
+      const authenticationToken = await UsersService.updatePassword(id, token, input).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {
@@ -81,8 +81,8 @@ const resolvers: Resolvers = {
       const accessToken = context.req.headers.authorization
       await ApiUtils.requireAuthenticated(accessToken, id)
 
-      const user = await UsersService.update(id, input as Partial<Omit<DbUser, 'id'>>).catch((err) => {
-        throw new GraphQLError(err)
+      const user = await UsersService.update(id, input as Partial<Omit<DbUser, 'id'>>).catch((err: Error) => {
+        throw new GraphQLError(err.message)
       })
 
       return {

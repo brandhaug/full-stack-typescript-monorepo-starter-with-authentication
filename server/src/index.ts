@@ -8,6 +8,7 @@ import { useSentry } from '@envelop/sentry'
 import { usePrometheus } from '@envelop/prometheus'
 import { logger } from './config/logger'
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const promBundle = require('express-prom-bundle')
 
 const app = express()
@@ -22,6 +23,7 @@ const yoga = graphqlYoga.createYoga({
 app.use('/graphql', yoga)
 
 // Prometheus
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(promBundle({}))
 
 app.listen(4000, () => {

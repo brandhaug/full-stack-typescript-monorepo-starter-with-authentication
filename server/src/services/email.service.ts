@@ -1,6 +1,5 @@
 import * as Email from '../config/email'
 import { Attachment } from 'nodemailer/lib/mailer'
-import { SentMessageInfo } from 'nodemailer'
 
 export const sendMail = async ({
   to,
@@ -16,8 +15,8 @@ export const sendMail = async ({
   replyTo?: string
   bcc?: string
   attachments?: Attachment[]
-}): Promise<SentMessageInfo> => {
-  const response = await new Promise((resolve, reject) => {
+}): Promise<boolean> => {
+  const success = await new Promise<boolean>((resolve, reject) => {
     if (!process.env.EMAIL) {
       throw new Error('Missing EMAIL env variable')
     }
@@ -32,12 +31,12 @@ export const sendMail = async ({
         html,
         attachments
       },
-      (err, info) => {
+      (err) => {
         if (err) reject(err)
-        resolve(info)
+        resolve(true)
       }
     )
   })
 
-  return response
+  return success
 }

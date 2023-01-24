@@ -4,13 +4,13 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      extends: ['plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/strict'],
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/strict'
+      ],
       rules: {
-        // '@typescript-eslint/no-unsafe-call': 'error',
-        // '@typescript-eslint/no-unsafe-assignment': 'error',
-        '@typescript-eslint/no-unsafe-member-access': 'error',
-        '@typescript-eslint/require-await': 'error',
-        '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/return-await': 'error',
         '@typescript-eslint/default-param-last': 'error',
         '@typescript-eslint/no-shadow': 'error',
