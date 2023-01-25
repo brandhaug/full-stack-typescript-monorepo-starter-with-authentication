@@ -5,8 +5,8 @@ import { RoutePaths } from '../types/custom'
 import { useOutsideClick } from '../utils/hooks'
 import { useTranslation } from 'react-i18next'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
-import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Logo from '../assets/logo_no-bg_cropped.png'
+import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const useMainMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
   const { t } = useTranslation()
@@ -38,6 +38,7 @@ const useUserMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
 }
 
 const UserMenu = (): JSX.Element | null => {
+  const { t } = useTranslation()
   const currentUser = useCurrentUser()
   const [isOpen, setIsOpen] = React.useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
@@ -58,7 +59,7 @@ const UserMenu = (): JSX.Element | null => {
   return (
     <div className='relative hidden md:block' ref={ref}>
       <button type='button' className='mr-3 flex rounded-lg p-3 text-gray-500 hover:bg-gray-100 md:mr-0' onClick={toggleIsOpen}>
-        <span className='sr-only'>Open user menu</span>
+        <span className='sr-only'>{t('Open user menu')}</span>
         <UserCircleIcon className='h-8 w-8' />
       </button>
       {isOpen && (
@@ -140,7 +141,7 @@ const MainMenu = (): JSX.Element => {
   const mainMenuItems = useMainMenuItems()
 
   return (
-    <div className='ml-10 flex w-full items-center md:block'>
+    <div className='ml-10 flex items-center md:block'>
       <ul className='flex flex-col md:flex-row md:space-x-0'>
         {mainMenuItems.map((menuItem) => {
           const isActive = location.pathname === menuItem.to

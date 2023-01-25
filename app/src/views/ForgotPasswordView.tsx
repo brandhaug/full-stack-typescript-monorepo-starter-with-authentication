@@ -8,6 +8,7 @@ import Logo from '../assets/logo_no-bg_cropped.png'
 import { useResetPasswordMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
 import { Form, FormInput } from '../types/form'
+import { Button } from '../components/ui/Button'
 
 interface ForgotPasswordForm extends Form {
   email: string
@@ -49,9 +50,9 @@ export const ForgotPasswordView = (): JSX.Element => {
   ) : (
     <form onSubmit={formData.handleSubmit(handleReset)}>
       <FormInputs inputs={inputs} formData={formData} />
-      <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
+      <Button size='lg' className='mt-4 w-full' type='submit' loading={loading}>
         {t('Reset password')}
-      </button>
+      </Button>
       <p className='mt-8 text-center'>
         {t('Do you remember your password?')}&nbsp;
         <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>

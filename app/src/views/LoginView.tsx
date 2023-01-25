@@ -12,6 +12,7 @@ import Logo from '../assets/logo_no-bg_cropped.png'
 import { useForm } from 'react-hook-form'
 import { Form, FormInput } from '../types/form'
 import { useLoginMutation } from '../types/graphqlOperations'
+import { Button } from '../components/ui/Button'
 
 interface LoginForm extends Form {
   email: string
@@ -75,9 +76,9 @@ export const LoginView = (): JSX.Element => {
             <div className='mb-2 flex justify-end'>
               <NavLink to={RoutePaths.FORGOT_PASSWORD}>{t('Forgot your password?')}</NavLink>
             </div>
-            <button className='btn btn-primary w-full' type='submit' disabled={loading}>
+            <Button size='lg' className='w-full' type='submit' loading={loading}>
               {t('Log in')}
-            </button>
+            </Button>
             <p className='mt-8 text-center'>
               {t("You don't have a user?")}&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.REGISTER}>

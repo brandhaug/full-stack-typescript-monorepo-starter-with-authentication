@@ -13,6 +13,7 @@ import { useRegisterUserMutation } from '../types/graphqlOperations'
 import { Language } from '@fstmswa/types'
 import { useForm } from 'react-hook-form'
 import { Form, FormInput } from '../types/form'
+import { Button } from '../components/ui/Button'
 
 interface RegisterForm extends Form {
   firstName: string
@@ -96,9 +97,9 @@ export const RegisterView = (): JSX.Element | null => {
           </div>
           <form onSubmit={formData.handleSubmit(handleRegister)}>
             <FormInputs inputs={inputs} formData={formData} />
-            <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
+            <Button size='lg' className='mt-4 w-full' type='submit' loading={loading}>
               {t('Register')}
-            </button>
+            </Button>
             <p className='mt-8 text-center'>
               {t('Do you already have a user?')}&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>

@@ -1,6 +1,5 @@
 import { FormInputs } from '../components/FormInputs'
 import React from 'react'
-import { ButtonLoader } from '../components/ui/ButtonLoader'
 import { toast } from 'react-hot-toast'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +7,7 @@ import { Language } from '@fstmswa/types'
 import { useUpdateUserMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
 import { Form, FormInput } from '../types/form'
+import { Button } from '../components/ui/Button'
 
 const languageOptions = [
   {
@@ -78,10 +78,9 @@ export const UserView = (): JSX.Element | null => {
     <div className='flex justify-center py-12'>
       <form className='max-w-lg' onSubmit={formData.handleSubmit(handleUpdate)}>
         <FormInputs inputs={inputs} formData={formData} />
-        <button className='btn btn-primary w-full' type='submit' disabled={updateUserLoading}>
-          {updateUserLoading && <ButtonLoader className='mr-2 inline' />}
+        <Button size='lg' className='w-full' type='submit' loading={updateUserLoading}>
           {t('Update')}
-        </button>
+        </Button>
       </form>
     </div>
   )

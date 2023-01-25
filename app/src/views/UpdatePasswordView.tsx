@@ -11,6 +11,7 @@ import Logo from '../assets/logo_no-bg_cropped.png'
 import { useUpdatePasswordMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
 import { Form, FormInput } from '../types/form'
+import { Button } from '../components/ui/Button'
 
 interface UpdatePasswordForm extends Form {
   password: string
@@ -68,9 +69,9 @@ export const UpdatePasswordView = (): JSX.Element => {
           </div>
           <form onSubmit={formData.handleSubmit(handleUpdate)}>
             <FormInputs inputs={inputs} formData={formData} />
-            <button className='btn btn-primary mt-4 w-full' type='submit' disabled={loading}>
+            <Button size='lg' className='mt-4 w-full' type='submit' loading={loading}>
               {t('Create new password')}
-            </button>
+            </Button>
             <p className='mt-8 text-center'>
               {t('Do you remember your password')}?&nbsp;
               <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
