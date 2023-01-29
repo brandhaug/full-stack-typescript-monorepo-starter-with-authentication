@@ -4,7 +4,8 @@ Bugs
 - Add register email with validation
 - Add input Zod validation frontend/backend
 - Translations backend
+- React email
+- NextJS
 
 Services
 - Mixpanel
-- NX Cloud caching
