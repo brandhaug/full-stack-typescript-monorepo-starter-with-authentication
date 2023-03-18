@@ -2,11 +2,11 @@ import React, { useRef } from 'react'
 import { useCurrentUser } from '../utils/currentUserUtils'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
-import { useOutsideClick } from '../utils/hooks'
 import { useTranslation } from 'react-i18next'
 import { useIsAuthenticated } from '../utils/authenticationUtils'
 import Logo from '../assets/logo_no-bg_cropped.png'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useOnClickOutside } from 'usehooks-ts'
 
 const useMainMenuItems = (): Array<{ title: string; to: RoutePaths }> => {
   const { t } = useTranslation()
@@ -50,7 +50,8 @@ const UserMenu = (): JSX.Element | null => {
   const handleClose = (): void => {
     setIsOpen(false)
   }
-  useOutsideClick(ref, handleClose)
+
+  useOnClickOutside(ref, handleClose)
 
   const userMenuItems = useUserMenuItems()
 
@@ -108,7 +109,7 @@ const MobileMainMenu = (): JSX.Element | null => {
   const handleClose = (): void => {
     setIsOpen(false)
   }
-  useOutsideClick(ref, handleClose)
+  useOnClickOutside(ref, handleClose)
 
   if (!currentUser) return null
 

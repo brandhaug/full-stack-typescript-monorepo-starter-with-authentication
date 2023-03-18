@@ -1,9 +1,9 @@
 import * as UserDao from '../daos/users.dao'
-import { AuthenticationToken, RefreshAccessTokenInput, RegisterUserInput, ResetPasswordInput, UpdatePasswordInput, User } from '@fstmswa/types'
+import { type AuthenticationToken, type RefreshAccessTokenInput, type RegisterUserInput, type ResetPasswordInput, type UpdatePasswordInput, type User } from '@fstmswa/types'
 import * as AuthenticationUtils from '../utils/authentication.utils'
 import * as StringUtils from '../utils/string.utils'
 import * as EmailService from '../services/email.service'
-import { User as DbUser } from '@prisma/client'
+import { type User as DbUser } from '@prisma/client'
 import { logger } from '../config/logger'
 
 const generateResetPasswordHtml = (id: string, token: string): string => {

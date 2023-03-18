@@ -1,6 +1,6 @@
 import React from 'react'
-import { MutationFunction } from '@apollo/client'
-import { LoginMutation, LoginMutationVariables } from '../types/graphqlTypes'
+import { type MutationFunction } from '@apollo/client'
+import { type LoginMutation, type LoginMutationVariables } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RoutePaths } from '../types/custom'
@@ -8,11 +8,11 @@ import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useIsAuthenticated, useSaveAuthenticationToken } from '../utils/authenticationUtils'
 import { useTranslation } from 'react-i18next'
-import Logo from '../assets/logo_no-bg_cropped.png'
 import { useForm } from 'react-hook-form'
-import { Form, FormInput } from '../types/form'
+import { type Form, type FormInput } from '../types/form'
 import { useLoginMutation } from '../types/graphqlOperations'
-import { Button } from '../components/ui/Button'
+import { Card, ContainerCentered, Button } from '@fstmswa/ui'
+import { LogoCentered } from '../components/LogoCentered'
 
 interface LoginForm extends Form {
   email: string
@@ -65,30 +65,26 @@ export const LoginView = (): JSX.Element => {
   if (isAuthenticated) return <Navigate to={RoutePaths.MAIN} replace />
 
   return (
-    <div className='container-centered'>
-      <div className='w-full max-w-lg'>
-        <div className='card'>
-          <div className='flex justify-center'>
-            <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
+    <ContainerCentered>
+      <Card>
+        <LogoCentered />
+        <form onSubmit={formData.handleSubmit(handleLogin)}>
+          <FormInputs inputs={inputs} formData={formData} />
+          <div className='mb-2 flex justify-end'>
+            <NavLink to={RoutePaths.FORGOT_PASSWORD}>{t('Forgot your password?')}</NavLink>
           </div>
-          <form onSubmit={formData.handleSubmit(handleLogin)}>
-            <FormInputs inputs={inputs} formData={formData} />
-            <div className='mb-2 flex justify-end'>
-              <NavLink to={RoutePaths.FORGOT_PASSWORD}>{t('Forgot your password?')}</NavLink>
-            </div>
-            <Button size='lg' className='w-full' type='submit' loading={loading}>
-              {t('Log in')}
-            </Button>
-            <p className='mt-8 text-center'>
-              {t("You don't have a user?")}&nbsp;
-              <NavLink className='text-blue-600' to={RoutePaths.REGISTER}>
-                {t('Register')}
-              </NavLink>
-            </p>
-          </form>
-        </div>
-        <TermsAndPrivacy />
-      </div>
-    </div>
+          <Button size='lg' className='w-full' type='submit' loading={loading}>
+            {t('Log in')}
+          </Button>
+          <p className='mt-8 text-center'>
+            {t("You don't have a user?")}&nbsp;
+            <NavLink className='text-blue-600' to={RoutePaths.REGISTER}>
+              {t('Register')}
+            </NavLink>
+          </p>
+        </form>
+      </Card>
+      <TermsAndPrivacy />
+    </ContainerCentered>
   )
 }

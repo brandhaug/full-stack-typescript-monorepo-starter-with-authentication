@@ -1,5 +1,5 @@
 import * as Email from '../config/email'
-import { Attachment } from 'nodemailer/lib/mailer'
+import { type Attachment } from 'nodemailer/lib/mailer'
 
 export const sendMail = async ({
   to,

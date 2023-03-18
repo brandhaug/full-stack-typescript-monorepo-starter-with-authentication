@@ -1,6 +1,6 @@
-import jwt, { Secret } from 'jsonwebtoken'
+import jwt, { type Secret } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { AuthenticationToken, User, UserRole } from '@fstmswa/types'
+import { type AuthenticationToken, type User, type UserRole } from '@fstmswa/types'
 
 export interface TokenPayload {
   id: string

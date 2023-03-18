@@ -11,13 +11,15 @@ import { LanguageContextProvider } from './contexts/LanguageContext'
 
 export const AppContent = (): JSX.Element | null => {
   return (
-    <div className='flex h-screen flex-col justify-between'>
+    <>
       <NavBar />
-      <main className='mb-auto'>
-        <Routes />
-      </main>
+      <div className='h-screen bg-gray-50 dark:bg-gray-900'>
+        <main className='mb-auto'>
+          <Routes />
+        </main>
+      </div>
       <Footer />
-    </div>
+    </>
   )
 }
 

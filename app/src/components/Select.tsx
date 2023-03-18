@@ -1,7 +1,7 @@
-import { Path, useController, UseFormReturn } from 'react-hook-form'
-import ReactSelect, { SingleValue } from 'react-select'
+import { type Path, useController, type UseFormReturn } from 'react-hook-form'
+import ReactSelect, { type SingleValue } from 'react-select'
 import React from 'react'
-import { Form, FormInput, Option } from '../types/form'
+import { type Form, type FormInput, type Option } from '../types/form'
 
 export const Select = <T extends Form>({ input, formData }: { input: FormInput<T>; formData: UseFormReturn<T> }): React.ReactElement => {
   const { field } = useController({ control: formData.control, name: input.key as Path<T> })

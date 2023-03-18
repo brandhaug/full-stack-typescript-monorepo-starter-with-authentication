@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next'
 import { Language } from '@fstmswa/types'
 import { useUpdateUserMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
-import { Form, FormInput } from '../types/form'
-import { Button } from '../components/ui/Button'
+import { type Form, type FormInput } from '../types/form'
+import { Button } from '@fstmswa/ui'
 
 const languageOptions = [
   {

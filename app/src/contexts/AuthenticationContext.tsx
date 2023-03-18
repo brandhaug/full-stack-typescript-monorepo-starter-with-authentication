@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePersistentState } from '../utils/stateHooks'
+import { useLocalStorage } from 'usehooks-ts'
 
 interface AuthenticationContextProps {
   accessToken: string | null
@@ -16,8 +16,8 @@ export const AuthenticationContext = React.createContext<AuthenticationContextPr
 })
 
 export const AuthenticationContextProvider = ({ children }: { children: JSX.Element | JSX.Element[] }): JSX.Element => {
-  const [accessToken, setAccessToken] = usePersistentState<string | null>('accessToken', null)
-  const [refreshToken, setRefreshToken] = usePersistentState<string | null>('refreshToken', null)
+  const [accessToken, setAccessToken] = useLocalStorage<string | null>('accessToken', null)
+  const [refreshToken, setRefreshToken] = useLocalStorage<string | null>('refreshToken', null)
 
   const value = React.useMemo(() => ({ accessToken, setAccessToken, refreshToken, setRefreshToken }), [accessToken, refreshToken])
 

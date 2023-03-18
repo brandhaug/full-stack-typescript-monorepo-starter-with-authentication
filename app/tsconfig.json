@@ -3,5 +3,11 @@
   "include": [
     "src/**/*",
     "test/**/*"
-  ]
+  ],
+  "compilerOptions": {
+    "types": [
+      "vite/client",
+      "jest"
+    ]
+  }
 }

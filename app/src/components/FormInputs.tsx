@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { Path, UseFormReturn } from 'react-hook-form'
-import { Form, FormInput } from '../types/form'
+import { type Path, type UseFormReturn } from 'react-hook-form'
+import { type Form, type FormInput } from '../types/form'
 import { Select } from './Select'
+import { Checkbox, Input } from '@fstmswa/ui'
 
 export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array<FormInput<T>>; formData: UseFormReturn<T> }): JSX.Element | null => {
   return (
@@ -11,12 +12,7 @@ export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array
         const key = String(input.key) as Path<T>
 
         if (input.type === 'checkbox') {
-          return (
-            <div key={key} className='my-2 flex align-middle'>
-              <input className='checkbox mr-2' type={input.type} {...formData.register(key)} required />
-              <label htmlFor={key}>{input.label}</label>
-            </div>
-          )
+          return <Checkbox key={key} id={key} label={input.label} {...formData.register(key)} required />
         }
 
         if (input.type === 'select' && input.options) {
@@ -28,12 +24,7 @@ export const FormInputs = <T extends Form>({ inputs, formData }: { inputs: Array
           )
         }
 
-        return (
-          <div key={key}>
-            <label>{input.label}</label>
-            <input className='form-control' type={input.type} placeholder={String(input.label)} minLength={input.minLength} required {...formData.register(key)} />
-          </div>
-        )
+        return <Input key={key} id={key} type={input.type} label={input.label} required {...formData.register(key)} />
       })}
     </>
   )

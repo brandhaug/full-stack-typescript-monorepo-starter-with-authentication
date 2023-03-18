@@ -1,11 +1,10 @@
-Bugs
-- CurrentUserContext
+- Failed to transform dom node to image in Review ownership for
+- Remove padding right on "Last requested at" in Credit
+- show matched topics on ams in review
+- LEI number in Review
+- Advokatregister
 
-- Add register email with validation
-- Add input Zod validation frontend/backend
-- Translations backend
-- React email
-- NextJS
-
-Services
-- Mixpanel
+TODO:
+- Innehaver/partner enriched rows
+- TableRowId(roleTitle)RoleTableService  ikke bruk translated id
+- Entity Language == Display language

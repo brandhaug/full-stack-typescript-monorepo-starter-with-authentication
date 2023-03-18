@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from './uiUtils'
+import { cn } from '../utils/uiUtils'
 
 export interface LoaderProps extends React.SVGProps<SVGSVGElement> {
   className?: string

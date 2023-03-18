@@ -3,5 +3,10 @@
   "include": [
     "src/**/*",
     "test/**/*"
-  ]
+  ],
+  "compilerOptions": {
+    "types": [
+      "jest"
+    ]
+  }
 }

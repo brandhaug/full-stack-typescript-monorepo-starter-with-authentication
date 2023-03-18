@@ -1,8 +1,8 @@
-import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import Axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import { logger } from './logger'
 import { jsonStringify } from '../utils/object.utils'
 import axiosRetry, { exponentialDelay, isNetworkOrIdempotentRequestError } from 'axios-retry'
-import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor'
+import { type InternalCacheRequestConfig, setupCache } from 'axios-cache-interceptor'
 
 const axios = setupCache(Axios)
 
@@ -12,7 +12,7 @@ axiosRetry(axios, {
   retryCondition: (err: AxiosError) => isNetworkOrIdempotentRequestError(err) || err.response?.status === 429
 })
 
-axios.interceptors.request.use((requestConfig: CacheRequestConfig<object, object>) => {
+axios.interceptors.request.use((requestConfig: InternalCacheRequestConfig<object, object>) => {
   const url = axios.getUri(requestConfig)
   logger.debug(`${requestConfig.method?.toUpperCase() ?? ''} ${url}${requestConfig.data ? ` | Data: ${jsonStringify(requestConfig.data)}` : ''}`)
   return requestConfig
@@ -43,7 +43,6 @@ const extractConfig = (config?: AxiosRequestConfig): AxiosRequestConfig => {
     'Accept-Encoding': 'gzip,deflate,compress'
   }
 
-  // @ts-expect-error Wut
   return { ...config, headers: { ...baseHeaders, ...config?.headers } }
 }
 

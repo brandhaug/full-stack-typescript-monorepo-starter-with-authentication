@@ -5,15 +5,15 @@ import { RoutePaths } from '../types/custom'
 import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useSaveAuthenticationToken } from '../utils/authenticationUtils'
-import { RegisterUserMutation } from '../types/graphqlTypes'
+import { type RegisterUserMutation } from '../types/graphqlTypes'
 import { toast } from 'react-hot-toast'
 import { languageIsoToLanguage } from '../utils/languageUtils'
-import Logo from '../assets/logo_no-bg_cropped.png'
 import { useRegisterUserMutation } from '../types/graphqlOperations'
 import { Language } from '@fstmswa/types'
 import { useForm } from 'react-hook-form'
-import { Form, FormInput } from '../types/form'
-import { Button } from '../components/ui/Button'
+import { type Form, type FormInput } from '../types/form'
+import { Card, ContainerCentered, Button } from '@fstmswa/ui'
+import { LogoCentered } from '../components/LogoCentered'
 
 interface RegisterForm extends Form {
   firstName: string
@@ -89,27 +89,23 @@ export const RegisterView = (): JSX.Element | null => {
   const inputs = useInputs()
 
   return (
-    <div className='container-centered'>
-      <div className='w-full max-w-lg'>
-        <div className='card'>
-          <div className='flex justify-center'>
-            <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
-          </div>
-          <form onSubmit={formData.handleSubmit(handleRegister)}>
-            <FormInputs inputs={inputs} formData={formData} />
-            <Button size='lg' className='mt-4 w-full' type='submit' loading={loading}>
-              {t('Register')}
-            </Button>
-            <p className='mt-8 text-center'>
-              {t('Do you already have a user?')}&nbsp;
-              <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
-                {t('Log in')}
-              </NavLink>
-            </p>
-          </form>
-        </div>
-        <TermsAndPrivacy />
-      </div>
-    </div>
+    <ContainerCentered>
+      <Card>
+        <LogoCentered />
+        <form onSubmit={formData.handleSubmit(handleRegister)}>
+          <FormInputs inputs={inputs} formData={formData} />
+          <Button size='lg' className='mt-4 w-full' type='submit' loading={loading}>
+            {t('Register')}
+          </Button>
+          <p className='mt-8 text-center'>
+            {t('Do you already have a user?')}&nbsp;
+            <NavLink className='text-blue-600' to={RoutePaths.LOGIN}>
+              {t('Log in')}
+            </NavLink>
+          </p>
+        </form>
+      </Card>
+      <TermsAndPrivacy />
+    </ContainerCentered>
   )
 }

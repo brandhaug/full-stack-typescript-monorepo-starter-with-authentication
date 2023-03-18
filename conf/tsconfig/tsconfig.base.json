@@ -3,7 +3,6 @@
     "module": "esnext", // specifies the module type
     "moduleResolution": "node", // specifies how modules are resolved
     "lib": ["esnext"], // specifies the library files to be included
-    "types": ["jest"],
     "target": "es6", // specifies the ECMAScript target version
     "strict": true, // enables strict type-checking
     "noImplicitReturns": true, // disallows implicit return values for functions
@@ -13,7 +12,6 @@
     "skipLibCheck": true, // skips type-checking of all declaration files
     "noUncheckedIndexedAccess": true, // disallows unchecked indexing for arrays and objects
     "noEmit": true // prevents the compiler from emitting output files,
-
   },
   "exclude": ["graphqlTypes.ts", "graphqlOperations.ts"]
 }

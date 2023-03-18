@@ -4,11 +4,11 @@ import { RoutePaths } from '../types/custom'
 import { FormInputs } from '../components/FormInputs'
 import { TermsAndPrivacy } from '../components/TermsAndPrivacy'
 import { useTranslation } from 'react-i18next'
-import Logo from '../assets/logo_no-bg_cropped.png'
 import { useResetPasswordMutation } from '../types/graphqlOperations'
 import { useForm } from 'react-hook-form'
-import { Form, FormInput } from '../types/form'
-import { Button } from '../components/ui/Button'
+import { type Form, type FormInput } from '../types/form'
+import { Button, Card, ContainerCentered } from '@fstmswa/ui'
+import { LogoCentered } from '../components/LogoCentered'
 
 interface ForgotPasswordForm extends Form {
   email: string
@@ -63,16 +63,12 @@ export const ForgotPasswordView = (): JSX.Element => {
   )
 
   return (
-    <div className='container-centered'>
-      <div className='w-full max-w-lg'>
-        <div className='card'>
-          <div className='flex justify-center'>
-            <img className='mb-2 text-center' width={150} src={Logo} alt='App logo' />
-          </div>
-          {content}
-        </div>
-        <TermsAndPrivacy />
-      </div>
-    </div>
+    <ContainerCentered>
+      <Card>
+        <LogoCentered />
+        {content}
+      </Card>
+      <TermsAndPrivacy />
+    </ContainerCentered>
   )
 }

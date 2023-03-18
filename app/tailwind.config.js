@@ -1,24 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+const sharedConfig = require('@fstmswa/conf/tailwind/tailwind.config')
+
 module.exports = {
-  darkMode: ['class', '[data-theme="dark"]'],
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {
-      keyframes: {
-        'accordion-down': {
-          from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' }
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 }
-        }
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
-      }
-    }
-  },
-  plugins: [require('tailwindcss-animate')]
+  ...sharedConfig,
+  content: ['./src/**/*.{ts,tsx}', './node_modules/@fstmswa/ui/**/*.{ts,tsx}']
 }

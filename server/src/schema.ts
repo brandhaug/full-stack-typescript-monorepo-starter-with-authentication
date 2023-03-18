@@ -1,26 +1,20 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import * as UsersService from './services/users.service'
 import { readFileSync } from 'fs'
-import { Resolvers } from './types/graphqlTypes'
-import { User as DbUser } from '@prisma/client'
-import * as ApiUtils from './utils/api.utils'
+import { type Resolvers } from './types/graphqlTypes'
+import { type User as DbUser } from '@prisma/client'
 import path from 'path'
-import { Query, User } from '@fstmswa/types'
+import { type Query, type User } from '@fstmswa/types'
 import { GraphQLError } from 'graphql/error'
-
-interface Context {
-  req: { headers: { authorization?: string } }
-}
+import { applyMiddleware } from 'graphql-middleware'
+import { permissions } from './permissions'
 
 const typeDefs = readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
 
 const resolvers: Resolvers = {
   Query: {
     hello: () => 'Hello World!',
-    user: async (_, { id }, context: Context) => {
-      const accessToken = context.req.headers.authorization
-      await ApiUtils.requireAuthenticated(accessToken, id)
-
+    user: async (_, { id }) => {
       return await (UsersService.fetchOne({ id }).catch((err: Error) => {
         throw new GraphQLError(err.message)
       }) as Promise<User>)
@@ -77,10 +71,7 @@ const resolvers: Resolvers = {
         query: {} as Query
       }
     },
-    updateUser: async (_, { id, input }, context: Context) => {
-      const accessToken = context.req.headers.authorization
-      await ApiUtils.requireAuthenticated(accessToken, id)
-
+    updateUser: async (_, { id, input }) => {
       const user = await UsersService.update(id, input as Partial<Omit<DbUser, 'id'>>).catch((err: Error) => {
         throw new GraphQLError(err.message)
       })
@@ -93,7 +84,9 @@ const resolvers: Resolvers = {
   }
 }
 
-export const schema = makeExecutableSchema({
+const executableSchema = makeExecutableSchema({
   typeDefs,
   resolvers
 })
+
+export const schema = applyMiddleware(executableSchema, permissions)

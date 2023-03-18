@@ -1,6 +1,6 @@
-import { User } from '@prisma/client'
+import { type User } from '@prisma/client'
 import { prismaClient } from '../config/database'
-import { RegisterUserInput } from '@fstmswa/types'
+import { type RegisterUserInput } from '@fstmswa/types'
 
 export const fetch = async (): Promise<User[]> => {
   const result = await prismaClient.user.findMany()

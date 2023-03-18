@@ -1,0 +1,32 @@
+{
+  "name": "@fstmswa/ui",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "npm run lint -- --fix",
+    "test": "pnpm run tsc && pnpm run lint && pnpm run jest",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@fstmswa/conf": "0.0.0",
+    "@heroicons/react": "^2.0.16",
+    "@radix-ui/react-navigation-menu": "^1.1.2",
+    "autoprefixer": "^10.4.14",
+    "class-variance-authority": "^0.4.0",
+    "clsx": "^1.2.1",
+    "postcss": "^8.4.21",
+    "react": "^18.2.0",
+    "react-select": "^5.7.0",
+    "tailwind-merge": "^1.10.0",
+    "tailwindcss": "^3.2.7",
+    "tailwindcss-animate": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "eslint": "^8.36.0",
+    "madge": "^6.0.0",
+    "typescript": "^5.0.2"
+  }
+}

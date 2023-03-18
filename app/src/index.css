@@ -2,36 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: Roboto, sans-serif;
-}
-
 body {
   background: #f8f9fc;
 }
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('assets/fonts/Roboto-Regular.ttf') format('truetype');
-  font-style: normal;
-}
-
-.card {
-  @apply bg-white rounded-lg p-12 pt-8 drop-shadow-lg;
-}
-
-.container-centered {
-  @apply flex justify-center py-40 h-screen w-screen;
-}
-
-.form-control {
-  @apply mb-2 block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-400 focus:outline-none;
-}
-
 .react-select__control {
   @apply mb-2 px-2 py-1 text-xl;
-}
-
-.checkbox {
-  @apply w-6 h-6 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 cursor-pointer;
 }

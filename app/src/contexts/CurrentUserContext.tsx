@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserFragment } from '../types/graphqlTypes'
+import { type UserFragment } from '../types/graphqlTypes'
 import { useDecodedAccessToken } from '../utils/authenticationUtils'
 import { useUserQuery } from '../types/graphqlOperations'
 

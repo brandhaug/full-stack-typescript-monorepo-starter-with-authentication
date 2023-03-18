@@ -12,17 +12,17 @@
     "railway": "railway"
   },
   "devDependencies": {
-    "@railway/cli": "^2.0.13",
-    "dotenv-cli": "^6.0.0",
-    "eslint": "^8.30.0",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.1",
-    "syncpack": "^8.4.11",
-    "turbo": "^1.7.0"
+    "@railway/cli": "^3.0.13",
+    "dotenv-cli": "^7.1.0",
+    "eslint": "^8.36.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.4",
+    "syncpack": "^9.8.4",
+    "turbo": "^1.8.3"
   },
   "engines": {
     "node": ">=18",
-    "pnpm": "6"
+    "pnpm": "7"
   }
 }

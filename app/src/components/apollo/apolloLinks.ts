@@ -2,9 +2,9 @@ import { onError } from '@apollo/client/link/error'
 import { toast } from 'react-hot-toast'
 import { useAccessToken, useLogout, useRefreshToken, useSaveAuthenticationToken } from '../../utils/authenticationUtils'
 import { setContext } from '@apollo/client/link/context'
-import { ApolloClient, ApolloLink, FetchResult, Observable } from '@apollo/client'
+import { type ApolloClient, type ApolloLink, type FetchResult, Observable } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
-import { RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables } from '../../types/graphqlTypes'
+import { type RefreshAccessTokenMutation, type RefreshAccessTokenMutationVariables } from '../../types/graphqlTypes'
 import REFRESH_ACCESS_TOKEN from '../../graphql/users/mutations/refreshAccessToken.graphql'
 
 export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => {
@@ -22,6 +22,7 @@ export const useErrorLink = (apolloClient: ApolloClient<object>): ApolloLink => 
       return null
     }
 
+    // eslint-disable-next-line functional/no-loop-statements
     for (const graphqlError of graphQLErrors) {
       if (graphqlError.extensions.code === 401) {
         // ignore 401 error for a refresh request
@@ -73,16 +74,16 @@ export const useAuthLink = (): ApolloLink => {
   const accessToken = useAccessToken()
   const refreshToken = useRefreshToken()
 
-  const authLink = setContext((request, { headers }: { headers: Record<string, string> }): { headers: Record<string, string> } => {
+  const authLink = setContext((request, context): { headers: Record<string, string> } => {
     const token = request.operationName !== 'refreshAccessToken' ? accessToken : refreshToken
 
     if (!token) {
-      return { headers }
+      return { headers: context.headers as Record<string, string> }
     }
 
     return {
       headers: {
-        ...headers,
+        ...(context.headers as Record<string, string>),
         authorization: `Bearer ${token}`
       }
     }

@@ -1,0 +1,7 @@
+{
+  "extends": "@fstmswa/conf/tsconfig/tsconfig.react.json",
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ]
+}

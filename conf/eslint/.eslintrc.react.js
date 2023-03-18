@@ -1,4 +1,5 @@
 module.exports = {
+  plugins: ['react-refresh'],
   extends: ['.eslintrc.base', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:eslint-plugin-tailwindcss/recommended'],
   settings: {
     react: {
@@ -15,6 +16,7 @@ module.exports = {
     'react/no-unstable-nested-components': 'error',
     'react-hooks/exhaustive-deps': 'off',
     'multiline-ternary': 'off',
-    '@typescript-eslint/no-misused-promises': 'off'
+    '@typescript-eslint/no-misused-promises': 'off',
+    'react-refresh/only-export-components': 'error'
   }
 }

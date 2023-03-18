@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import { AuthenticationContext } from '../contexts/AuthenticationContext'
 import React from 'react'
-import { AuthenticationToken } from '@fstmswa/types'
+import { type AuthenticationToken } from '@fstmswa/types'
 
 interface DecodedAccessToken {
   id: string

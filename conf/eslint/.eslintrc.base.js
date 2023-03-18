@@ -1,5 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
+  plugins: ['functional'],
   extends: ['eslint:recommended', 'eslint-config-standard-with-typescript', 'plugin:prettier/recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'plugin:jest/recommended'],
   overrides: [
     {
@@ -49,6 +50,15 @@ module.exports = {
     'prefer-template': 'error',
     'no-lonely-if': 'error',
     'import/no-named-as-default-member': 'off',
-    'import/no-named-as-default': 'off'
+    'import/no-named-as-default': 'off',
+    'functional/immutable-data': [
+      'error',
+      {
+        ignorePattern: ['window.*', 'module.exports', 'mutable*'],
+        ignoreAccessorPattern: '*.current.**'
+      }
+    ], // Allow modifying refs
+    'functional/no-let': 'error',
+    'functional/no-loop-statements': 'error'
   }
 }

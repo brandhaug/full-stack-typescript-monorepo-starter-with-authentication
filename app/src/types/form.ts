@@ -1,5 +1,5 @@
-import { FormValueType } from '@fstmswa/types'
-import React from 'react'
+import { type FormValueType } from '@fstmswa/types'
+import type React from 'react'
 
 export type Form = Record<string, FormValueType>
 
