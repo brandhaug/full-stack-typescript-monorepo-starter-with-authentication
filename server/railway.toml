@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm run nx run @fstmswa/server:build"
+buildCommand = "pnpm run --filter=@fstmswa/server build"
 
 [deploy]
-startCommand = "pnpm run start --prefix server"
+startCommand = "pnpm run --filter=@fstmswa/server start"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

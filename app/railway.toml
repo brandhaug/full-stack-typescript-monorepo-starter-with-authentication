@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm run graphql-codegen && pnpm nx run @fstmswa/app:build"
+buildCommand = "pnpm run --filter=@fstmswa/types graphql-codegen && pnpm run --filter=@fstmswa/app build"
 
 [deploy]
-startCommand = "pnpm run start --prefix app"
+startCommand = "pnpm run --filter=@fstmswa/app start"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

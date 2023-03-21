@@ -1,9 +1,9 @@
-name: Deploy Web Application
+name: ci
 
 on: push
 
 jobs:
-  setup:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,29 +30,22 @@ jobs:
         run: pnpm run list-mismatches
 
       - name: Build GraphQL types
-        run: pnpm run graphql-codegen
+        run: pnpm run --filter=@fstmswa/type graphql-codegen
 
       - name: Build DB types
-        run: pnpm run prisma generate --prefix server
+        run: pnpm run --filter=@fstmswa/server prisma generate
 
-  test:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
       - name: Test
         run: pnpm run test
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [test-app, test-server]
-    if: github.ref == 'refs/heads/master'
-    steps:
       - name: Deploy Server
-        run: pnpm run railway up -- --service server
+        if: github.ref == 'refs/heads/main'
+        run: pnpm run railway up --service server
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Deploy App
-        run: pnpm run railway up -- --service app
+        if: github.ref == 'refs/heads/main'
+        run: pnpm run railway up --service app
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
